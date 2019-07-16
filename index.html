@@ -501,7 +501,8 @@ FROM &lt;image&gt;[@&lt;digest&gt;] [AS &lt;name&gt;]
 FROM指令设置一个基础镜像，让后面的指令可以在一个镜像中运行，可以是任何在镜像库中存在的镜像，一般作为是Dockerfile的第一条指令
 
 ARG是唯一可以放在FROM之前的指令
-FROM可以在同一个Docker
+FROM可以在同一个Dockerfile里面出现多次
+tag和digest参数不是必填的，如果不填默认是 lat
               ...
             </p>
           <!--noindex-->
@@ -659,7 +660,8 @@ Quick StartCreate a new post$ hexo new "My New Post"
 More info: Writing
 Run server$ hexo server
 
-More in
+More info: Server
+Generate static files$ hexo g
               ...
             </p>
           <!--noindex-->

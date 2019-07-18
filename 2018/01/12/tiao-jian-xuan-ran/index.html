@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="v-if 在字符串模板中，比如 Handlebards，条件块：  { {#if ok}}     &amp;lt;h1&amp;gt;Yes&amp;lt;/h1&amp;gt; { {/if}} 在Vue中，使用 v-if 指令实现同样的功能：   Yes  也可以添加else块    Yes    No  在元素上使用v-if 条件渲染分组 因为 v-if 是一个指令，所以必须将其添加到一个元素之上。但是 如果想要多个元素">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="条件渲染">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/01/12/tiao-jian-xuan-ran/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="v-if 在字符串模板中，比如 Handlebards，条件块：  { {#if ok}}     &amp;lt;h1&amp;gt;Yes&amp;lt;/h1&amp;gt; { {/if}} 在Vue中，使用 v-if 指令实现同样的功能：   Yes  也可以添加else块    Yes    No  在元素上使用v-if 条件渲染分组 因为 v-if 是一个指令，所以必须将其添加到一个元素之上。但是 如果想要多个元素">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="条件渲染">
+<meta name="twitter:description" content="v-if 在字符串模板中，比如 Handlebards，条件块：  { {#if ok}}     &amp;lt;h1&amp;gt;Yes&amp;lt;/h1&amp;gt; { {/if}} 在Vue中，使用 v-if 指令实现同样的功能：   Yes  也可以添加else块    Yes    No  在元素上使用v-if 条件渲染分组 因为 v-if 是一个指令，所以必须将其添加到一个元素之上。但是 如果想要多个元素">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/01/12/tiao-jian-xuan-ran/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>条件渲染 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/01/12/tiao-jian-xuan-ran/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">条件渲染
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-12 10:05:07" itemprop="dateCreated datePublished" datetime="2018-01-12T10:05:07+08:00">2018-01-12</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h4><blockquote>
+<p>在字符串模板中，比如 Handlebards，条件块：</p>
+</blockquote>
+<pre><code>{ {#if ok}}
+    &lt;h1&gt;Yes&lt;/h1&gt;
+{ {/if}}</code></pre><blockquote>
+<p>在Vue中，使用 v-if 指令实现同样的功能：  </p>
+<h1 v-if="ok">Yes</h1>
+
+<p>也可以添加else块  </p>
+<h1 v-if="ok"> Yes </h1>  
+<h1 v-else>No</h1>
+</blockquote>
+<h4 id="在元素上使用v-if-条件渲染分组"><a href="#在元素上使用v-if-条件渲染分组" class="headerlink" title="在元素上使用v-if 条件渲染分组"></a>在<template>元素上使用v-if 条件渲染分组</template></h4><blockquote>
+<p>因为 v-if 是一个指令，所以必须将其添加到一个元素之上。但是 如果想要多个元素。可以将 <template> 元素 当做一个不可见的 包裹元素，并且在上面使用 v-if。 最终的渲染结果将不包含<tempalte>元素。<br>v-else-if 可以使用v-else指令来表示 v-if 的”else-if 块”。<br>v-else 可以使用v-else指令来表示 v-if 的”else 块”。</tempalte></template></p>
+</blockquote>
+<pre><code>// 类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后。
+&lt;div v-if=&quot;Math.random()&gt; 0.5&quot;&gt;
+Now you see me
+&lt;/div&gt;
+&lt;div v-else-if=&quot;Math.random()== 0.5&quot;&gt;
+ Now you don&apos;t
+&lt;/div&gt;
+&lt;div v-else&gt;
+ Now you don&apos;t
+&lt;/div&gt;</code></pre><h5 id="用key-管理可复用的元素"><a href="#用key-管理可复用的元素" class="headerlink" title="用key 管理可复用的元素"></a>用key 管理可复用的元素</h5><blockquote>
+<p>Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是重头开始渲染。这么做除了会使得vue 变得很快以外。还有一些其它的好处。例如：<br>如果你允许用户在不同的登录方式之间切换：  </p>
+<pre><code>&lt;div v-if=&quot;loginType===&apos;username&apos;&quot;&gt;
+    &lt;label&gt;Username&lt;/label&gt;
+    &lt;input placeholder=&quot;Enter your username&quot;&gt;
+&lt;/div&gt;
+&lt;div v-else&gt;
+    &lt;label&gt;Username&lt;/label&gt;
+    &lt;input placeholder=&quot;Enter your username&quot;&gt;
+&lt;/div&gt;</code></pre></blockquote>
+<blockquote>
+<p>上述代码中 切换 loginType 将不会清除 用户已经输入的内容。因为两个模板使用了相同的元素，<input> 不会被替换掉–仅仅是替换掉它的placeholder。<br>这样也不总是符合实际需求，所以Vue 提供了一种方式来表达，这两个元素是独立的，不要复用它们。只需要添加一个具有唯一的值的 key 属性即可：</p>
+</blockquote>
+<pre><code>&lt;div v-if=&quot;loginType===&apos;username&apos;&quot;&gt;
+    &lt;label&gt;Username&lt;/label&gt;
+    &lt;input placeholder=&quot;Enter your username&quot; key=&quot;username-input&quot;&gt;
+&lt;/div&gt;
+&lt;div v-else&gt;
+    &lt;label&gt;Username&lt;/label&gt;
+    &lt;input placeholder=&quot;Enter your username&quot;&gt;
+&lt;/div key=&quot;adminname-key&quot;&gt;
+    // 注&lt;label&gt; 元素仍然会被高效的利用，因为其没有添加key属性。</code></pre><h4 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h4><blockquote>
+<p>另一个用于根据条件展示元素的选项是v-show 指令。用法大致一样：<br>&amp;lt；h1 v-show=”ok”&gt;Hello<br>不同的是带有 v-show 的元素始终会被渲染并保留在DOM 中。 v-show 只是简单的切换元素的 css属性 display。<br>v-if 是真正的条件渲染，因为他会确保在切换过程中条件快内的事件监听器和子组件适当的被销毁和重建。<br>v-if 也是惰性的。如果在渲染时条件为假，则什么都不做–直到条件第一次变为真时，才会开始渲染条件块。<br>相比之下， v-show 就简单的多–不管初始条件是什么，元素总是被渲染，只是简单的基于css 进行切换。<br>一般来说， v-if 有更高的切换开销，而v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用v-show 较好； 如果在条件运行时候很少改变。则使用v-if较好。<br>v-for 比 v-if 具有更高的优先级。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/11/Class 与 Style 的绑定/" rel="next" title="Class 与 Style 的绑定">
+                <i class="fa fa-chevron-left"></i> Class 与 Style 的绑定
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/15/let-const/" rel="prev" title="let & const">
+                let & const <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#v-if"><span class="nav-number">1.</span> <span class="nav-text">v-if</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text">Yes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text"> Yes </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text">No</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在元素上使用v-if-条件渲染分组"><span class="nav-number">1.</span> <span class="nav-text">在元素上使用v-if 条件渲染分组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用key-管理可复用的元素"><span class="nav-number">1.1.</span> <span class="nav-text">用key 管理可复用的元素</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-show"><span class="nav-number">2.</span> <span class="nav-text">v-show</span></a></li></ol></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

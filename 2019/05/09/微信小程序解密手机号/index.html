@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="接收三个参数：分别是wx.login()接口获取的code，调起获取手机号按钮的两个参数encryptedData和iv； 调用auth.code2Session接口可以解析出openid，session_key和unionid，session_key是用来解密个人信息的关键参数。 查看登录凭证校验官方文档 查看获取手机号官方文档 注意点：前端在吊起获取手机号的按钮之前一定要先调用wx.login">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序解密手机号">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/05/09/微信小程序解密手机号/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="接收三个参数：分别是wx.login()接口获取的code，调起获取手机号按钮的两个参数encryptedData和iv； 调用auth.code2Session接口可以解析出openid，session_key和unionid，session_key是用来解密个人信息的关键参数。 查看登录凭证校验官方文档 查看获取手机号官方文档 注意点：前端在吊起获取手机号的按钮之前一定要先调用wx.login">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序解密手机号">
+<meta name="twitter:description" content="接收三个参数：分别是wx.login()接口获取的code，调起获取手机号按钮的两个参数encryptedData和iv； 调用auth.code2Session接口可以解析出openid，session_key和unionid，session_key是用来解密个人信息的关键参数。 查看登录凭证校验官方文档 查看获取手机号官方文档 注意点：前端在吊起获取手机号的按钮之前一定要先调用wx.login">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/05/09/微信小程序解密手机号/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>微信小程序解密手机号 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/05/09/微信小程序解密手机号/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微信小程序解密手机号
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-09 18:57:26" itemprop="dateCreated datePublished" datetime="2019-05-09T18:57:26+08:00">2019-05-09</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微信开发/" itemprop="url" rel="index"><span itemprop="name">微信开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接收三个参数：分别是wx.login()接口获取的code，调起获取手机号按钮的两个参数encryptedData和iv； 调用auth.code2Session接口可以解析出openid，session_key和unionid，session_key是用来解密个人信息的关键参数。 <a href="https://developers.weixin.qq.com/miniprogram/dev/api-backend/auth.code2Session.html" title="登录凭证校验官方文档" target="_blank" rel="noopener">查看登录凭证校验官方文档</a> <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhoneNumber.html" title="获取手机号官方文档" target="_blank" rel="noopener">查看获取手机号官方文档</a> <strong>注意点：</strong>前端在吊起获取手机号的按钮<strong>之前</strong>一定要<strong>先调用wx.login()</strong>这个先后顺序一定不能错，不然会出现解密错误的情况</p>
+<h4 id="获取手机号方法，结合自己需求改造"><a href="#获取手机号方法，结合自己需求改造" class="headerlink" title="获取手机号方法，结合自己需求改造"></a>获取手机号方法，结合自己需求改造</h4><pre><code>import net.sf.json.JSONObject;
+
+public class getWeixinTelephone {
+    public static String getTelePhone(String code,String encryptedData,String iv) {
+        String code2SessionUrl = &quot;https://api.weixin.qq.com/sns/jscode2session?appid=APPID&amp;secret=SECRET&amp;js_code=JSCODE&amp;grant_type=authorization_code&quot;;
+        String appId = &quot;1234321234&quot;;//填写自己真实的appid
+        String appSecret = &quot;qewretryrutitoyoupu&quot;;//填写自己真实的appSecret
+        code2SessionUrl = code2SessionUrl.replace(&quot;APPID&quot;, appId);
+        code2SessionUrl = code2SessionUrl.replace(&quot;SECRET&quot;, appSecret);
+        code2SessionUrl = code2SessionUrl.replace(&quot;JSCODE&quot;, code);
+
+        JSONObject jsonObject;
+        try {
+            //后台调用接口获得返回值
+            jsonObject = JSONObject.fromObject(HttpUtil.get(code2SessionUrl));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return &quot;系统错误&quot;;
+        }
+        //调用上面的url的返回值可以解析出openid，session_key和unionid，这里只取用sessionKey用于解密手机号码
+        String sessionKey = jsonObject.get(&quot;session_key&quot;).toString();
+        //工具类调用解密方法解密
+        String result = WeiXinUtils.decrypt(encryptedData, sessionKey, iv);
+        //转化为json格式获取手机号码
+        JSONObject josn = JSONObject.fromObject(result);
+        return (String) josn.get(&quot;phoneNumber&quot;);
+    }
+}</code></pre><h4 id="WeiXinUtils解密工具类"><a href="#WeiXinUtils解密工具类" class="headerlink" title="WeiXinUtils解密工具类"></a>WeiXinUtils解密工具类</h4><pre><code>import sun.misc.BASE64Decoder;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.AlgorithmParameters;
+
+public class WeiXinUtils {
+    public static String decrypt(String encryptedData, String sessionKey, String ivStr) {
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            AlgorithmParameters params = AlgorithmParameters.getInstance(&quot;AES&quot;);
+            params.init(new IvParameterSpec(org.apache.commons.codec.binary.Base64.decodeBase64(ivStr)));
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(decoder.decodeBuffer(sessionKey), &quot;AES&quot;), params);
+            String originalString = new String(cipher.doFinal(decoder.decodeBuffer(encryptedData)), StandardCharsets.UTF_8);
+            return originalString;
+        } catch (Exception e) {
+            throw new RuntimeException(&quot;AES解密失败&quot;, e);
+        }
+    }
+}</code></pre><h4 id="HttpUtil工具类"><a href="#HttpUtil工具类" class="headerlink" title="HttpUtil工具类"></a>HttpUtil工具类</h4><pre><code>import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class HttpUtil {
+
+    private static final String DEFAULT_CHARSET = &quot;UTF-8&quot;;
+    private static final String _GET = &quot;GET&quot;; // GET
+    private static final String _POST = &quot;POST&quot;;// POST
+    public static final int DEF_CONN_TIMEOUT = 30000;
+    public static final int DEF_READ_TIMEOUT = 30000;
+
+    /**
+     * 初始化http请求参数
+     *
+     * @param url
+     * @param method
+     * @param headers
+     * @return
+     * @throws Exception
+     */
+    private static HttpURLConnection initHttp(String url, String method,
+                                              Map&lt;String, String&gt; headers) throws Exception {
+        URL _url = new URL(url);
+        HttpURLConnection http = (HttpURLConnection) _url.openConnection();
+        // 连接超时
+        http.setConnectTimeout(DEF_CONN_TIMEOUT);
+        // 读取超时 --服务器响应比较慢，增大时间
+        http.setReadTimeout(DEF_READ_TIMEOUT);
+        http.setUseCaches(false);
+        http.setRequestMethod(method);
+        http.setRequestProperty(&quot;Content-Type&quot;,
+                &quot;application/x-www-form-urlencoded&quot;);
+        http.setRequestProperty(
+                &quot;User-Agent&quot;,
+                &quot;Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36&quot;);
+        if (null != headers &amp;&amp; !headers.isEmpty()) {
+            for (Entry&lt;String, String&gt; entry : headers.entrySet()) {
+                http.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        http.setDoOutput(true);
+        http.setDoInput(true);
+        http.connect();
+        return http;
+    }
+
+    /**
+     * 初始化http请求参数
+     *
+     * @param url
+     * @param method
+     * @return
+     * @throws Exception
+     */
+    private static HttpsURLConnection initHttps(String url, String method,
+                                                Map&lt;String, String&gt; headers) throws Exception {
+        TrustManager[] tm = {new MyX509TrustManager()};
+        System.setProperty(&quot;https.protocols&quot;, &quot;TLSv1&quot;);
+        SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);
+        sslContext.init(null, tm, new java.security.SecureRandom());
+        // 从上述SSLContext对象中得到SSLSocketFactory对象
+        SSLSocketFactory ssf = sslContext.getSocketFactory();
+        URL _url = new URL(url);
+        HttpsURLConnection http = (HttpsURLConnection) _url.openConnection();
+        // 设置域名校验
+        http.setHostnameVerifier(new HttpUtil().new TrustAnyHostnameVerifier());
+        // 连接超时
+        http.setConnectTimeout(DEF_CONN_TIMEOUT);
+        // 读取超时 --服务器响应比较慢，增大时间
+        http.setReadTimeout(DEF_READ_TIMEOUT);
+        http.setUseCaches(false);
+        http.setRequestMethod(method);
+        http.setRequestProperty(&quot;Content-Type&quot;,
+                &quot;application/x-www-form-urlencoded&quot;);
+        http.setRequestProperty(
+                &quot;User-Agent&quot;,
+                &quot;Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36&quot;);
+        if (null != headers &amp;&amp; !headers.isEmpty()) {
+            for (Entry&lt;String, String&gt; entry : headers.entrySet()) {
+                http.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        http.setSSLSocketFactory(ssf);
+        http.setDoOutput(true);
+        http.setDoInput(true);
+        http.connect();
+        return http;
+    }
+
+    /**
+     * @return 返回类型:
+     * @throws Exception
+     * @description 功能描述: get 请求
+     */
+    public static String get(String url, Map&lt;String, String&gt; params,
+                             Map&lt;String, String&gt; headers) throws Exception {
+        HttpURLConnection http = null;
+        if (isHttps(url)) {
+            http = initHttps(initParams(url, params), _GET, headers);
+        } else {
+            http = initHttp(initParams(url, params), _GET, headers);
+        }
+        InputStream in = http.getInputStream();
+        BufferedReader read = new BufferedReader(new InputStreamReader(in,
+                DEFAULT_CHARSET));
+        String valueString = null;
+        StringBuffer bufferRes = new StringBuffer();
+        while ((valueString = read.readLine()) != null) {
+            bufferRes.append(valueString);
+        }
+        in.close();
+        if (http != null) {
+            http.disconnect();// 关闭连接
+        }
+        return bufferRes.toString();
+    }
+
+    public static String get(String url) throws Exception {
+        return get(url, null);
+    }
+
+    public static String get(String url, Map&lt;String, String&gt; params)
+            throws Exception {
+        return get(url, params, null);
+    }
+
+    public static String post(String url, String params)
+            throws Exception {
+        HttpURLConnection http = null;
+        if (isHttps(url)) {
+            http = initHttps(url, _POST, null);
+        } else {
+            http = initHttp(url, _POST, null);
+        }
+        OutputStream out = http.getOutputStream();
+        out.write(params.getBytes(DEFAULT_CHARSET));
+        out.flush();
+        out.close();
+
+        InputStream in = http.getInputStream();
+        BufferedReader read = new BufferedReader(new InputStreamReader(in,
+                DEFAULT_CHARSET));
+        String valueString = null;
+        StringBuffer bufferRes = new StringBuffer();
+        while ((valueString = read.readLine()) != null) {
+            bufferRes.append(valueString);
+        }
+        in.close();
+        if (http != null) {
+            http.disconnect();// 关闭连接
+        }
+        return bufferRes.toString();
+    }
+
+    /**
+     * 功能描述: 构造请求参数
+     *
+     * @return 返回类型:
+     * @throws Exception
+     */
+    public static String initParams(String url, Map&lt;String, String&gt; params)
+            throws Exception {
+        if (null == params || params.isEmpty()) {
+            return url;
+        }
+        StringBuilder sb = new StringBuilder(url);
+        if (url.indexOf(&quot;?&quot;) == -1) {
+            sb.append(&quot;?&quot;);
+        }
+        sb.append(map2Url(params));
+        return sb.toString();
+    }
+
+    /**
+     * map构造url
+     *
+     * @return 返回类型:
+     * @throws Exception
+     */
+    public static String map2Url(Map&lt;String, String&gt; paramToMap)
+            throws Exception {
+        if (null == paramToMap || paramToMap.isEmpty()) {
+            return null;
+        }
+        StringBuffer url = new StringBuffer();
+        boolean isfist = true;
+        for (Entry&lt;String, String&gt; entry : paramToMap.entrySet()) {
+            if (isfist) {
+                isfist = false;
+            } else {
+                url.append(&quot;&amp;&quot;);
+            }
+            url.append(entry.getKey()).append(&quot;=&quot;);
+            String value = entry.getValue();
+            if (null != value &amp;&amp; value != &quot;&quot;) {
+                url.append(URLEncoder.encode(value, DEFAULT_CHARSET));
+            }
+        }
+        return url.toString();
+    }
+
+    /**
+     * 检测是否https
+     *
+     * @param url
+     */
+    private static boolean isHttps(String url) {
+        return url.startsWith(&quot;https&quot;);
+    }
+
+    public class TrustAnyHostnameVerifier implements HostnameVerifier {
+        @Override
+        public boolean verify(String hostname, SSLSession session) {
+            return true;// 直接返回true
+        }
+    }
+
+}</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/kafka消费者（customer）—— 从Kafka读取数据/" rel="next" title="kafka消费者（customer）—— 从Kafka读取数据">
+                <i class="fa fa-chevron-left"></i> kafka消费者（customer）—— 从Kafka读取数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/13/jenkins-e5-ae-89-e8-a3-85/" rel="prev" title="Jenkins安装，简单配置，新建任务">
+                Jenkins安装，简单配置，新建任务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取手机号方法，结合自己需求改造"><span class="nav-number">1.</span> <span class="nav-text">获取手机号方法，结合自己需求改造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WeiXinUtils解密工具类"><span class="nav-number">2.</span> <span class="nav-text">WeiXinUtils解密工具类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpUtil工具类"><span class="nav-number">3.</span> <span class="nav-text">HttpUtil工具类</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="从打印hello world开始 输入命令 lua -i 或 lua 来启用交互式编程模式，使用print函数打印字符串”hello world”： [root@vmzq1l0l ~]# luaLua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio&amp;gt; print(“hello world”)hello world&amp;gt;  有交互是编程，也有脚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua的基本使用">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="从打印hello world开始 输入命令 lua -i 或 lua 来启用交互式编程模式，使用print函数打印字符串”hello world”： [root@vmzq1l0l ~]# luaLua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio&amp;gt; print(“hello world”)hello world&amp;gt;  有交互是编程，也有脚">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua的基本使用">
+<meta name="twitter:description" content="从打印hello world开始 输入命令 lua -i 或 lua 来启用交互式编程模式，使用print函数打印字符串”hello world”： [root@vmzq1l0l ~]# luaLua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio&amp;gt; print(“hello world”)hello world&amp;gt;  有交互是编程，也有脚">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Lua的基本使用 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lua的基本使用
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-22 16:33:54" itemprop="dateCreated datePublished" datetime="2019-03-22T16:33:54+08:00">2019-03-22</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>从打印hello world开始</strong></p>
+<p>输入命令 lua -i 或 lua 来启用交互式编程模式，使用print函数打印字符串”hello world”：</p>
+<p>[root@vmzq1l0l ~]# lua<br>Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio<br>&gt; print(“hello world”)<br>hello world<br>&gt; </p>
+<p>有交互是编程，也有脚本式编程</p>
+<p>编写脚本指定解释器为 /bash/lua （本人为centos7的系统，自带lua，如果其他版本没有Lua的需要自行安装）</p>
+<p>编写脚本</p>
+<p>[root@vmzq1l0l ~]# vim hello.lua</p>
+<p>脚本内容</p>
+<p>#!/bin/lua<br>print(“hello world”)</p>
+<p>执行脚本</p>
+<p>[root@vmzq1l0l ~]# lua hello.lua<br>hello world</p>
+<p>赋权后直接执行赋权操作只需执行一次</p>
+<p>[root@vmzq1l0l ~]# chmod +x hello.lua<br>[root@vmzq1l0l ~]# ./hello.lua<br>hello world</p>
+<p><strong>数据类型</strong></p>
+<p>Lua中有8个基本类型分别为：nil、boolean、number、string、userdata、function、thread和table</p>
+<p>数据类型</p>
+<p>描述</p>
+<p>nil</p>
+<p>这个最简单，只有值nil属于该类，表示一个无效值（在条件表达式中相当于false）</p>
+<p>boolean</p>
+<p>包含两个值：false和true</p>
+<p>number</p>
+<p>表示双精度类型的实浮点数</p>
+<p>string</p>
+<p>字符串由一对双引号或单引号来表示</p>
+<p>function</p>
+<p>由 C 或 Lua 编写的函数</p>
+<p>userdata    </p>
+<p>表示任意存储在变量中的C数据结构</p>
+<p>thread</p>
+<p>表示执行的独立线路，用于执行协同程序</p>
+<p>table</p>
+<p>Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。在 Lua 里，table 的创建是通过”构造表达式”来完成，最简单构造表达式是{}，用来创建一个空表</p>
+<p>type函数可以查看数据类型</p>
+<p>[root@vmzq1l0l ~]# lua<br>Lua 5.1.4 Copyright (C) 1994-2008 Lua.org, PUC-Rio<br>&gt; print(type(nil))<br>nil<br>&gt; print(type(true))<br>boolean<br>&gt; print(type(“hello world”))<br>string<br>&gt; print(type(type))<br>function<br>&gt; print(type(23))<br>number</p>
+<p><strong>通过例子快速了解其中几个数据类型和逻辑处理的语法</strong></p>
+<p>string</p>
+<p>声明string变量“Tom”，此处是全局变量，只要不退出客户端界面，就可以一直使用这个变量<br>local声明string变量“Jerry”，这是个局部变量，只能在当前作用域使用</p>
+<p>&gt; Tom=”I’m a cat”<br>&gt; print(Tom)<br>I’m a cat<br>&gt; local Jerry=”I’m a mouse” print(Jerry) –局部变量只能在当前作用域使用<br>I’m a mouse<br>&gt; print(Jerry)<br>nil<br>&gt; local Jerry=”I’m a mouse” print(type(Jerry)) –局部变量只能在当前作用域使用<br>string<br>&gt; print(type(Jerry))<br>nil<br>&gt; print(Tom)<br>I’m a cat<br>&gt; print(type(Tom))<br>string</p>
+<p>string块用两个方括号括起来可以换行，换行之后前面会变成两个大于号&gt;&gt;，直到]]封尾</p>
+<p>&gt; Tom=[[I’m a cat;  </p>
+<blockquote>
+<p>&gt; I hate Spike]]<br>&gt; print(Tom)<br>I’m a cat;<br>I hate Spike</p>
+</blockquote>
+<p>拼接字符串，使用 .. 两个英文句号拼接字符串</p>
+<p>&gt; Tom=”I’m a cat;”<br>&gt; Jerry=”I’m a mouse;”<br>&gt; print(Tom .. Jerry) –使用..来拼接字符串<br>I’m a cat;I’m a mouse;</p>
+<p>延伸：注释</p>
+<p>-- 为lua单行注释  </p>
+<p>–[[<br>这是多行注释<br>–]]</p>
+<p>boolean</p>
+<p>&gt; print(type(true))<br>boolean<br>&gt; print(type(false))<br>boolean<br>&gt; if false or nil  </p>
+<blockquote>
+<p>&gt; then<br>&gt; print(“至少有一个是true”)<br>&gt; else<br>&gt; print(“false和nil都是false”)<br>&gt; end<br>false和nil都是false</p>
+</blockquote>
+<p>number </p>
+<p>lua可以对number类型的数据进行运算</p>
+<p>&gt; a=12<br>&gt; b=34<br>&gt; c=a+b<br>&gt; d=a-b<br>&gt; e=a/b<br>&gt; print(c)<br>46<br>&gt; print(d)<br>-22<br>&gt; print(e)<br>0.35294117647059<br>&gt; print(type(c))<br>number<br>&gt; print(type(d))<br>number<br>&gt; print(type(e))<br>number</p>
+<p>table</p>
+<p>table有点像java中的map可以自定义key值，但是不定义key值的话key默认从1开始索引，</p>
+<p>&gt; table1={key=”val1”,key2=”val2”,key3=”val3”}<br>&gt; print(type(table1))<br>table<br>&gt; print(table1[“key”])<br>val1<br>&gt; print(table1[“key3”])<br>val3<br>&gt; table2={“Tom”,”Jerry”,”Spike”}<br>&gt; print(type(table2))<br>table<br>&gt; print(table2[0])<br>nil<br>&gt; print(table2[1])<br>Tom<br>&gt; print(table2[2])<br>Jerry</p>
+<p>写个脚本table1.lua，for循环中的k,v是自定义的，可以写任何名称a,b；key,val···目的就是代表q前一个是索引，后一个是值，pairs()里面放要循环的table名</p>
+<p>#!/bin/lua<br>table1={}<br>table1[“key”]=”value”<br>key = 5<br>table1[key] = 15<br>table1[key] = table1[key] + 10<br>for k,v in pairs(table1) do<br>print(k .. “:” .. v)<br>end</p>
+<p>执行结果</p>
+<p>[root@vmzq1l0l ~]# lua table1.lua<br>key:value<br>5:25</p>
+<p>function</p>
+<p>在 Lua 中，函数是被看作是”第一类值（First-Class Value）”，函数可以存在变量里:<br>写一个脚本function_test.lua，这个脚本内部相当于递归调用自己的方法进行阶乘的运算</p>
+<p>#!/bin/lua<br>function factorial1(n)<br> if n == 0 then<br>  return 1<br> else<br>  return n*factorial1(n-1)<br> end<br>end<br>print(factorial1(5))<br>factorial2=factorial1<br>print(factorial2(5))</p>
+<p>执行结果</p>
+<p>[root@vmzq1l0l ~]# lua function_test.lua<br>120<br>120</p>
+<p>function 可以以匿名函数（anonymous function）的方式通过参数传递，写一个脚本function_test2.lua，</p>
+<p>#!/bin/lua<br>function testFun(tab,fun)<br> for key,val in pairs(tab) do<br>  print(fun(key,val))<br> end<br>end  </p>
+<p>tab={key1=”val1”,key2=”val2”}<br>testFun(tab,<br> function(key,val) –匿名函数<br>  return key..”=”..val<br> end<br>)</p>
+<p>执行结果</p>
+<p>[root@vmzq1l0l ~]# lua function_test2.lua<br>key1=val1<br>key2=val2</p>
+<p>thread</p>
+<p>在 Lua 里，最主要的线程是协同程序（coroutine）。它跟线程（thread）差不多，拥有自己独立的栈、局部变量和指令指针，可以跟其他协同程序共享全局变量和其他大部分东西</p>
+<p>线程跟协程的区别：线程可以同时多个运行，而协程任意时刻只能运行一个，并且处于运行状态的协程只有被挂起（suspend）时才会暂停</p>
+<p>userdata</p>
+<p>userdata 是一种用户自定义数据，用于表示一种由应用程序或 C/C++ 语言库所创建的类型，可以将任意 C/C++ 的任意数据类型的数据（通常是 struct 和 指针）存储到 Lua 变量中调用</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/21/linux-e4-bf-ae-e6-94-b9shell-e8-84-9a-e6-9c-ac-e7-bc-96-e7-a0-81-e6-a0-bc-e5-bc-8f/" rel="next" title="linux修改Shell脚本编码格式">
+                <i class="fa fa-chevron-left"></i> linux修改Shell脚本编码格式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/22/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-e4-b8-8elua/" rel="prev" title="Redis学习笔记—Redis与Lua">
+                Redis学习笔记—Redis与Lua <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

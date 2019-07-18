@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="截取自emmet官网：https://docs.emmet.io/abbreviations/syntax/详情可去官网查看 Child:&amp;gt;You can use&amp;gt;operator to nest elements inside each other: div&amp;gt;ul&amp;gt;li…will produce &amp;lt;div&amp;gt;     &amp;lt;ul&amp;gt;         &amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="emmet使用手册">
+<meta property="og:url" content="http://blog.oeteo.cn/2017/12/13/emmet-e4-bd-bf-e7-94-a8-e6-89-8b-e5-86-8c/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="截取自emmet官网：https://docs.emmet.io/abbreviations/syntax/详情可去官网查看 Child:&amp;gt;You can use&amp;gt;operator to nest elements inside each other: div&amp;gt;ul&amp;gt;li…will produce &amp;lt;div&amp;gt;     &amp;lt;ul&amp;gt;         &amp;lt">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="emmet使用手册">
+<meta name="twitter:description" content="截取自emmet官网：https://docs.emmet.io/abbreviations/syntax/详情可去官网查看 Child:&amp;gt;You can use&amp;gt;operator to nest elements inside each other: div&amp;gt;ul&amp;gt;li…will produce &amp;lt;div&amp;gt;     &amp;lt;ul&amp;gt;         &amp;lt">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2017/12/13/emmet-e4-bd-bf-e7-94-a8-e6-89-8b-e5-86-8c/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>emmet使用手册 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2017/12/13/emmet-e4-bd-bf-e7-94-a8-e6-89-8b-e5-86-8c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">emmet使用手册
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-13 11:54:24" itemprop="dateCreated datePublished" datetime="2017-12-13T11:54:24+08:00">2017-12-13</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>截取自<a href="https://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="noopener">emmet官网</a>：<a href="https://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="noopener">https://docs.emmet.io/abbreviations/syntax/</a>详情可去<a href="https://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="noopener">官网</a>查看</p>
+<h3 id="Child-gt"><a href="#Child-gt" class="headerlink" title="Child:&gt;"></a>Child:<code>&gt;</code></h3><p>You can use<code>&gt;</code>operator to nest elements inside each other:</p>
+<pre><code>div&gt;ul&gt;li</code></pre><p>…will produce</p>
+<pre><code>&lt;div&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre><h3 id="Sibling"><a href="#Sibling" class="headerlink" title="Sibling:+"></a><a href="https://docs.emmet.io/abbreviations/syntax/#sibling" target="_blank" rel="noopener"></a>Sibling:<code>+</code></h3><p>Use<code>+</code>operator to place elements near each other, on the same level:</p>
+<pre><code>div+p+bq</code></pre><p>…will output</p>
+<pre><code>&lt;div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;blockquote&gt;&lt;/blockquote&gt;</code></pre><h3 id="Climb-up"><a href="#Climb-up" class="headerlink" title="Climb-up:^"></a><a href="https://docs.emmet.io/abbreviations/syntax/#climb-up" target="_blank" rel="noopener"></a>Climb-up:<code>^</code></h3><p>With<code>&gt;</code>operator you’re descending down the generated tree and positions of all sibling elements will be resolved against the most deepest element:</p>
+<pre><code>div+div&gt;p&gt;span+em </code></pre><p>…will be expanded to</p>
+<pre><code>&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;
+    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre><p>With<code>^</code>operator, you can climb one level up the tree and change context where following elements should appear:</p>
+<pre><code>div+div&gt;p&gt;span+em^bq</code></pre><p>…outputs to</p>
+<pre><code>&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;
+    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;
+    &lt;blockquote&gt;&lt;/blockquote&gt;
+&lt;/div&gt;</code></pre><p>You can use as many<code>^</code>operators as you like, each operator will move one level up:</p>
+<pre><code>div+div&gt;p&gt;span+em^^^bq</code></pre><p>…will output to</p>
+<pre><code>&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;
+    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;&lt;/blockquote&gt;</code></pre><h3 id="Multiplication"><a href="#Multiplication" class="headerlink" title="Multiplication:*"></a><a href="https://docs.emmet.io/abbreviations/syntax/#multiplication" target="_blank" rel="noopener"></a>Multiplication:<code>*</code></h3><p>With<code>*</code>operator you can define how many times element should be outputted:</p>
+<pre><code>ul&gt;li*5</code></pre><p>…outputs to</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre><h3 id="Grouping"><a href="#Grouping" class="headerlink" title="Grouping:()"></a><a href="https://docs.emmet.io/abbreviations/syntax/#grouping" target="_blank" rel="noopener"></a>Grouping:<code>()</code></h3><p>Parenthesises are used by Emmets’ power users for grouping subtrees in complex abbreviations:</p>
+<pre><code>div&gt;(header&gt;ul&gt;li*2&gt;a)+footer&gt;p</code></pre><p>…expands to</p>
+<pre><code>&lt;div&gt;
+    &lt;header&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/header&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/div&gt;</code></pre><p>If you’re working with browser’s DOM, you may think of groups as Document Fragments: each group contains abbreviation subtree and all the following elements are inserted at the same level as the first element of group. You can nest groups inside each other and combine them with multiplication<code>*</code>operator:</p>
+<pre><code>(div&gt;dl&gt;(dt+dd)*3)+footer&gt;p</code></pre><p>…produces</p>
+<pre><code>&lt;div&gt;
+    &lt;dl&gt;
+        &lt;dt&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;/dd&gt;
+        &lt;dt&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;/dd&gt;
+        &lt;dt&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;/dd&gt;
+    &lt;/dl&gt;
+&lt;/div&gt;
+&lt;footer&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/footer&gt;</code></pre><p>With groups, you can literally write full page mark-up with a single abbreviation, but please don’t do that.</p>
+<h2 id="Attribute-operators"><a href="#Attribute-operators" class="headerlink" title="Attribute operators"></a><a href="https://docs.emmet.io/abbreviations/syntax/#attribute-operators" target="_blank" rel="noopener"></a>Attribute operators</h2><p>Attribute operators are used to modify attributes of outputted elements. For example, in HTML and XML you can quickly add<code>class</code>attribute to generated element.</p>
+<h3 id="ID-and-CLASS"><a href="#ID-and-CLASS" class="headerlink" title="ID and CLASS"></a><a href="https://docs.emmet.io/abbreviations/syntax/#id-and-class" target="_blank" rel="noopener"></a>ID and CLASS</h3><p>In CSS, you use<code>elem#id</code>and<code>elem.class</code>notation to reach the elements with specified<code>id</code>or<code>class</code>attributes. In Emmet, you can use the very same syntax to_add_these attributes to specified element:</p>
+<pre><code>div#header+div.page+div#footer.class1.class2.class3</code></pre><p>…will output</p>
+<pre><code>&lt;div id=&quot;header&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;page&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;footer&quot; class=&quot;class1 class2 class3&quot;&gt;&lt;/div&gt;</code></pre><h3 id="Custom-attributes"><a href="#Custom-attributes" class="headerlink" title="Custom attributes"></a><a href="https://docs.emmet.io/abbreviations/syntax/#custom-attributes" target="_blank" rel="noopener"></a>Custom attributes</h3><p>You can use<code>[attr]</code>notation (as in CSS) to add custom attributes to your element:</p>
+<pre><code>td[title=&quot;Hello world!&quot; colspan=3]</code></pre><p>…outputs</p>
+<pre><code>&lt;td title=&quot;Hello world!&quot; colspan=&quot;3&quot;&gt;&lt;/td&gt;</code></pre><ul>
+<li>You can place as many attributes as you like inside square brackets.</li>
+<li>You don’t have to specify attribute values:<code>td[colspan title]</code>will produce<code>&lt;td colspan=&quot;&quot; title=&quot;&quot;&gt;</code>with tabstops inside each empty attribute (if your editor supports them).</li>
+<li>You can use single or double quotes for quoting attribute values.</li>
+<li>You don’t need to quote values if they don’t contain spaces:<code>td[title=hello colspan=3]</code>will work.</li>
+</ul>
+<h3 id="Item-numbering"><a href="#Item-numbering" class="headerlink" title="Item numbering:$"></a><a href="https://docs.emmet.io/abbreviations/syntax/#item-numbering" target="_blank" rel="noopener"></a>Item numbering:<code>$</code></h3><p>With multiplication<code>*</code>operator you can repeat elements, but with<code>$</code>you can_number_them. Place<code>$</code>operator inside element’s name, attribute’s name or attribute’s value to output current number of repeated element:</p>
+<pre><code>ul&gt;li.item$*5</code></pre><p>…outputs to</p>
+<pre><code>&lt;ul&gt;
+    &lt;li class=&quot;item1&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item2&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre><p>You can use multiple<code>$</code>in a row to pad number with zeroes:</p>
+<pre><code>ul&gt;li.item$$$*5</code></pre><p>…outputs to</p>
+<pre><code>&lt;ul&gt;
+    &lt;li class=&quot;item001&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item002&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item003&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item004&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item005&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre><h4 id="Changing-numbering-base-and-direction"><a href="#Changing-numbering-base-and-direction" class="headerlink" title="Changing numbering base and direction"></a><a href="https://docs.emmet.io/abbreviations/syntax/#changing-numbering-base-and-direction" target="_blank" rel="noopener"></a>Changing numbering base and direction</h4><p>With<code>@</code>modifier, you can change numbering direction (ascending or descending) and base (e.g. start value). For example, to change direction, add<code>@-</code>after<code>$</code>:</p>
+<pre><code>ul&gt;li.item$@-*5</code></pre><p>…outputs to</p>
+<pre><code>&lt;ul&gt;
+    &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item2&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item1&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre><p>To change counter base value, add<code>@N</code>modifier to<code>$</code>:</p>
+<pre><code>ul&gt;li.item$@3*5</code></pre><p>…transforms to</p>
+<pre><code>&lt;ul&gt;
+    &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item6&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item7&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre><p>You can use these modifiers together:</p>
+<pre><code>ul&gt;li.item$@-3*5</code></pre><p>…is transformed to</p>
+<pre><code>&lt;ul&gt;
+    &lt;li class=&quot;item7&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item6&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre><h2 id="Text"><a href="#Text" class="headerlink" title="Text:{}"></a><a href="https://docs.emmet.io/abbreviations/syntax/#text" target="_blank" rel="noopener"></a>Text:<code>{}</code></h2><p>You can use curly braces to add text to element:</p>
+<pre><code>a{Click me}</code></pre><p>…will produce</p>
+<pre><code>&lt;a href=&quot;&quot;&gt;Click me&lt;/a&gt;</code></pre><p>Note that<code>{text}</code>is used and parsed as a separate element (like,<code>div</code>,<code>p</code>etc.) but has a special meaning when written right after element. For example,<code>a{click}</code>and<code>a&gt;{click}</code>will produce the same output, but<code>a{click}+b{here}</code>and<code>a&gt;{click}+b{here}</code>won’t:</p>
+<pre><code>&lt;!-- a{click}+b{here} --&gt;
+&lt;a href=&quot;&quot;&gt;click&lt;/a&gt;&lt;b&gt;here&lt;/b&gt;
+
+&lt;!-- a&gt;{click}+b{here} --&gt;
+&lt;a href=&quot;&quot;&gt;click&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</code></pre><p>In second example the<code>&lt;b&gt;</code>element is placed_inside_<code>&lt;a&gt;</code>element. And that’s the difference: when<code>{text}</code>is written right after element, it doesn’t change parent context. Here’s more complex example showing why it is important:</p>
+<pre><code>p&gt;{Click }+a{here}+{ to continue}</code></pre><p>…produces</p>
+<pre><code>&lt;p&gt;Click &lt;a href=&quot;&quot;&gt;here&lt;/a&gt; to continue&lt;/p&gt;</code></pre><p>In this example, to write<code>Click here to continue</code>inside<code>&lt;p&gt;</code>element we have explicitly move down the tree with<code>&gt;</code>operator after<code>p</code>, but in case of<code>a</code>element we don’t have to, since we need<code>&lt;a&gt;</code>element with<code>here</code>word only, without changing parent context. For comparison, here’s the same abbreviation written without child<code>&gt;</code>operator:</p>
+<pre><code>p{Click }+a{here}+{ to continue}</code></pre><p>…produces</p>
+<pre><code>&lt;p&gt;Click &lt;/p&gt;
+&lt;a href=&quot;&quot;&gt;here&lt;/a&gt; to continue</code></pre><h2 id="Notes-on-abbreviation-formatting"><a href="#Notes-on-abbreviation-formatting" class="headerlink" title="Notes on abbreviation formatting"></a><a href="https://docs.emmet.io/abbreviations/syntax/#notes-on-abbreviation-formatting" target="_blank" rel="noopener"></a>Notes on abbreviation formatting</h2><p>When you get familiar with Emmet’s abbreviations syntax, you may want to use some formatting to make your abbreviations more readable. For example, use spaces between elements and operators, like this:</p>
+<pre><code>(header &gt; ul.nav &gt; li*5) + footer</code></pre><p>But it won’t work, because space is a_stop symbol_where Emmet stops abbreviation parsing.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/12/e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/" rel="next" title="正则表达式">
+                <i class="fa fa-chevron-left"></i> 正则表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/15/memcached高性能的分布式内存对象缓存系统/" rel="prev" title="memcached高性能的分布式内存对象缓存系统">
+                memcached高性能的分布式内存对象缓存系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Child-gt"><span class="nav-number">1.</span> <span class="nav-text">Child:&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sibling"><span class="nav-number">2.</span> <span class="nav-text">Sibling:+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Climb-up"><span class="nav-number">3.</span> <span class="nav-text">Climb-up:^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiplication"><span class="nav-number">4.</span> <span class="nav-text">Multiplication:*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grouping"><span class="nav-number">5.</span> <span class="nav-text">Grouping:()</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Attribute-operators"><span class="nav-number"></span> <span class="nav-text">Attribute operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ID-and-CLASS"><span class="nav-number">1.</span> <span class="nav-text">ID and CLASS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-attributes"><span class="nav-number">2.</span> <span class="nav-text">Custom attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Item-numbering"><span class="nav-number">3.</span> <span class="nav-text">Item numbering:$</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Changing-numbering-base-and-direction"><span class="nav-number">3.1.</span> <span class="nav-text">Changing numbering base and direction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Text"><span class="nav-number"></span> <span class="nav-text">Text:{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Notes-on-abbreviation-formatting"><span class="nav-number"></span> <span class="nav-text">Notes on abbreviation formatting</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="作者：Sam哥哥 链接：https://blog.csdn.net/linsongbin1/article/details/80211919 概述 Intellij IDEA真是越用越觉得它强大，它总是在我们写代码的时候，不时给我们来个小惊喜。出于对Intellij IDEA的喜爱，我决定写一个与其相关的专栏或者系列，把一些好用的Intellij IDEA技巧分享给大家。本文是这个系列的第一篇，主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（转载）Intellij IDEA神器居然还有这些小技巧">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/05/24/（转载）Intellij IDEA神器居然还有这些小技巧/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="作者：Sam哥哥 链接：https://blog.csdn.net/linsongbin1/article/details/80211919 概述 Intellij IDEA真是越用越觉得它强大，它总是在我们写代码的时候，不时给我们来个小惊喜。出于对Intellij IDEA的喜爱，我决定写一个与其相关的专栏或者系列，把一些好用的Intellij IDEA技巧分享给大家。本文是这个系列的第一篇，主">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506101049248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506102510207?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506103121907?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506103545731?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506104023832?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506104257350?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/2018050610490590?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506105438146?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506111208407?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506111615984?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506111913289?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506112253301?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506112922875?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506113149744?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506114420813?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506114545585?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506114751563?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506115258400?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506121917448?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506122137443?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506130226135?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506130444300?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506130624611?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506131057131?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180506131239122?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（转载）Intellij IDEA神器居然还有这些小技巧">
+<meta name="twitter:description" content="作者：Sam哥哥 链接：https://blog.csdn.net/linsongbin1/article/details/80211919 概述 Intellij IDEA真是越用越觉得它强大，它总是在我们写代码的时候，不时给我们来个小惊喜。出于对Intellij IDEA的喜爱，我决定写一个与其相关的专栏或者系列，把一些好用的Intellij IDEA技巧分享给大家。本文是这个系列的第一篇，主">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180506101049248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/05/24/（转载）Intellij IDEA神器居然还有这些小技巧/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>（转载）Intellij IDEA神器居然还有这些小技巧 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/05/24/（转载）Intellij IDEA神器居然还有这些小技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">（转载）Intellij IDEA神器居然还有这些小技巧
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-24 11:26:04" itemprop="dateCreated datePublished" datetime="2018-05-24T11:26:04+08:00">2018-05-24</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>作者：Sam哥哥</p>
+<p>链接：<a href="https://blog.csdn.net/linsongbin1/article/details/80211919" target="_blank" rel="noopener">https://blog.csdn.net/linsongbin1/article/details/80211919</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><hr>
+<p><code>Intellij IDEA</code>真是越用越觉得它强大，它总是在我们写代码的时候，不时给我们来个小惊喜。出于对<code>Intellij IDEA</code>的喜爱，我决定写一个与其相关的专栏或者系列，把一些好用的<code>Intellij IDEA</code>技巧分享给大家。本文是这个系列的第一篇，主要介绍一些你可能不知道的但是又实用的小技巧。</p>
+<hr>
+<h1 id="我最爱的【演出模式】"><a href="#我最爱的【演出模式】" class="headerlink" title="我最爱的【演出模式】"></a>我最爱的【演出模式】</h1><hr>
+<p>我们可以使用【Presentation Mode】，将<code>IDEA</code>弄到最大，可以让你只关注一个类里面的代码，进行毫无干扰的<code>coding</code>。 可以使用<code>Alt+V</code>快捷键，弹出<code>View</code>视图，然后选择<code>Enter Presentation Mode</code>。效果如下： <img src="https://img-blog.csdn.net/20180506101049248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 这个模式的好处就是，可以让你更加专注，因为你只能看到特定某个类的代码。可能读者会问，进入这个模式后，我想看其他类的代码怎么办？这个时候，就要考验你快捷键的熟练程度了。你可以使用<code>CTRL+E</code>弹出最近使用的文件。又或者使用<code>CTRL+N</code>和<code>CTRL+SHIFT+N</code>定位文件。 如何退出这个模式呢？很简单，使用<code>ALT+V</code>弹出view视图，然后选择<code>Exit Presentation Mode</code>即可。但是我强烈建议你不要这么做，因为你是可以在<code>Enter Presentation Mode</code>模式下在<code>IDEA</code>里面做任何事情的。当然前提是，你对<code>IDEA</code>足够熟练。</p>
+<hr>
+<h1 id="神奇的Inject-language"><a href="#神奇的Inject-language" class="headerlink" title="神奇的Inject language"></a>神奇的Inject language</h1><hr>
+<p>如果你使用<code>IDEA</code>在编写<code>JSON</code>字符串的时候，然后要一个一个<code>\</code>去转义双引号的话，就实在太不应该了，又烦又容易出错。在<code>IDEA</code>可以使用<code>Inject language</code>帮我们自动转义双引号。 <img src="https://img-blog.csdn.net/20180506102510207?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 先将焦点定位到双引号里面，使用<code>alt+enter</code>快捷键弹出<code>inject language</code>视图，并选中 <code>Inject language or reference</code>。 <img src="https://img-blog.csdn.net/20180506103121907?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 选择后,切记，要直接按下<code>enter</code>回车键，才能弹出<code>inject language</code>列表。在列表中选择<code>json</code>组件。 <img src="https://img-blog.csdn.net/20180506103545731?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 选择完后。鼠标焦点自动会定位在双引号里面，这个时候你再次使用<code>alt+enter</code>就可以看到 <img src="https://img-blog.csdn.net/20180506104023832?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 选中<code>Edit JSON Fragment</code>并回车，就可以看到编辑<code>JSON</code>文件的视图了。 <img src="https://img-blog.csdn.net/20180506104257350?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 可以看到<code>IDEA</code>确实帮我们自动转义双引号了。如果要退出编辑<code>JSON</code>信息的视图，只需要使用<code>ctrl+F4</code>快捷键即可。 <code>Inject language</code>可以支持的语言和操作多到你难以想象，读者可以自行研究。</p>
+<hr>
+<h1 id="使用快捷键移动分割线"><a href="#使用快捷键移动分割线" class="headerlink" title="使用快捷键移动分割线"></a>使用快捷键移动分割线</h1><hr>
+<p>假设有下面的场景，某个类的名字在<code>project</code>视图里被挡住了某一部分。 <img src="https://img-blog.csdn.net/2018050610490590?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 你想完整的看到类的名字，该怎么做。一般都是使用鼠标来移动分割线，但是这样子效率太低了。可以使用<code>alt+1</code>把鼠标焦点定位到<code>project</code>视图里，然后直接使用<code>ctrl+shift+左右箭头</code>来移动分割线。</p>
+<hr>
+<h1 id="ctrl-shift-enter不只是用来行尾加分号的"><a href="#ctrl-shift-enter不只是用来行尾加分号的" class="headerlink" title="ctrl+shift+enter不只是用来行尾加分号的"></a>ctrl+shift+enter不只是用来行尾加分号的</h1><hr>
+<p><code>ctrl+shift+enter</code>其实是表示<code>为您收尾</code>的意思，不只是用来给代码加分号的。比如说： <img src="https://img-blog.csdn.net/20180506105438146?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 这段代码，我们还需要为if语句加上大括号才能编译通过，这个时候你直接输入<code>ctrl+shift+enter</code>，<code>IDEA</code>会自动帮你收尾，加上大括号的。</p>
+<hr>
+<h1 id="不要动不动就使用IDEA的重构功能"><a href="#不要动不动就使用IDEA的重构功能" class="headerlink" title="不要动不动就使用IDEA的重构功能"></a>不要动不动就使用IDEA的重构功能</h1><hr>
+<p><code>IDEA</code>的重构功能非常强大，但是也有时候，在单个类里面，如果只是想批量修改某个文本，大可不必使用到重构的功能。比如说： <img src="https://img-blog.csdn.net/20180506111208407?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 上面的代码中，有5个地方用到了rabbitTemplate文本，如何批量修改呢？ 首先是使用<code>ctrl+w</code>选中<code>rabbitTemplate</code>这个文本,然后依次使用5次<code>alt+j</code>快捷键，逐个选中，这样五个文本就都被选中并且高亮起来了，这个时候就可以直接批量修改了。 <img src="https://img-blog.csdn.net/20180506111615984?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<hr>
+<h1 id="去掉导航栏"><a href="#去掉导航栏" class="headerlink" title="去掉导航栏"></a>去掉导航栏</h1><hr>
+<p>去掉导航栏，因为平时用的不多。 <img src="https://img-blog.csdn.net/20180506111913289?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 可以把红色的导航栏去掉，让<code>IDEA</code>显得更加干净整洁一些。使用<code>alt+v</code>，然后去掉<code>Navigation bar</code>即可。去掉这个导航栏后，如果你偶尔还是要用的，直接用<code>alt+home</code>就可以临时把导航栏显示出来。 <img src="https://img-blog.csdn.net/20180506112253301?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 如果想让这个临时的导航栏消失的话，直接使用<code>esc</code>快捷键即可。</p>
+<hr>
+<h1 id="把鼠标定位到project视图里"><a href="#把鼠标定位到project视图里" class="headerlink" title="把鼠标定位到project视图里"></a>把鼠标定位到project视图里</h1><hr>
+<p>当工程里的包和类非常多的时候，有时候我们想知道当前类在project视图里是处在哪个位置。 <img src="https://img-blog.csdn.net/20180506112922875?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 上面图中的<code>DemoIDEA</code>里，你如何知道它是在<code>spring-cloud-config</code>工程里的哪个位置呢？ 可以先使用<code>alt+F1</code>，弹出<code>Select in</code>视图，然后选择<code>Project View</code>中的<code>Project</code>，回车，就可以立刻定位到类的位置了。 <img src="https://img-blog.csdn.net/20180506113149744?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 那如何从<code>project</code>跳回代码里呢？可以直接使用<code>esc</code>退出<code>project</code>视图，或者直接使用<code>F4</code>,跳到代码里。</p>
+<hr>
+<h1 id="强大的symbol"><a href="#强大的symbol" class="headerlink" title="强大的symbol"></a>强大的symbol</h1><hr>
+<p>如果你依稀记得某个方法名字几个字母，想在<code>IDEA</code>里面找出来，可以怎么做呢？ 直接使用<code>ctrl+shift+alt+n</code>，使用<code>symbol</code>来查找即可。 比如说： <img src="https://img-blog.csdn.net/20180506114420813?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 你想找到checkUser方法。直接输入<code>user</code>即可。 <img src="https://img-blog.csdn.net/20180506114545585?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 如果你记得某个业务类里面有某个方法，那也可以使用首字母找到类,然后加个<code>.</code>，再输入方法名字也是可以的。 <img src="https://img-blog.csdn.net/20180506114751563?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<hr>
+<h1 id="如何找目录"><a href="#如何找目录" class="headerlink" title="如何找目录"></a>如何找目录</h1><hr>
+<p>使用<code>ctrl+shift+n</code>后，使用<code>/</code>，然后输入目录名字即可. <img src="https://img-blog.csdn.net/20180506115258400?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<hr>
+<h1 id="自动生成not-null判断语句"><a href="#自动生成not-null判断语句" class="headerlink" title="自动生成not null判断语句"></a>自动生成not null判断语句</h1><hr>
+<p>自动生成not null这种if判断，在<code>IDEA</code>里有很多种办法，其中一种办法你可能没想到。 <img src="https://img-blog.csdn.net/20180506121917448?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 当我们使用rabbitTemplate. 后，直接输入<code>notnull</code>并回车，<code>IDEA</code>就好自动生成if判断了。 <img src="https://img-blog.csdn.net/20180506122137443?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<hr>
+<h1 id="按照模板找内容"><a href="#按照模板找内容" class="headerlink" title="按照模板找内容"></a>按照模板找内容</h1><hr>
+<p>这个也是我非常喜欢的一个功能，可以根据模板来找到与模板匹配的代码块。比如说：</p>
+<blockquote>
+<p>想在整个工程里面找到所有的try catch语句,但是catch语句里面没有做异常处理的。</p>
+</blockquote>
+<p>catch语句里没有处理异常，是极其危险的。我们可以<code>IDEA</code>里面方便找到所有这样的代码。 <img src="https://img-blog.csdn.net/20180506130226135?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 首先使用<code>ctrl+shift+A</code>快捷键弹出action框，然后输入<code>Search Struct</code> <img src="https://img-blog.csdn.net/20180506130444300?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 选择<code>Search Structurally</code>后，回车，跳转到模板视图。 <img src="https://img-blog.csdn.net/20180506130624611?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 点击<code>Existing Templates</code>按钮，选择<code>try</code>模板。为了能找出catch里面没有处理异常的代码块，我们需要配置一下<code>CatchStatement</code>的<code>Maximum count</code>的值，将其设置为1。 点击<code>Edit Variables</code>按钮，在界面修改<code>Maximum count</code>的值。 <img src="https://img-blog.csdn.net/20180506131057131?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"> 最后点击<code>find</code>按钮，就可以找出catch里面没有处理异常的代码了。 <img src="https://img-blog.csdn.net/20180506131239122?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbnNvbmdiaW4x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/IntelliJ IDEA，代码行宽度超出限制时设置自动换行/" rel="next" title="IntelliJ IDEA，代码行宽度超出限制时设置自动换行">
+                <i class="fa fa-chevron-left"></i> IntelliJ IDEA，代码行宽度超出限制时设置自动换行
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/mysql查询一个表的主键被哪些表所调用/" rel="prev" title="mysql查询一个表的主键被哪些表所调用">
+                mysql查询一个表的主键被哪些表所调用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我最爱的【演出模式】"><span class="nav-number">2.</span> <span class="nav-text">我最爱的【演出模式】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神奇的Inject-language"><span class="nav-number">3.</span> <span class="nav-text">神奇的Inject language</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用快捷键移动分割线"><span class="nav-number">4.</span> <span class="nav-text">使用快捷键移动分割线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ctrl-shift-enter不只是用来行尾加分号的"><span class="nav-number">5.</span> <span class="nav-text">ctrl+shift+enter不只是用来行尾加分号的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不要动不动就使用IDEA的重构功能"><span class="nav-number">6.</span> <span class="nav-text">不要动不动就使用IDEA的重构功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去掉导航栏"><span class="nav-number">7.</span> <span class="nav-text">去掉导航栏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#把鼠标定位到project视图里"><span class="nav-number">8.</span> <span class="nav-text">把鼠标定位到project视图里</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强大的symbol"><span class="nav-number">9.</span> <span class="nav-text">强大的symbol</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何找目录"><span class="nav-number">10.</span> <span class="nav-text">如何找目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动生成not-null判断语句"><span class="nav-number">11.</span> <span class="nav-text">自动生成not null判断语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按照模板找内容"><span class="nav-number">12.</span> <span class="nav-text">按照模板找内容</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

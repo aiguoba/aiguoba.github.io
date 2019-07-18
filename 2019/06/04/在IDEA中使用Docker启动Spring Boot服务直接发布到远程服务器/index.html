@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Docker开启远程访问[root@Charlie docker]# vim /usr/lib/systemd/system/docker.service将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/cont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/06/04/在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="Docker开启远程访问[root@Charlie docker]# vim /usr/lib/systemd/system/docker.service将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/cont">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs15.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA%E5%AE%89%E8%A3%85Docker%E6%8F%92%E4%BB%B6.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA%E9%85%8D%E7%BD%AEdocker1.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs11.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs12.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA13.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs14.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA15.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA16-e1560410586413.png">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.175Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器">
+<meta name="twitter:description" content="Docker开启远程访问[root@Charlie docker]# vim /usr/lib/systemd/system/docker.service将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/cont">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs15.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/06/04/在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/06/04/在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在IDEA中使用Docker启动Spring Boot服务直接发布到远程服务器
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-04 16:32:03" itemprop="dateCreated datePublished" datetime="2019-06-04T16:32:03+08:00">2019-06-04</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Docker开启远程访问"><a href="#Docker开启远程访问" class="headerlink" title="Docker开启远程访问"></a>Docker开启远程访问</h4><pre><code>[root@Charlie docker]# vim /usr/lib/systemd/system/docker.service</code></pre><h5 id="将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）"><a href="#将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）" class="headerlink" title="将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）"></a>将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）</h5><pre><code>#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375  -H unix:///var/run/docker.sock</code></pre><h4 id="重启docker"><a href="#重启docker" class="headerlink" title="重启docker"></a>重启docker</h4><pre><code>systemctl daemon-reload #加载docker守护线程
+systemctl restart docker #重启docker</code></pre><h4 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h4><h5 id="本篇是百度云服务器测试的，其他供应商也大致相同，首先需要在管理服务器后台页面操作安全组相关操作，各个平台不尽相同，其次服务器如果不想关闭防火墙需要另外开放端口"><a href="#本篇是百度云服务器测试的，其他供应商也大致相同，首先需要在管理服务器后台页面操作安全组相关操作，各个平台不尽相同，其次服务器如果不想关闭防火墙需要另外开放端口" class="headerlink" title="本篇是百度云服务器测试的，其他供应商也大致相同，首先需要在管理服务器后台页面操作安全组相关操作，各个平台不尽相同，其次服务器如果不想关闭防火墙需要另外开放端口"></a>本篇是百度云服务器测试的，其他供应商也大致相同，首先需要在管理服务器后台页面操作安全组相关操作，各个平台不尽相同，其次服务器如果不想关闭防火墙需要另外开放端口</h5><p><a href="https://blog.doeat.cn/?s=%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3" title="开放端口点此跳转" target="_blank" rel="noopener">开放端口方法点此跳转</a></p>
+<h4 id="创建一个基础的Spring-Boot项目"><a href="#创建一个基础的Spring-Boot项目" class="headerlink" title="创建一个基础的Spring Boot项目"></a>创建一个基础的Spring Boot项目</h4><p><a href="https://blog.doeat.cn/index.php/2018/03/04/30%E7%A7%92%E5%88%9B%E5%BB%BA%E5%B8%A6%E8%AE%BF%E9%97%AE%E6%8E%A5%E5%8F%A3%E7%9A%84spring-boot%E9%A1%B9%E7%9B%AE/" title="创建方法点此跳转" target="_blank" rel="noopener">创建基础的Spring Boot项目点此跳转</a></p>
+<h5 id="创建一个Dockerfile文件，放在项目的根目录下，内容如下"><a href="#创建一个Dockerfile文件，放在项目的根目录下，内容如下" class="headerlink" title="创建一个Dockerfile文件，放在项目的根目录下，内容如下"></a>创建一个Dockerfile文件，放在项目的根目录下，内容如下</h5><h5 id="Dockerfile运行Spring-Boot项目的参数等详情点此跳转"><a href="#Dockerfile运行Spring-Boot项目的参数等详情点此跳转" class="headerlink" title="Dockerfile运行Spring Boot项目的参数等详情点此跳转"></a>Dockerfile运行Spring Boot项目的参数等详情<a href="https://blog.doeat.cn/index.php/2019/05/30/dcokerfile%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F%E8%BF%90%E8%A1%8Cspring-boot%E9%A1%B9%E7%9B%AE/" title="详情点此跳转" target="_blank" rel="noopener">点此跳转</a></h5><pre><code>FROM anapsix/alpine-java
+VOLUME /tmp
+ADD target/demo-0.0.1-SNAPSHOT.jar app.jar
+RUN bash -c &apos;touch /app.jar&apos;
+ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd=file:/dev/./urandom&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+EXPOSE 8080</code></pre><h4 id="MAVEN将项目打成jar包"><a href="#MAVEN将项目打成jar包" class="headerlink" title="MAVEN将项目打成jar包"></a>MAVEN将项目打成jar包</h4><h5 id="右侧有个tab是maven，点击package按钮会生成jar包，每次改代码都需要clean然后再package"><a href="#右侧有个tab是maven，点击package按钮会生成jar包，每次改代码都需要clean然后再package" class="headerlink" title="右侧有个tab是maven，点击package按钮会生成jar包，每次改代码都需要clean然后再package"></a>右侧有个tab是maven，点击<code>package</code>按钮会生成jar包，每次改代码都需要<code>clean</code>然后再<code>package</code></h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs15.png" title="打包" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs15.png" alt="打包" title="打包"></a></p>
+<h4 id="IDEA安装插件"><a href="#IDEA安装插件" class="headerlink" title="IDEA安装插件"></a>IDEA安装插件</h4><h5 id="右侧没安装过插件的话会有个Install按钮，安装之后重启idea"><a href="#右侧没安装过插件的话会有个Install按钮，安装之后重启idea" class="headerlink" title="右侧没安装过插件的话会有个Install按钮，安装之后重启idea"></a>右侧没安装过插件的话会有个<code>Install</code>按钮，安装之后重启idea</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA安装Docker插件.png" title="IDEA安装Docker插件" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA%E5%AE%89%E8%A3%85Docker%E6%8F%92%E4%BB%B6.png" alt="IDEA安装Docker插件" title="IDEA安装Docker插件"></a></p>
+<h4 id="IDEA配置docker"><a href="#IDEA配置docker" class="headerlink" title="IDEA配置docker"></a>IDEA配置docker</h4><h5 id="如下图进行配置，在engine-API-URL-填入自己服务器对应的-tcp-ip-port-如果下方出现Connection-successful的字样，表示连接成功"><a href="#如下图进行配置，在engine-API-URL-填入自己服务器对应的-tcp-ip-port-如果下方出现Connection-successful的字样，表示连接成功" class="headerlink" title="如下图进行配置，在engine API URL 填入自己服务器对应的 tcp://ip:port 如果下方出现Connection successful的字样，表示连接成功"></a>如下图进行配置，在<code>engine API URL</code> 填入自己服务器对应的 <code>tcp://ip:port</code> 如果下方出现<code>Connection successful</code>的字样，表示连接成功</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA配置docker1.png" title="IDEA配置docker" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA%E9%85%8D%E7%BD%AEdocker1.png" alt="IDEA配置docker" title="IDEA配置docker"></a></p>
+<h4 id="添加Docker启动配置"><a href="#添加Docker启动配置" class="headerlink" title="添加Docker启动配置"></a>添加Docker启动配置</h4><h5 id="点击Edit-Configurations···"><a href="#点击Edit-Configurations···" class="headerlink" title="点击Edit Configurations···"></a>点击<code>Edit Configurations···</code></h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs11.png" title="启动配置" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs11.png" alt="启动配置" title="启动配置"></a></p>
+<h5 id="然后点击右上角加号，选择Docker的Dockerfile"><a href="#然后点击右上角加号，选择Docker的Dockerfile" class="headerlink" title="然后点击右上角加号，选择Docker的Dockerfile"></a>然后点击右上角加号，选择Docker的Dockerfile</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs12.png" title="启动配置" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs12.png" alt="启动配置" title="启动配置"></a></p>
+<h5 id="按照下图配置，镜像和容器名字取自己喜欢的，Bind-ports-此处的配置指的是将容器中的8080端口代理到宿主机的8765端口，然后启动之后通过宿主机的ip-8765即可访问到项目"><a href="#按照下图配置，镜像和容器名字取自己喜欢的，Bind-ports-此处的配置指的是将容器中的8080端口代理到宿主机的8765端口，然后启动之后通过宿主机的ip-8765即可访问到项目" class="headerlink" title="按照下图配置，镜像和容器名字取自己喜欢的，Bind ports 此处的配置指的是将容器中的8080端口代理到宿主机的8765端口，然后启动之后通过宿主机的ip:8765即可访问到项目"></a>按照下图配置，镜像和容器名字取自己喜欢的，<code>Bind ports</code> 此处的配置指的是将容器中的8080端口代理到宿主机的8765端口，然后启动之后通过宿主机的ip:8765即可访问到项目</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA13.png" title="启动配置" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA13.png" alt="启动配置" title="启动配置"></a></p>
+<h4 id="创建镜像并启动"><a href="#创建镜像并启动" class="headerlink" title="创建镜像并启动"></a>创建镜像并启动</h4><h5 id="找到刚刚创建的Dockerfile文件，右上角会有启动创建镜像和启动容器的按钮"><a href="#找到刚刚创建的Dockerfile文件，右上角会有启动创建镜像和启动容器的按钮" class="headerlink" title="找到刚刚创建的Dockerfile文件，右上角会有启动创建镜像和启动容器的按钮"></a>找到刚刚创建的Dockerfile文件，右上角会有启动创建镜像和启动容器的按钮</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs14.png" title="创建镜像并启动" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEAs14.png" alt="创建镜像并启动" title="创建镜像并启动"></a></p>
+<h5 id="容器启动之后控制台能看到具体的运行信息，也可以管理镜像和容器的开始启动，非常方便"><a href="#容器启动之后控制台能看到具体的运行信息，也可以管理镜像和容器的开始启动，非常方便" class="headerlink" title="容器启动之后控制台能看到具体的运行信息，也可以管理镜像和容器的开始启动，非常方便"></a>容器启动之后控制台能看到具体的运行信息，也可以管理镜像和容器的开始启动，非常方便</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA15.png" title="容器启动控制台" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA15.png" alt="容器启动控制台" title="容器启动控制台"></a></p>
+<h4 id="访问接口"><a href="#访问接口" class="headerlink" title="访问接口"></a>访问接口</h4><h5 id="刚刚Docker启动配置中将docker容器中的8080端口代理到宿主机的8765端口"><a href="#刚刚Docker启动配置中将docker容器中的8080端口代理到宿主机的8765端口" class="headerlink" title="刚刚Docker启动配置中将docker容器中的8080端口代理到宿主机的8765端口"></a>刚刚Docker启动配置中将docker容器中的8080端口代理到宿主机的8765端口</h5><h5 id="这里访问-ip-8765-test-就可以查看到项目接口细信息"><a href="#这里访问-ip-8765-test-就可以查看到项目接口细信息" class="headerlink" title="这里访问 ip:8765/test 就可以查看到项目接口细信息"></a>这里访问 <code>ip:8765/test</code> 就可以查看到项目接口细信息</h5><p><a href="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA16-e1560410586413.png" title="访问页面" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/06/IDEA16-e1560410586413.png" alt="访问页面" title="访问页面"></a></p>
+<h4 id="服务器上的Docker相关信息"><a href="#服务器上的Docker相关信息" class="headerlink" title="服务器上的Docker相关信息"></a>服务器上的Docker相关信息</h4><pre><code>[root@Charile docker]# docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+aiguoba/demo          v1                  077953297ce3        3 minutes ago       159MB
+[root@Charile docker]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+5b78d7f5d654        077953297ce3        &quot;java -Djava.securit…&quot;   3 minutes ago       Up 3 minutes        0.0.0.0:8765-&gt;8080/tcp    demo_v1</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/Dockerfile指令/" rel="next" title="Dockerfile指令">
+                <i class="fa fa-chevron-left"></i> Dockerfile指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/11/Redis通过防火墙配置开放局域网连接，禁用外网连接/" rel="prev" title="Redis通过防火墙配置开放局域网连接，禁用外网连接">
+                Redis通过防火墙配置开放局域网连接，禁用外网连接 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker开启远程访问"><span class="nav-number">1.</span> <span class="nav-text">Docker开启远程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）"><span class="nav-number">1.1.</span> <span class="nav-text">将原本上面这行改为下面这行（搜到的大量文档都是2375端口，可能是官方教程？索性抄一下吧，吐槽一下不细究）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启docker"><span class="nav-number">2.</span> <span class="nav-text">重启docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开放端口"><span class="nav-number">3.</span> <span class="nav-text">开放端口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本篇是百度云服务器测试的，其他供应商也大致相同，首先需要在管理服务器后台页面操作安全组相关操作，各个平台不尽相同，其次服务器如果不想关闭防火墙需要另外开放端口"><span class="nav-number">3.1.</span> <span class="nav-text">本篇是百度云服务器测试的，其他供应商也大致相同，首先需要在管理服务器后台页面操作安全组相关操作，各个平台不尽相同，其次服务器如果不想关闭防火墙需要另外开放端口</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个基础的Spring-Boot项目"><span class="nav-number">4.</span> <span class="nav-text">创建一个基础的Spring Boot项目</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个Dockerfile文件，放在项目的根目录下，内容如下"><span class="nav-number">4.1.</span> <span class="nav-text">创建一个Dockerfile文件，放在项目的根目录下，内容如下</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dockerfile运行Spring-Boot项目的参数等详情点此跳转"><span class="nav-number">4.2.</span> <span class="nav-text">Dockerfile运行Spring Boot项目的参数等详情点此跳转</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAVEN将项目打成jar包"><span class="nav-number">5.</span> <span class="nav-text">MAVEN将项目打成jar包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#右侧有个tab是maven，点击package按钮会生成jar包，每次改代码都需要clean然后再package"><span class="nav-number">5.1.</span> <span class="nav-text">右侧有个tab是maven，点击package按钮会生成jar包，每次改代码都需要clean然后再package</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDEA安装插件"><span class="nav-number">6.</span> <span class="nav-text">IDEA安装插件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#右侧没安装过插件的话会有个Install按钮，安装之后重启idea"><span class="nav-number">6.1.</span> <span class="nav-text">右侧没安装过插件的话会有个Install按钮，安装之后重启idea</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDEA配置docker"><span class="nav-number">7.</span> <span class="nav-text">IDEA配置docker</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如下图进行配置，在engine-API-URL-填入自己服务器对应的-tcp-ip-port-如果下方出现Connection-successful的字样，表示连接成功"><span class="nav-number">7.1.</span> <span class="nav-text">如下图进行配置，在engine API URL 填入自己服务器对应的 tcp://ip:port 如果下方出现Connection successful的字样，表示连接成功</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加Docker启动配置"><span class="nav-number">8.</span> <span class="nav-text">添加Docker启动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#点击Edit-Configurations···"><span class="nav-number">8.1.</span> <span class="nav-text">点击Edit Configurations···</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#然后点击右上角加号，选择Docker的Dockerfile"><span class="nav-number">8.2.</span> <span class="nav-text">然后点击右上角加号，选择Docker的Dockerfile</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#按照下图配置，镜像和容器名字取自己喜欢的，Bind-ports-此处的配置指的是将容器中的8080端口代理到宿主机的8765端口，然后启动之后通过宿主机的ip-8765即可访问到项目"><span class="nav-number">8.3.</span> <span class="nav-text">按照下图配置，镜像和容器名字取自己喜欢的，Bind ports 此处的配置指的是将容器中的8080端口代理到宿主机的8765端口，然后启动之后通过宿主机的ip:8765即可访问到项目</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建镜像并启动"><span class="nav-number">9.</span> <span class="nav-text">创建镜像并启动</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#找到刚刚创建的Dockerfile文件，右上角会有启动创建镜像和启动容器的按钮"><span class="nav-number">9.1.</span> <span class="nav-text">找到刚刚创建的Dockerfile文件，右上角会有启动创建镜像和启动容器的按钮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#容器启动之后控制台能看到具体的运行信息，也可以管理镜像和容器的开始启动，非常方便"><span class="nav-number">9.2.</span> <span class="nav-text">容器启动之后控制台能看到具体的运行信息，也可以管理镜像和容器的开始启动，非常方便</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问接口"><span class="nav-number">10.</span> <span class="nav-text">访问接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#刚刚Docker启动配置中将docker容器中的8080端口代理到宿主机的8765端口"><span class="nav-number">10.1.</span> <span class="nav-text">刚刚Docker启动配置中将docker容器中的8080端口代理到宿主机的8765端口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#这里访问-ip-8765-test-就可以查看到项目接口细信息"><span class="nav-number">10.2.</span> <span class="nav-text">这里访问 ip:8765/test 就可以查看到项目接口细信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器上的Docker相关信息"><span class="nav-number">11.</span> <span class="nav-text">服务器上的Docker相关信息</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

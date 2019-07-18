@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="待整理··· CentOS7安装Mysql5.7: 参考网址：https://blog.csdn.net/nullbull/article/details/79507996 Mysql使用ProxySQL实现读写分离 http://blog.51cto.com/bigboss/2103290 nohup ./xxx.sh &amp;amp;  后台保护进程执行脚本查看是否开启了bin_logmysql&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql的全量备份和差量备份">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/11/21/mysql-e7-9a-84-e5-85-a8-e9-87-8f-e5-a4-87-e4-bb-bd-e5-92-8c-e5-b7-ae-e9-87-8f-e5-a4-87-e4-bb-bd/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="待整理··· CentOS7安装Mysql5.7: 参考网址：https://blog.csdn.net/nullbull/article/details/79507996 Mysql使用ProxySQL实现读写分离 http://blog.51cto.com/bigboss/2103290 nohup ./xxx.sh &amp;amp;  后台保护进程执行脚本查看是否开启了bin_logmysql&amp;g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/864087/201711/864087-20171119221623718-484415242.png">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql的全量备份和差量备份">
+<meta name="twitter:description" content="待整理··· CentOS7安装Mysql5.7: 参考网址：https://blog.csdn.net/nullbull/article/details/79507996 Mysql使用ProxySQL实现读写分离 http://blog.51cto.com/bigboss/2103290 nohup ./xxx.sh &amp;amp;  后台保护进程执行脚本查看是否开启了bin_logmysql&amp;g">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/864087/201711/864087-20171119221623718-484415242.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/11/21/mysql-e7-9a-84-e5-85-a8-e9-87-8f-e5-a4-87-e4-bb-bd-e5-92-8c-e5-b7-ae-e9-87-8f-e5-a4-87-e4-bb-bd/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql的全量备份和差量备份 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/11/21/mysql-e7-9a-84-e5-85-a8-e9-87-8f-e5-a4-87-e4-bb-bd-e5-92-8c-e5-b7-ae-e9-87-8f-e5-a4-87-e4-bb-bd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql的全量备份和差量备份
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-21 16:36:02" itemprop="dateCreated datePublished" datetime="2018-11-21T16:36:02+08:00">2018-11-21</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em><strong>待整理···</strong></em></p>
+<p>CentOS7安装Mysql5.7: 参考网址：<a href="https://www.cnblogs.com/bigbrotherer/p/7241845.html" target="_blank" rel="noopener">https://blog.csdn.net/nullbull/article/details/79507996</a></p>
+<p>Mysql使用ProxySQL实现读写分离</p>
+<p><a href="http://blog.51cto.com/bigboss/2103290" target="_blank" rel="noopener">http://blog.51cto.com/bigboss/2103290</a></p>
+<h4 id="nohup-xxx-sh-amp-后台保护进程执行脚本"><a href="#nohup-xxx-sh-amp-后台保护进程执行脚本" class="headerlink" title="nohup ./xxx.sh &amp;  后台保护进程执行脚本"></a>nohup ./xxx.sh &amp;  后台保护进程执行脚本</h4><h4 id="查看是否开启了bin-log"><a href="#查看是否开启了bin-log" class="headerlink" title="查看是否开启了bin_log"></a>查看是否开启了bin_log</h4><p>mysql&gt; show variables like ‘log_%’;</p>
+<h4 id="全量备份"><a href="#全量备份" class="headerlink" title="全量备份"></a>全量备份</h4><p>各种参数：<a href="https://www.cnblogs.com/qq78292959/p/3637135.html" target="_blank" rel="noopener">https://www.cnblogs.com/qq78292959/p/3637135.html</a> USER是用户名，PASSWORD是密码，table是要备份的数据库名，bakname是自己起的备份名 <strong><em>备份数据</em></strong></p>
+<p>mysqldump -uUSER -pPASSWORD table &gt; bakname.sql<br>–mast-data=2 记录pos位置</p>
+<p><em><strong>恢复数据</strong></em></p>
+<p>mysql -uUSER -pPASSWORD table &lt; bakname.sql</p>
+<p>备份时候加的参数 <a href="https://blog.csdn.net/cug_jiang126com/article/details/49824471" target="_blank" rel="noopener">https://blog.csdn.net/cug_jiang126com/article/details/49824471</a></p>
+<h4 id="增量备份"><a href="#增量备份" class="headerlink" title="增量备份"></a>增量备份</h4><p>备份：mysqladmin -uroot -p12345 flush-logs； 查看binlog日志：mysql&gt;show binlog events in ‘mysql-bin.000003’; <a href="https://blog.csdn.net/leshami/article/details/41962243" target="_blank" rel="noopener">https://blog.csdn.net/leshami/article/details/41962243</a>   恢复数据：mysqlbinlog –start-position=2051 –stop-position=2399 /app/mysql_binlog/mysql-bin.000003 | mysql -uroot -p ，回车后输入密码。 待续 ···· 资料待整理 <a href="https://blog.csdn.net/fengyong7723131/article/details/80447786" target="_blank" rel="noopener">#https://blog.csdn.net/fengyong7723131/article/details/80447786</a> <a href="https://www.cnblogs.com/kevingrace/p/5907254.html" target="_blank" rel="noopener">https://www.cnblogs.com/kevingrace/p/5907254.html</a>   ProxySql 读写分离   CentOS7安装Mysql5.7: 参考网址：<a href="https://blog.csdn.net/nullbull/article/details/79507996" target="_blank" rel="noopener">https://blog.csdn.net/nullbull/article/details/79507996</a>   备份MySQL数据库的命令 mysqldump -hhostname -uusername -ppassword databasename &gt; backupfile.sql 备份MySQL数据库为带删除表的格式 备份MySQL数据库为带删除表的格式，能够让该备份覆盖已有数据库而不需要手动删除原有数据库。 mysqldump -–add-drop-table -uusername -ppassword databasename &gt; backupfile.sql 直接将MySQL数据库压缩备份 mysqldump -hhostname -uusername -ppassword databasename | gzip &gt; backupfile.sql.gz 备份MySQL数据库某个(些)表 mysqldump -hhostname -uusername -ppassword databasename specific_table1 specific_table2 &gt; backupfile.sql 同时备份多个MySQL数据库 mysqldump -hhostname -uusername -ppassword –databases databasename1 databasename2 databasename3 &gt; multibackupfile.sql 仅仅备份数据库结构 mysqldump –no-data –databases databasename1 databasename2 databasename3 &gt; structurebackupfile.sql 备份服务器上所有数据库 mysqldump –all-databases &gt; allbackupfile.sql 还原MySQL数据库的命令 mysql -hhostname -uusername -ppassword databasename &lt; backupfile.sql 还原压缩的MySQL数据库 gunzip &lt; backupfile.sql.gz | mysql -uusername -ppassword databasename 将数据库转移到新服务器 mysqldump -uusername -ppassword databasename | mysql –host=<em>.</em>.<em>.</em> -C databasename ——————— 作者：null_plf 来源：CSDN 原文：<a href="https://blog.csdn.net/plfplc/article/details/80704018" target="_blank" rel="noopener">https://blog.csdn.net/plfplc/article/details/80704018</a> 版权声明：本文为博主原创文章，转载请附上博文链接！       找到 my.cnf 文件，添加以下两行 skip_innodb_doublewrite innodb_flush_log_at_trx_commit = 0 重启Mysql，重新导入数据，见证奇迹。 skip_innodb_doublewrite 禁用Mysql 的两次写功能。 innodb_flush_log_at_trx_commit = 0 当设置该值为1时，每次事务提交都要做一次fsync，这是最安全的配置，即使宕机也不会丢失事务； 当设置为2时，则在事务提交时只做write操作，只保证写到系统的page cache，因此实例crash不会丢失事务，但宕机则可能丢失事务； 当设置为0时，事务提交不会触发redo写操作，而是留给后台线程每秒一次的刷盘操作，因此实例crash将最多丢失1秒钟内的事务。 ——————— 作者：程序猿老曹 来源：CSDN 原文：<a href="https://blog.csdn.net/starscao/article/details/72819108" target="_blank" rel="noopener">https://blog.csdn.net/starscao/article/details/72819108</a> 版权声明：本文为博主原创文章，转载请附上博文链接！     <strong>如何启动/停止/重启MySQL</strong> 发启动、停止、重启 MySQL 是每个拥有独立主机的站长必须要撑握的操作，下面为大家简单介绍一下操作方法： 一、启动方式 1、使用 service 启动：service mysqld start 2、使用 mysqld 脚本启动：/etc/inint.d/mysqld start 3、使用 safe_mysqld 启动：safe_mysqld&amp; 二、停止 1、使用 service 启动：service mysqld stop 2、使用 mysqld 脚本启动：/etc/inint.d/mysqld stop 3、mysqladmin shutdown 三、重启 1、使用 service 启动：service mysqld restart 2、使用 mysqld 脚本启动：/etc/inint.d/mysqld restart 好久没在linux下重启mysql了，看来是服务跑得太稳定了呵呵，最近机器死掉，重启后mysql服务也得重启，竟然命令忘记了，只好百度、google啦！ 下面是从网上搜的，应该是最靠谱的喽，大家试试好用不！ 好久没有折腾服务器了，一大早打开要调试的页面，发现/tmp目录空间满了，导致MySQL没有办法正常运行了。于是修改了修改了my.cnf中mysql.sock的存放路径以及php.ini中的相关设置，这个时候需要重启MySQL，呵呵，好长时间没有在Linux下折腾服务器了，尽然突然想不起来怎么在Linux操作系统下重启MySQL服务的命令了：（ 于是乎百度、google了“Linux下重启MySQL命令”，搜索结果一显示，从前几条的摘要信息中就已经找到答案了：）以下Linux下重启MySQL的正确方法： <strong>1、通过rpm包安装的MySQL</strong> service mysqld restart <strong>2、从源码包安装的MySQL</strong> // linux关闭MySQL的命令 $mysql_dir/bin/mysqladmin -uroot -p shutdown // linux启动MySQL的命令 $mysql_dir/bin/mysqld_safe &amp; 其中mysql_dir为MySQL的安装目录，mysqladmin和mysqld_safe位于MySQL安装目录的bin目录下，很容易找到的。 3、以上方法都无效的时候，可以通过强行命令：“killall mysql”来关闭MySQL，但是不建议用这样的方式，因为这种野蛮的方法会强行终止MySQL数据库服务，有可能导致表损坏……所以自己掂量着用。 <img src="https://images2017.cnblogs.com/blog/864087/201711/864087-20171119221623718-484415242.png" alt> 问题描述：sh文件中，在win环境下，用WinSCP编辑，出现如下错误： -bash: ./start.sh: /bin/sh^M: bad interpreter: No such file or directory 解决方案：这是win的编码引起的，可通过如下解决。 1.查看该文件：vim  start.sh 2.查看该错误文件的格式（一般报错的文件格式是DOS）： :set ff 3.修改该文件格式为UNIX： :set ff=unix 4.再保存。 :wq! ——————— 作者：lizhengnanhua 来源：CSDN 原文：<a href="https://blog.csdn.net/lizhengnanhua/article/details/51724396" target="_blank" rel="noopener">https://blog.csdn.net/lizhengnanhua/article/details/51724396</a> 版权声明：本文为博主原创文章，转载请附上博文链接！  </p>
+<h1 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h1><p><a href="http://blog.51cto.com/dbguy/1583063" target="_blank" rel="noopener">http://blog.51cto.com/dbguy/1583063</a></p>
+<h1 id="查看linux系统常用的命令，Linux查看系统配置常用命令"><a href="#查看linux系统常用的命令，Linux查看系统配置常用命令" class="headerlink" title="查看linux系统常用的命令，Linux查看系统配置常用命令"></a><a href="https://www.cnblogs.com/xuchunlin/p/5671572.html" target="_blank" rel="noopener">查看linux系统常用的命令，Linux查看系统配置常用命令</a></h1><p><a href="https://www.cnblogs.com/xuchunlin/p/5671572.html" target="_blank" rel="noopener">https://www.cnblogs.com/xuchunlin/p/5671572.html</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/21/xshell直接用命令上传下载文件到服务器/" rel="next" title="xshell直接用命令上传下载文件到服务器">
+                <i class="fa fa-chevron-left"></i> xshell直接用命令上传下载文件到服务器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/22/java的时间工具类，包括找各种时间，根据固定格式返回时间/" rel="prev" title="java的时间工具类，包括找各种时间，根据固定格式返回时间">
+                java的时间工具类，包括找各种时间，根据固定格式返回时间 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#nohup-xxx-sh-amp-后台保护进程执行脚本"><span class="nav-number">1.</span> <span class="nav-text">nohup ./xxx.sh &amp;  后台保护进程执行脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看是否开启了bin-log"><span class="nav-number">2.</span> <span class="nav-text">查看是否开启了bin_log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全量备份"><span class="nav-number">3.</span> <span class="nav-text">全量备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增量备份"><span class="nav-number">4.</span> <span class="nav-text">增量备份</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#数据恢复"><span class="nav-number"></span> <span class="nav-text">数据恢复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看linux系统常用的命令，Linux查看系统配置常用命令"><span class="nav-number"></span> <span class="nav-text">查看linux系统常用的命令，Linux查看系统配置常用命令</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

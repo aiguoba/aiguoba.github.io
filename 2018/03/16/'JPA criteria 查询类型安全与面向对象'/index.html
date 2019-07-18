@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="转自 https://my.oschina.net/zhaoqian/blog/133500#comment-list序言自工作以来,除了以前比较流量的hibernate,就是一直使用ORM 规范 JPA了.而这几天工作需要,研究了下JPA的标准查询,名为:JPA criteria查询.相比JPQL,其优势是类型安全,更加的面向对象. 使用标准查询,开发人员可在编译的时候就检查查询的正确与否.而以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JPA criteria 查询:类型安全与面向对象">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/03/16/'JPA criteria 查询类型安全与面向对象'/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="转自 https://my.oschina.net/zhaoqian/blog/133500#comment-list序言自工作以来,除了以前比较流量的hibernate,就是一直使用ORM 规范 JPA了.而这几天工作需要,研究了下JPA的标准查询,名为:JPA criteria查询.相比JPQL,其优势是类型安全,更加的面向对象. 使用标准查询,开发人员可在编译的时候就检查查询的正确与否.而以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JPA criteria 查询:类型安全与面向对象">
+<meta name="twitter:description" content="转自 https://my.oschina.net/zhaoqian/blog/133500#comment-list序言自工作以来,除了以前比较流量的hibernate,就是一直使用ORM 规范 JPA了.而这几天工作需要,研究了下JPA的标准查询,名为:JPA criteria查询.相比JPQL,其优势是类型安全,更加的面向对象. 使用标准查询,开发人员可在编译的时候就检查查询的正确与否.而以">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/03/16/'JPA criteria 查询类型安全与面向对象'/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JPA criteria 查询:类型安全与面向对象 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/03/16/'JPA criteria 查询类型安全与面向对象'/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JPA criteria 查询:类型安全与面向对象
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-16 18:51:34" itemprop="dateCreated datePublished" datetime="2018-03-16T18:51:34+08:00">2018-03-16</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="转自-https-my-oschina-net-zhaoqian-blog-133500-comment-list"><a href="#转自-https-my-oschina-net-zhaoqian-blog-133500-comment-list" class="headerlink" title="转自 https://my.oschina.net/zhaoqian/blog/133500#comment-list"></a>转自 <a href="https://my.oschina.net/zhaoqian/blog/133500#comment-list" target="_blank" rel="noopener">https://my.oschina.net/zhaoqian/blog/133500#comment-list</a></h6><h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>自工作以来,除了以前比较流量的hibernate,就是一直使用ORM 规范 JPA了.而这几天工作需要,研究了下JPA的标准查询,名为:JPA criteria查询.相比JPQL,其优势是类型安全,更加的面向对象. 使用标准查询,开发人员可在编译的时候就检查查询的正确与否.而以前也只是在Hibernate中听说有过.具体不详,没用过. 用的maven插件生成的.具体看这些把. Hibernate org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor <a href="http://relation.to/Bloggers/HibernateStaticMetamodelGeneratorAnnotationProcessor" target="_blank" rel="noopener">http://relation.to/Bloggers/HibernateStaticMetamodelGeneratorAnnotationProcessor</a> OpenJPA org.apache.openjpa.persistence.meta.AnnotationProcessor6 <a href="http://openjpa.apache.org/builds/latest/docs/manual/manual.html#d0e11094" target="_blank" rel="noopener">http://openjpa.apache.org/builds/latest/docs/manual/manual.html#d0e11094</a> DataNucleus org.datanucleus.jpa.JPACriteriaProcessor <a href="http://www.datanucleus.org/products/accessplatform\_2\_1/jpa/jpql\_criteria\_metamodel.html" target="_blank" rel="noopener">http://www.datanucleus.org/products/accessplatform\_2\_1/jpa/jpql\_criteria\_metamodel.html</a></p>
+<h1 id="一-JPA元模型概念-及使用"><a href="#一-JPA元模型概念-及使用" class="headerlink" title="一.JPA元模型概念,及使用"></a>一.JPA元模型概念,及使用</h1><p>在JPA中,标准查询是以元模型的概念为基础的.元模型是为具体持久化单元的受管实体定义的.这些实体可以是实体类,嵌入类或者映射的父类.提供受管实体元信息的类就是元模型类. 描述受管类的状态和他们之间的关系的静态元模型类可以</p>
+<ul>
+<li>1.从注解处理器产生</li>
+<li>2.从程序产生</li>
+<li>3.用EntityManager访问.</li>
+</ul>
+<p>如下code,一个简单的实体类package com.demo.entities;下,实体类Employee ，假设该实体有诸如id，name和age的基本属性，还有与类Address的OneToMany关联:</p>
+<pre><code>@Entity
+@Table
+public class Employee{  
+    private int id;   
+    private String name;
+    private int age;
+    @OneToMany
+    private List&lt;Address&gt; addresses;
+    // Other code…
+}</code></pre><p>Employee类(com.demo.entities包中定义)的标准元模型类的名字将是使用 javax.persistence.StaticMetamodel注解的Employee_。元模型类的属性全部是static和public的。Employee的每一个属性都会使用在JPA2规范中描述的以下规则在相应的元模型类中映射：</p>
+<ul>
+<li>诸如id，name和age的非集合类型，会定义静态属性SingularAttribute&lt;A, B&gt; b，这里b是定义在类A中的类型为B的一个对象。</li>
+<li>对于Addess这样的集合类型，会定义静态属性ListAttribute&lt;A, B&gt; b，这里List对象b是定义在类A中类型B的对象。其它集合类型可以是SetAttribute, MapAttribute 或 CollectionAttribute 类型。</li>
+</ul>
+<p>以下是用注解处理器产生的元模型类package com.demo.entities;下：</p>
+<pre><code>import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.ListAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+@Generated(&quot;org.hibernate.jpamodelgen.JPAMetaModelEntityProcesso&quot;)
+@StaticMetamodel(Employee.class)
+public class Employee_ {     
+    public static volatile SingularAttribute&lt;Employee, Integer&gt; id;   
+    public static volatile SingularAttribute&lt;Employee, Integer&gt; age;   
+    public static volatile SingularAttribute&lt;Employee, String&gt; name;    
+    public static volatile ListAttribute&lt;Employee, Address&gt; addresses;
+}</code></pre><p>就像它的名字表明的，注解处理器处理注解，帮助产生源代码。注解处理在编译时就能激活。元模型类遵循JPA2.0规范中为定义标准元模型类而描述的规则创建。 使用元模型类最大的优势是凭借其实例化可以在编译时访问实体的持久属性.该特性使得criteria 查询更加类型安全. 元模型API与Java中的标准反射API密切相关。主要不同在于使用标准反射API编译器无法验证其正确性。例如：下面的代码会通过编译测试：</p>
+<pre><code>Class myClass = Class.forName(&quot;com.demo.Test&quot;);
+Field myField = myClass.getField(&quot;myName&quot;);</code></pre><p>编译器假定com.demo.Test中定义了属性myName，一旦该类并没有定义属性myName，编译器将抛出运行时异常。 元模型API会强制编译器检查适当的值是否分配给实体类的持久属性。例如：考虑Employee类的age属性，它是Integer变量。若该属性被赋值为String类型的值，编译器会抛出错误。该实现并不要求支持非标准特性。程序员编写的元模型类通常称为非标准元模型类。当EntityManagerFactory 创建时，持久化提供者会初始化元模型类的属性。</p>
+<h1 id="二-使用criteria-查询简单Demo"><a href="#二-使用criteria-查询简单Demo" class="headerlink" title="二.使用criteria 查询简单Demo"></a>二.使用criteria 查询简单Demo</h1><p>为了更好的理解criteria 查询，考虑拥有Employee实例集合的Dept实体，Employee和Dept的元模型类的代码如下：</p>
+<pre><code>//All Necessary Imports
+@StaticMetamodel(Dept.class)
+public class Dept_ {    
+    public static volatile SingularAttribute&lt;Dept, Integer&gt; id;   
+    public static volatile ListAttribute&lt;Dept, Employee&gt; employeeCollection;    
+    public static volatile SingularAttribute&lt;Dept, String&gt; name;
+}
+//All Necessary Imports
+@StaticMetamodel(Employee.class)
+public class Employee_ {     
+    public static volatile SingularAttribute&lt;Employee, Integer&gt; id;    
+    public static volatile SingularAttribute&lt;Employee, Integer&gt; age;    
+    public static volatile SingularAttribute&lt;Employee, String&gt; name;    
+    public static volatile SingularAttribute&lt;Employee, Dept&gt; deptId;
+}</code></pre><p>下面的代码片段展示了一个criteria 查询，它用于获取所有年龄大于24岁的员工：</p>
+<pre><code>CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+CriteriaQuery&lt;Employee&gt; criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);
+Predicate condition = criteriaBuilder.gt(employee.get(Employee_.age), 24);
+criteriaQuery.where(condition);
+TypedQuery&lt;Employee&gt; typedQuery = em.createQuery(criteriaQuery);
+List&lt;Employee&gt; result = typedQuery.getResultList();</code></pre><p>对应的SQL: SELECT * FROM employee WHERE age &gt; 24</p>
+<h1 id="三-构建CriteriaQuery-实-例API说明"><a href="#三-构建CriteriaQuery-实-例API说明" class="headerlink" title="三.构建CriteriaQuery 实**例API说明**"></a><strong>三.构建CriteriaQuery 实**</strong>例API说明**</h1><h2 id="1-CriteriaBuilder-安全查询创建工厂-创建CriteriaQuery-创建查询具体具体条件Predicate-等"><a href="#1-CriteriaBuilder-安全查询创建工厂-创建CriteriaQuery-创建查询具体具体条件Predicate-等" class="headerlink" title="1.CriteriaBuilder 安全查询创建工厂,创建CriteriaQuery,创建查询具体具体条件Predicate 等"></a><strong>1.CriteriaBuilder 安全查询创建工厂,创建CriteriaQuery,创建查询具体具体条件Predicate 等</strong></h2><p>CriteriaBuilder是一个工厂对象,安全查询的开始.用于构建JPA安全查询.可以从EntityManager 或 EntityManagerFactory类中获得CriteriaBuilder.  比如: CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();</p>
+<h2 id="2-CriteriaQuery-安全查询主语句"><a href="#2-CriteriaQuery-安全查询主语句" class="headerlink" title="2.CriteriaQuery 安全查询主语句"></a><strong>2.CriteriaQuery 安全查询主语句</strong></h2><p><strong>CriteriaQuery</strong>对象必须在实体类型或嵌入式类型上的Criteria 查询上起作用。 它通过调用 <strong>CriteriaBuilder</strong>, createQuery 或CriteriaBuilder.createTupleQuery 获得。 CriteriaBuilder就像CriteriaQuery 的工厂一样。 CriteriaBuilder工厂类是调用EntityManager.getCriteriaBuilder 或 EntityManagerFactory.getCriteriaBuilder而得。  Employee实体的 CriteriaQuery 对象以下面的方式创建：</p>
+<pre><code>CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+CriteriaQuery&lt;Employee&gt; criteriaQuery = criteriaBuilder.createQuery(Employee.class);</code></pre><h2 id="3-Root-定义查询的From子句中能出现的类型"><a href="#3-Root-定义查询的From子句中能出现的类型" class="headerlink" title="3.Root 定义查询的From子句中能出现的类型"></a><strong>3.Root 定义查询的From子句中能出现的类型</strong></h2><p>AbstractQuery是CriteriaQuery 接口的父类。它提供得到查询根的方法。 Criteria查询的查询根定义了实体类型，能为将来导航获得想要的结果，它与SQL查询中的FROM子句类似。 Root实例也是类型化的，且定义了查询的FROM子句中能够出现的类型。 查询根实例能通过传入一个实体类型给 AbstractQuery.from方法获得。 Criteria查询，可以有多个查询根。 Employee实体的查询根对象可以用以下的语法获得： </p>
+<pre><code>Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);</code></pre><h2 id="4-Predicate-过滤条件"><a href="#4-Predicate-过滤条件" class="headerlink" title="4.Predicate 过滤条件"></a><strong>4.Predicate 过滤条件</strong></h2><p>过滤条件应用到SQL语句的FROM子句中。 在criteria 查询中，查询条件通过Predicate 或Expression 实例应用到CriteriaQuery 对象上。 这些条件使用 CriteriaQuery .where 方法应用到CriteriaQuery 对象上。 <strong>CriteriaBuilder 也是作为Predicate 实例的工厂，Predicate 对象通过调用CriteriaBuilder 的条件方法（ equal，notEqual， gt， ge，lt， le，between，like等）创建。</strong> Predicate 实例也可以用Expression 实例的 isNull， isNotNull 和 in方法获得，复合的Predicate 语句可以使用CriteriaBuilder的and, or andnot 方法构建。 下面的代码片段展示了Predicate 实例检查年龄大于24岁的员工实例:</p>
+<pre><code>Predicate condition = criteriaBuilder.gt(employee.get(Employee_.age), 24);
+criteriaQuery.where(condition);</code></pre><p>过Employee_元模型类age属性，称之为路径表达式。若age属性与String文本比较，编译器会抛出错误，这在JPQL中是不可能的。</p>
+<h2 id="5-Predicate-多个过滤条件"><a href="#5-Predicate-多个过滤条件" class="headerlink" title="5.**Predicate[] 多个过滤条件**"></a><strong>5.**</strong>Predicate[] 多个过滤条件**</h2><p><strong>List<predicate> predicatesList = new ArrayList<predicate>();</predicate></predicate></strong> <strong>predicatesList.add(…..Pridicate….)</strong> <strong>criteriaQuery.where(predicatesList.toArray(new Predicate[predicatesList.size()]));</strong> OR语句</p>
+<pre><code>predicatesList.add(criteriaBuilder.or(criteriaBuilder.equal(root.get(RepairOrder_.localRepairStatus), LocalRepairStatus.repairing),criteriaBuilder.equal(root.get(RepairOrder_.localRepairStatus), LocalRepairStatus.diagnos)));</code></pre><p>忽略大小写(全大写)</p>
+<pre><code>predicatesList.add(criteriaBuilder.like(criteriaBuilder.upper(root.get(RepairShop_.shopName)), StringUtils.upperCase(StringUtils.trim(this.shopName)) + &quot;%&quot;));</code></pre><p>通过如上两句添加多个.</p>
+<h2 id="6-TypedQuery-执行查询与获取元模型实例"><a href="#6-TypedQuery-执行查询与获取元模型实例" class="headerlink" title="6._TypedQuery_执行查询与获取元模型实例"></a><strong>6._TypedQuery_执行查询与获取元模型实例</strong></h2><p>注意，你使用EntityManager创建查询时，可以在输入中指定一个CriteriaQuery对象，它返回一个TypedQuery，它是JPA 2.0引入javax.persistence.Query接口的一个扩展，TypedQuery接口知道它返回的类型。 所以使用中,先创建查询得到TypedQuery,然后通过typeQuery得到结果. 当EntityManager.createQuery(CriteriaQuery)方法调用时，一个可执行的查询实例会创建，该方法返回指定从 criteria 查询返回的实际类型的TypedQuery 对象。 TypedQuery 接口是javax.persistence.Queryinterface.的子类型。在该片段中， TypedQuery 中指定的类型信息是Employee，调用getResultList时，查询就会得到执行  <strong><em>TypedQuery<employee> typedQuery = em.createQuery(criteriaQuery);</employee></em></strong> <strong><em>List<employee> result = typedQuery.getResultList();</employee></em></strong> 元模型实例通过调用 EntityManager.getMetamodel 方法获得，EntityType<employee>的元模型实例通过调用Metamodel.entity(Employee.class)而获得，其被传入 CriteriaQuery.from 获得查询根。</employee></p>
+<pre><code>Metamodel metamodel = em.getMetamodel();EntityType&lt;Employee&gt; 
+Employee_ = metamodel.entity(Employee.class);
+Root&lt;Employee&gt; empRoot = criteriaQuery.from(Employee_);</code></pre><p>也有可能调用Root.getModel方法获得元模型信息。类型 EntityType<dept>的实例Dept_和name属性可以调用getSingularAttribute 方法获得，它与String文本进行比较：</dept></p>
+<pre><code>CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
+Root&lt;Dept&gt; dept = criteriaQuery.from(Dept.class);
+EntityType&lt;Dept&gt; Dept_ = dept.getModel();
+Predicate testCondition = criteriaBuilder.equal(dept.get(Dept_.getSingularAttribute(&quot;name&quot;, String.class)), &quot;Ecomm&quot;);</code></pre><h2 id="7-Expression-用在查询语句的select，where和having子句中，该接口有-isNull-isNotNull-和-in方法"><a href="#7-Expression-用在查询语句的select，where和having子句中，该接口有-isNull-isNotNull-和-in方法" class="headerlink" title="7.Expression 用在查询语句的select，where和having子句中，该接口有 isNull, isNotNull 和 in方法"></a><strong>7.Expression 用在查询语句的select，where和having子句中，该接口有 isNull, isNotNull 和 in方法</strong></h2><p>Expression对象用在查询语句的select，where和having子句中，该接口有 isNull, isNotNull 和 in方法，下面的代码片段展示了Expression.in的用法，employye的年龄检查在20或24的。 </p>
+<pre><code>CriteriaQuery&lt;Employee&gt; criteriaQuery = criteriaBuilder .createQuery(Employee.class);
+Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);
+criteriaQuery.where(employee.get(Employee_.age).in(20, 24));
+em.createQuery(criteriaQuery).getResultList();</code></pre><p>对应的SQL: SELECT * FROM employee WHERE age in (20, 24) 下面也是一个更贴切的例子:</p>
+<pre><code>//定义一个Expression
+Expression&lt;String&gt; exp = root.get(Employee.id);
+//
+List&lt;String&gt; strList=new ArrayList&lt;&gt;();    
+strList.add(&quot;20&quot;);
+strList.add(&quot;24&quot;);        
+predicatesList.add(exp.in(strList));
+
+criteriaQuery.where(predicatesList.toArray(new Predicate[predicatesList.size()]));</code></pre><h2 id="8-复合谓词"><a href="#8-复合谓词" class="headerlink" title="8.复合谓词"></a><strong>8.复合谓词</strong></h2><p>Criteria Query也允许开发者编写复合谓词，通过该查询可以为多条件测试下面的查询检查两个条件。首先，name属性是否以M开头，其次，employee的age属性是否是25。逻辑操作符and执行获得结果记录。</p>
+<pre><code>criteriaQuery.where(
+ criteriaBuilder.and(
+  criteriaBuilder.like(employee.get(Employee_.name), &quot;M%&quot;), 
+  criteriaBuilder.equal(employee.get(Employee_.age), 25)
+));
+em.createQuery(criteriaQuery).getResultList();</code></pre><h2 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a><strong>连接查询</strong></h2><p>在SQL中，连接跨多张表以获取查询结果，类似的实体连接通过调用 From.join 执行，连接帮助从一个实体导航到另一个实体以获得查询结果。  Root的join方法返回一个 Join&lt;Dept, Employee&gt;类型(也可以是SetJoin,，ListJoin，MapJoin 或者 CollectionJoin类型)。 默认情况下，连接操作使用内连接，而外连接可以通过在join方法中指定JoinType参数为LEFT或RIGHT来实现。</p>
+<pre><code>CriteriaQuery&lt;Dept&gt; cqDept = criteriaBuilder.createQuery(Dept.class);
+Root&lt;Dept&gt; deptRoot = cqDept.from(Dept.class);
+Join&lt;Dept, Employee&gt; employeeJoin = deptRoot.join(Dept_.employeeCollection);
+cqDept.where(criteriaBuilder.equal(employeeJoin.get(Employee_.deptId).get(Dept_.id), 1));
+TypedQuery&lt;Dept&gt; resultDept = em.createQuery(cqDept);</code></pre><h2 id="抓取连接"><a href="#抓取连接" class="headerlink" title="抓取连接"></a><strong>抓取连接</strong></h2><p>当涉及到collection属性时，抓取连接对优化数据访问是非常有帮助的。<strong>这是通过预抓取关联对象和减少懒加载开销而达到的。</strong> 使用 criteria 查询，fetch方法用于指定关联属性 Fetch连接的语义与Join是一样的，因为Fetch操作不返回Path对象，所以它不能将来在查询中引用。 在以下例子中，查询Dept对象时employeeCollection对象被加载，这不会有第二次查询数据库，因为有懒加载。</p>
+<pre><code>CriteriaQuery&lt;Dept&gt; d = cb.createQuery(Dept.class);
+Root&lt;Dept&gt; deptRoot = d.from(Dept.class);
+deptRoot.fetch(&quot;employeeCollection&quot;, JoinType.LEFT);
+d.select(deptRoot);
+List&lt;Dept&gt; dList = em.createQuery(d).getResultList();</code></pre><p>对应SQL: SELECT * FROM dept d, employee e  WHERE d.id = e.deptId</p>
+<h2 id="路径表达式"><a href="#路径表达式" class="headerlink" title="路径表达式"></a><strong>路径表达式</strong></h2><p>Root实例，Join实例或者从另一个Path对象的get方法获得的对象使用get方法可以得到Path对象，当查询需要导航到实体的属性时，路径表达式是必要的。 Get方法接收的参数是在实体元模型类中指定的属性。 Path对象一般用于Criteria查询对象的select或where方法。例子如下：</p>
+<pre><code>CriteriaQuery&lt;String&gt; criteriaQuery = criteriaBuilder.createQuery(String.class);
+Root&lt;Dept&gt; root = criteriaQuery.from(Dept.class);
+criteriaQuery.select(root.get(Dept_.name));&amp;nbsp;</code></pre><h2 id="参数化表达式"><a href="#参数化表达式" class="headerlink" title="参数化表达式"></a><strong>参数化表达式</strong></h2><pre><code> 在JPQL中，查询参数是在运行时通过使用命名参数语法(冒号加变量，如 :age)传入的。在Criteria查询中，查询参数是在运行时创建ParameterExpression对象并为在查询前调用TypeQuery,setParameter方法设置而传入的。下面代码片段展示了类型为Integer的ParameterExpression age，它被设置为24：
+
+ParameterExpression&lt;Integer&gt; age = criteriaBuilder.parameter(Integer.class);
+Predicate condition = criteriaBuilder.gt(testEmp.get(Employee_.age), age);
+criteriaQuery.where(condition);
+TypedQuery&lt;Employee&gt; testQuery = em.createQuery(criteriaQuery);
+List&lt;Employee&gt; result = testQuery.setParameter(age, 24).getResultList();
+Corresponding SQL: SELECT * FROM Employee WHERE age = 24;</code></pre><h2 id="排序结果"><a href="#排序结果" class="headerlink" title="排序结果"></a><strong>排序结果</strong></h2><pre><code> Criteria查询的结果能调用CriteriaQuery.orderBy方法排序，该方法接收一个Order对象做为参数。通过调用  CriteriaBuilder.asc 或 CriteriaBuilder.Desc，Order对象能被创建。以下代码片段中，Employee实例是基于age的升序排列。  
+
+CriteriaQuery&lt;Employee&gt; criteriaQuery = criteriaBuilder .createQuery(Employee.class);
+ Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);
+ criteriaQuery.orderBy(criteriaBuilder.asc(employee.get(Employee_.age)));
+  em.createQuery(criteriaQuery).getResultList();</code></pre><p>对应 SQL: SELECT * FROM Employee ORDER BY age ASC</p>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a><strong>分组</strong></h2><p>CriteriaQuery 实例的groupBy 方法用于基于Expression的结果分组。查询通过设置额外表达式，以后调用having方法。下面代码片段中，查询按照Employee类的name属性分组，且结果以字母N开头：  <strong><em>CriteriaQuery<tuple> cq = criteriaBuilder.createQuery(Tuple.class);</tuple></em></strong></p>
+<pre><code>Root&lt;Employee&gt; employee = cq.from(Employee.class);
+  cq.groupBy(employee.get(Employee_.name));
+  cq.having(criteriaBuilder.like(employee.get(Employee_.name), &quot;N%&quot;));
+cq.select(criteriaBuilder.tuple(employee.get(Employee_.name),criteriaBuilder.count(employee)));
+  TypedQuery&lt;Tuple&gt; q = em.createQuery(cq);
+  List&lt;Tuple&gt; result = q.getResultList();</code></pre><p>对应 SQL:    SELECT name, COUNT(*) FROM employeeGROUP BY name HAVING name like ‘N%’</p>
+<h2 id="查询投影"><a href="#查询投影" class="headerlink" title="查询投影"></a><strong>查询投影</strong></h2><p>Criteria查询的结果与在Critiria查询创建中指定的一样。结果也能通过把查询根传入 CriteriaQuery.select中显式指定。Criteria查询也给开发者投影各种结果的能力。 </p>
+<h2 id="使用construct"><a href="#使用construct" class="headerlink" title="使用construct()"></a><strong>使用construct()</strong></h2><p>使用该方法，查询结果能由非实体类型组成。在下面的代码片段中，为EmployeeDetail类创建了一个Criteria查询对象，而EmployeeDetail类并不是实体类型。 </p>
+<pre><code>CriteriaQuery&lt;EmployeeDetails&gt; criteriaQuery = criteriaBuilder.createQuery(EmployeeDetails.class);
+  Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);
+  criteriaQuery.select(criteriaBuilder.construct(EmployeeDetails.class, employee.get(Employee_.name), employee.get(Employee_.age)));
+  em.createQuery(criteriaQuery).getResultList();
+  Corresponding SQL: SELECT name, age FROM employee&lt;span style=&quot;white-space: normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;</code></pre><h2 id="返回Object-的查询"><a href="#返回Object-的查询" class="headerlink" title="返回Object[]的查询"></a><strong>返回Object[]的查询</strong></h2><p>Criteria查询也能通过设置值给CriteriaBuilder.array方法返回Object[]的结果。下面的代码片段中，数组大小是2（由String和Integer组成）。 </p>
+<pre><code>CriteriaQuery&lt;Object[]&gt; criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+  Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);
+  criteriaQuery.select(criteriaBuilder.array(employee.get(Employee_.name), employee.get(Employee_.age)));
+  em.createQuery(criteriaQuery).getResultList();</code></pre><p>对应 SQL: SELECT name, age FROM employee</p>
+<h2 id="返回元组-Tuple-的查询"><a href="#返回元组-Tuple-的查询" class="headerlink" title="返回元组(Tuple)的查询"></a><strong>返回元组(Tuple)的查询</strong></h2><p>数据库中的一行数据或单个记录通常称为元组。通过调用CriteriaBuilder.createTupleQuery()方法，查询可以用于元组上。CriteriaQuery.multiselect方法传入参数，它必须在查询中返回。 </p>
+<pre><code>CriteriaQuery&lt;Tuple&gt; criteriaQuery = criteriaBuilder.createTupleQuery();
+   Root&lt;Employee&gt; employee = criteriaQuery.from(Employee.class);
+   criteriaQuery.multiselect(employee.get(Employee_.name).alias(&quot;name&quot;), employee.get(Employee_.age).alias(&quot;age&quot;));
+   em.createQuery(criteriaQuery).getResultList();</code></pre><p>对应 SQL: SELECT name, age FROM employee </p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><pre><code>Criteria查询是一种以更加面向对象的方式查询数据库的方法、在本文中，我讨论了JPA2中类型安全的Criteria查询，以及对于理解Criteria查询非常重要的元模型的概念。也讨论了Criteria查询中的各种API。</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/判断当前时间在时间区间的逻辑关系，只有小时分钟秒钟/" rel="next" title="判断当前时间在时间区间的逻辑关系，只有小时分钟秒钟">
+                <i class="fa fa-chevron-left"></i> 判断当前时间在时间区间的逻辑关系，只有小时分钟秒钟
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/18/sql-e7-9a-84having-e5-92-8cwhere/" rel="prev" title="sql的having和where">
+                sql的having和where <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#转自-https-my-oschina-net-zhaoqian-blog-133500-comment-list"><span class="nav-number">1.</span> <span class="nav-text">转自 https://my.oschina.net/zhaoqian/blog/133500#comment-list</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#序言"><span class="nav-number"></span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一-JPA元模型概念-及使用"><span class="nav-number"></span> <span class="nav-text">一.JPA元模型概念,及使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-使用criteria-查询简单Demo"><span class="nav-number"></span> <span class="nav-text">二.使用criteria 查询简单Demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-构建CriteriaQuery-实-例API说明"><span class="nav-number"></span> <span class="nav-text">三.构建CriteriaQuery 实**例API说明**</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-CriteriaBuilder-安全查询创建工厂-创建CriteriaQuery-创建查询具体具体条件Predicate-等"><span class="nav-number"></span> <span class="nav-text">1.CriteriaBuilder 安全查询创建工厂,创建CriteriaQuery,创建查询具体具体条件Predicate 等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-CriteriaQuery-安全查询主语句"><span class="nav-number"></span> <span class="nav-text">2.CriteriaQuery 安全查询主语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Root-定义查询的From子句中能出现的类型"><span class="nav-number"></span> <span class="nav-text">3.Root 定义查询的From子句中能出现的类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Predicate-过滤条件"><span class="nav-number"></span> <span class="nav-text">4.Predicate 过滤条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Predicate-多个过滤条件"><span class="nav-number"></span> <span class="nav-text">5.**Predicate[] 多个过滤条件**</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-TypedQuery-执行查询与获取元模型实例"><span class="nav-number"></span> <span class="nav-text">6._TypedQuery_执行查询与获取元模型实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Expression-用在查询语句的select，where和having子句中，该接口有-isNull-isNotNull-和-in方法"><span class="nav-number"></span> <span class="nav-text">7.Expression 用在查询语句的select，where和having子句中，该接口有 isNull, isNotNull 和 in方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-复合谓词"><span class="nav-number"></span> <span class="nav-text">8.复合谓词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接查询"><span class="nav-number"></span> <span class="nav-text">连接查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抓取连接"><span class="nav-number"></span> <span class="nav-text">抓取连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径表达式"><span class="nav-number"></span> <span class="nav-text">路径表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数化表达式"><span class="nav-number"></span> <span class="nav-text">参数化表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序结果"><span class="nav-number"></span> <span class="nav-text">排序结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组"><span class="nav-number"></span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询投影"><span class="nav-number"></span> <span class="nav-text">查询投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用construct"><span class="nav-number"></span> <span class="nav-text">使用construct()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回Object-的查询"><span class="nav-number"></span> <span class="nav-text">返回Object[]的查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回元组-Tuple-的查询"><span class="nav-number"></span> <span class="nav-text">返回元组(Tuple)的查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number"></span> <span class="nav-text">结论</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

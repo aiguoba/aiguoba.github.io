@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Vue.js 使用了基于HTML的模板语法，允许开发者声明式的将DOM 绑定至底层Vue 实例的数据。 所有Vue.js 的模板都是合法的HTML。所以能够被遵循规范的浏览器和HTML解析器解析。 在底层的实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，在应用状态改变时候，Vue 能够智能的计算出重新渲染组件的最小代价并应用到DOM操作上。 若足够熟悉虚拟DOM，并且偏爱javasc">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板语法">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/01/10/mo-ban-yu-fa/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="Vue.js 使用了基于HTML的模板语法，允许开发者声明式的将DOM 绑定至底层Vue 实例的数据。 所有Vue.js 的模板都是合法的HTML。所以能够被遵循规范的浏览器和HTML解析器解析。 在底层的实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，在应用状态改变时候，Vue 能够智能的计算出重新渲染组件的最小代价并应用到DOM操作上。 若足够熟悉虚拟DOM，并且偏爱javasc">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模板语法">
+<meta name="twitter:description" content="Vue.js 使用了基于HTML的模板语法，允许开发者声明式的将DOM 绑定至底层Vue 实例的数据。 所有Vue.js 的模板都是合法的HTML。所以能够被遵循规范的浏览器和HTML解析器解析。 在底层的实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，在应用状态改变时候，Vue 能够智能的计算出重新渲染组件的最小代价并应用到DOM操作上。 若足够熟悉虚拟DOM，并且偏爱javasc">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/01/10/mo-ban-yu-fa/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>模板语法 | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/01/10/mo-ban-yu-fa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">模板语法
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-10 11:33:07" itemprop="dateCreated datePublished" datetime="2018-01-10T11:33:07+08:00">2018-01-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Vue.js 使用了基于HTML的模板语法，允许开发者声明式的将DOM 绑定至底层Vue 实例的数据。 所有Vue.js 的模板都是合法的HTML。所以能够被遵循规范的浏览器和HTML解析器解析。</p>
+<p>在底层的实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，在应用状态改变时候，Vue 能够智能的计算出重新渲染组件的最小代价并应用到DOM操作上。</p>
+<p>若足够熟悉虚拟DOM，并且偏爱javascript的原始力量，可以不使用模板，直接写渲染函数（render），使用可选的JSX语法。</p>
+</blockquote>
+<h4 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h4><h5 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h5><blockquote>
+<p>数据绑定最常见的形式就是使用”Mustache”(双大括号)的文本插值：</p>
+</blockquote>
+<pre><code>&lt;span&gt; Message: { { msg }} &lt;/span&gt;</code></pre><blockquote>
+<p>Mustache 标签将会被替换为对应数据上的msg 属性的值。 无论何时， 绑定的数据对象上msg 属性发生改变时，插值处的内容也会进行更新。</p>
+<p>通过使用 v-once 指令也能够实现一次性地插值。<br>当数据改变时候，插值处的内容并不会更新。会影响到该节点上所有数据的绑定。</p>
+</blockquote>
+<h5 id="原始HTML"><a href="#原始HTML" class="headerlink" title="原始HTML"></a>原始HTML</h5><blockquote>
+<p>双大括号会将数据解释为普通文本，而非HTML代码。为了输出原始的HTML代码，需要使用 v-html 指令：</p>
+</blockquote>
+<pre><code>&lt;p&gt; Using mustaches: { { rawHtml }} &lt;/p&gt;
+&lt;p&gt; Using v-html directive:
+        &lt;span v-html=&quot;rawHtml&quot;&gt;&lt;/span&gt;
+&lt;/p&gt;</code></pre><blockquote>
+<p>span 中的内容将会被替换为属性值 rawHtml，直接作为HTML – 会忽略解析属性值中的数据绑定。注意不能使用v-html来复合局部模板。因为 Vue不是基于字符串的模板引擎。反之对于用户界面，组件更适合作为可重用和可组合的基本单位。</p>
+<p>Mustache 语法不能作用在HTML 特性上，遇到这种情况应该使用 v-bind 指令：</p>
+</blockquote>
+<pre><code>&lt;div v-bind:id=&quot;dynamicId&quot;&gt;&lt;/div&gt;</code></pre><blockquote>
+<p>如果 isButtonDisabled 的值是 null、undefined 或 false,则disabled特性甚至不会被包含在渲染出来的btn中。</p>
+</blockquote>
+<pre><code>&lt;button v-bind:disabled=&quot;isButtonDisabled&quot;&gt;&lt;/button&gt;</code></pre><h5 id="使用javascript表达式"><a href="#使用javascript表达式" class="headerlink" title="使用javascript表达式"></a>使用javascript表达式</h5><blockquote>
+<p>迄今为止，在模板中，一直使用的都只是绑定简单的属性键值。但实际上，对于所有的数据绑定，Vue.js 都提供了完全的javascript表达式支持。</p>
+</blockquote>
+<pre><code>{ { number+1 }}
+{ { ok ? &apos;YES&apos; : &apos;NO&apos; }}
+{ { message.split(&apos;&apos;).reverse().join(&apos;&apos;) }}
+&lt;div v-bind:id=&quot;&apos;list&apos;+id&quot;&gt;&lt;/div&gt;</code></pre><blockquote>
+<p>这些表达式会在所属Vue实例的数据作用域下作为javascript被解析。有个限制就是，每个绑定都只能包含单个表达式。下列例子<strong>不会</strong>生效：</p>
+<p>{ { var a = 1;}}<br>{ { if(ok){ return message } }}</p>
+</blockquote>
+<h4 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h4><blockquote>
+<p>指令(Directive)是带有 v- 前缀的特殊属性，指令属性的值预期是 单个javascript表达式 （v-for 是例外的情况）。指令的职责是，当表达是改变时候，将会产生连带影响，响应式地作用于DOM。</p>
+</blockquote>
+<pre><code>&lt;p v-if=&quot;seen&quot;&gt;...&lt;/p&gt; </code></pre><blockquote>
+<p>这里，v-if 指令将根据表达式 seen 的值的真假来插入/移除 </p><p> 元素。</p>
+</blockquote>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><blockquote>
+<p>一些指令可以接受参数，在指令名称后面加以冒号表示。例如, v-bind 指令可以用于响应式地更新HTML 属性：</p>
+</blockquote>
+<pre><code>&lt;a v-bind:href=&quot;url&quot;&gt;...&lt;/a&gt;</code></pre><blockquote>
+<p>在这里 href 是参数，告知 v-bind 指令将钙元素的href 属性与 表达式url 的值绑定。<br>另一个为 v-on 指令，它用于监听DOM事件：</p>
+</blockquote>
+<pre><code>&lt;a v-on:click=&quot;doSomething&quot;&gt;...&lt;/a&gt;</code></pre><blockquote>
+<p>在这里参数是监听的事件名。</p>
+</blockquote>
+<h5 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h5><blockquote>
+<p>修饰符（Modifiers）是以半角句号. 指明的特殊后缀，用于只出一个指令应该以特殊的方式进行绑定。 例如 .prevent 修饰符 告诉 v-on 指令对于触发的事件调用 event.preventDefalt():  </p>
+<pre><code>&lt;form v-on:submit.prevent=&quot;onSubmit&quot;&gt;...&lt;/form&gt;</code></pre></blockquote>
+<h5 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h5><blockquote>
+<p>v- 前缀作为一种视觉提示，用来识别模板中Vue 特定的特性。当使用Vue.js 为现有标签添加动态行为时(dynamic behavior)时， v- 前缀很有帮助，但是对于一些频繁用到的指令俩说，就会使用繁琐。 同时，在构建由Vue.js 管理所有模板的 单页面应用程序 SPA（single page application）时， v-前缀也变得不再那么重要，因此Vue.js为v-bind 和v-on 这两个最常用指令提供了特定简写：<br>v-bind:attributeName =&gt; :attributeName</p>
+</blockquote>
+<pre><code>&lt;!-- 完整写法 --&gt;
+&lt;a v-bind:href=&quot;url&quot;&gt;...&lt;/a&gt;
+&lt;!-- 简写 --&gt;
+&lt;a :href=&quot;url&quot;&gt;...&lt;/a&gt;</code></pre><blockquote>
+<p>v-on:eventName =&gt; @eventName</p>
+</blockquote>
+<pre><code>&lt;!-- 完整写法 --&gt;
+&lt;a v-on:click=&quot;show&quot;&gt;...&lt;/a&gt;
+&lt;!-- 简写 --&gt;
+&lt;a @click=&quot;show&quot;&gt;...&lt;/a&gt;</code></pre><blockquote>
+<p>上述看起来可能与普通的HTML 略有不同，但：与 @对于特姓名来说都是合法字符，在所有支持Vue.js 的浏览器都能够被正确的解析。并且，不会出现在最终渲染的标记中。缩写语法为可选。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/09/vuejs-an-zhuang/" rel="next" title="vue.js 安装">
+                <i class="fa fa-chevron-left"></i> vue.js 安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/10/ji-suan-shu-xing-he-guan-cha-zhe/" rel="prev" title="计算属性和观察者">
+                计算属性和观察者 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#插值"><span class="nav-number">1.</span> <span class="nav-text">插值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文本"><span class="nav-number">1.1.</span> <span class="nav-text">文本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#原始HTML"><span class="nav-number">1.2.</span> <span class="nav-text">原始HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用javascript表达式"><span class="nav-number">1.3.</span> <span class="nav-text">使用javascript表达式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指令"><span class="nav-number">2.</span> <span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数"><span class="nav-number">2.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修饰符"><span class="nav-number">2.2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缩写"><span class="nav-number">2.3.</span> <span class="nav-text">缩写</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

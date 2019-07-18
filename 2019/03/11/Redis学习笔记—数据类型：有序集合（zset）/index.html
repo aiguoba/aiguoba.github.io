@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/doe50.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/doe50.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="有序集合相对于哈希、列表、集合来说会有一点点陌生，但既然叫有序集合，那么它和集合必然有着联系，它保留了集合不能有重复成员的特性，但不同的是，有序集合中的元素可以排序。但是它和列表使用索引下标作为排序依据不同的是，它给每个元素设置一个分数（score）作为排序的依据。 集合内操作 1.添加成员 zadd key [nx|xx] [ch] [incr] score member [score memb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis学习笔记—数据类型：有序集合（zset）">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/03/11/Redis学习笔记—数据类型：有序集合（zset）/index.html">
+<meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="有序集合相对于哈希、列表、集合来说会有一点点陌生，但既然叫有序集合，那么它和集合必然有着联系，它保留了集合不能有重复成员的特性，但不同的是，有序集合中的元素可以排序。但是它和列表使用索引下标作为排序依据不同的是，它给每个元素设置一个分数（score）作为排序的依据。 集合内操作 1.添加成员 zadd key [nx|xx] [ch] [incr] score member [score memb">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis学习笔记—数据类型：有序集合（zset）">
+<meta name="twitter:description" content="有序集合相对于哈希、列表、集合来说会有一点点陌生，但既然叫有序集合，那么它和集合必然有着联系，它保留了集合不能有重复成员的特性，但不同的是，有序集合中的元素可以排序。但是它和列表使用索引下标作为排序依据不同的是，它给每个元素设置一个分数（score）作为排序的依据。 集合内操作 1.添加成员 zadd key [nx|xx] [ch] [incr] score member [score memb">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/11/Redis学习笔记—数据类型：有序集合（zset）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Redis学习笔记—数据类型：有序集合（zset） | doeat's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">doeat's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">live for live</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aiguoba" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/11/Redis学习笔记—数据类型：有序集合（zset）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charlie">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/doe50.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="doeat's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis学习笔记—数据类型：有序集合（zset）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-11 13:42:08" itemprop="dateCreated datePublished" datetime="2019-03-11T13:42:08+08:00">2019-03-11</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有序集合相对于哈希、列表、集合来说会有一点点陌生，但既然叫有序集合，那么它和集合必然有着联系，它保留了集合不能有重复成员的特性，但不同的是，有序集合中的元素可以排序。但是它和列表使用索引下标作为排序依据不同的是，它给每个元素设置一个分数（score）作为排序的依据。</p>
+<p><strong>集合内操作</strong></p>
+<p>1.添加成员</p>
+<p>zadd key [nx|xx] [ch] [incr] score member [score member …]</p>
+<ul>
+<li>nx：member必须不存在，才可以设置成功，用于添加</li>
+<li>xx：member必须存在，才可以设置成功，用于更新</li>
+<li>ch：返回此次操作后，有序集合元素和分数发生变化的个数</li>
+<li>incr：对score做增加，相当于后面介绍的zincrby</li>
+<li>有序集合相比集合提供了排序字段，但是也产生了代价，zadd的时间复杂度为O（log（n）），sadd的时间复杂度为O（1）。</li>
+</ul>
+<p>添加key为“user:ranking”的集合</p>
+<p>127.0.0.1:6379&gt; zadd user:ranking 150 Tom<br>(integer) 1<br>127.0.0.1:6379&gt; zadd user:ranking 1 Charlie 14 Day 66 Ling 124 Zhang<br>(integer) 4</p>
+<p>2.计算成员个数</p>
+<p>zcard key</p>
+<p>计算key为“user:ranking”的集合成员个数</p>
+<p>127.0.0.1:6379&gt; zcard user:ranking<br>(integer) 5</p>
+<p>3.计算某个成员的分数</p>
+<p>zscore key member</p>
+<p>计算key为“user:ranking”的集合成员“Charlie”的分数</p>
+<p>127.0.0.1:6379&gt; zscore user:ranking Charlie<br>“1”</p>
+<p>4.计算成员的排名</p>
+<p>从低到高</p>
+<p>zrank key member</p>
+<p>从高到低</p>
+<p>zrevrank key member</p>
+<p>计算key为“user:ranking”的集合成员的排名</p>
+<p>127.0.0.1:6379&gt; zrank user:ranking Day<br>(integer) 1<br>127.0.0.1:6379&gt; zrank user:ranking Charlie<br>(integer) 0<br>127.0.0.1:6379&gt; zrank user:ranking Zhang<br>(integer) 3</p>
+<p>5.删除成员</p>
+<p>zrem key member [member …]</p>
+<p>删除key为“user:ranking”的集合成员“Zhang”</p>
+<p>127.0.0.1:6379&gt; zrem user:ranking Zhang<br>(integer) 1</p>
+<p>6.增加成员的分数</p>
+<p>zincrby key increment member</p>
+<p>增加key为“user:ranking”的集合成员“Ling”5分</p>
+<p>127.0.0.1:6379&gt; zincrby user:ranking 5 Ling<br>“71”</p>
+<p>7.返回指定排名范围的成员</p>
+<p>从低到高</p>
+<p>zrange key start end [withscores]</p>
+<p>从高到低</p>
+<p>zrevrange key start end [withscores]</p>
+<p>返回key为“user:ranking”的集合指定范围和分数</p>
+<p>127.0.0.1:6379&gt; zrange user:ranking 0 -1<br>1) “Charlie”<br>2) “Day”<br>3) “Ling”<br>4) “Tom”<br>127.0.0.1:6379&gt; zrange user:ranking 0 -1 withscores<br>1) “Charlie”<br>2) “1”<br>3) “Day”<br>4) “14”<br>5) “Ling”<br>6) “71”<br>7) “Tom”<br>8) “150”</p>
+<p>8.返回指定分数范围的成员</p>
+<p>从低到高</p>
+<p>zrangebyscore key min max [withscores] [limit offset count]</p>
+<p>从高到低</p>
+<p>zrevrangebyscore key max min [withscores] [limit offset count]</p>
+<p>返回key为“user:ranking”的集合指定分数范围的成员</p>
+<p>127.0.0.1:6379&gt; zrangebyscore user:ranking 10 80 withscores<br>1) “Day”<br>2) “14”<br>3) “Ling”<br>4) “71”<br>127.0.0.1:6379&gt; zrevrangebyscore user:ranking 80 10 withscores<br>1) “Ling”<br>2) “71”<br>3) “Day”<br>4) “14”</p>
+<p>min和max默认闭区间，支持开区间（小括号），-inf和+inf分别代表无限小和无限大</p>
+<p>127.0.0.1:6379&gt; zrangebyscore user:ranking 10 +inf withscores<br>1) “Day”<br>2) “14”<br>3) “Ling”<br>4) “71”<br>5) “Tom”<br>6) “150”<br>127.0.0.1:6379&gt; zrevrangebyscore user:ranking 80 -inf withscores<br>1) “Ling”<br>2) “71”<br>3) “Day”<br>4) “14”<br>5) “Charlie”<br>6) “1”<br>127.0.0.1:6379&gt; zrevrangebyscore user:ranking 71 -inf withscores<br>1) “Ling”<br>2) “71”<br>3) “Day”<br>4) “14”<br>5) “Charlie”<br>6) “1”<br>127.0.0.1:6379&gt; zrevrangebyscore user:ranking (71 -inf withscores<br>1) “Day”<br>2) “14”<br>3) “Charlie”<br>4) “1”</p>
+<p>9.返回指定分数范围的成员个数</p>
+<p>zcount key min max</p>
+<p>返回key为“user:ranking”的集合指定分数范围的成员个数</p>
+<p>127.0.0.1:6379&gt; zcount user:ranking 10 80<br>(integer) 2</p>
+<p>10.删除指定排名内的升序元素</p>
+<p>zremrangebyrank key start stop</p>
+<p>11.删除指定分数范围的成员</p>
+<p>zremrangebyscore key min max</p>
+<p><strong>集合间的操作</strong></p>
+<p>添加测试数据</p>
+<p>127.0.0.1:6379&gt; zadd user:ranking:1 1 Carlie 15 Day 67 Lin 124 Zhang<br>(integer) 4<br>127.0.0.1:6379&gt; zadd user:ranking:2 5 Tom 35 Jerry 564 Zhang<br>(integer) 3</p>
+<p>1.交集</p>
+<p>zinterstore destination numkeys key [key …] [weights weight [weight …]] [aggregate sum|min|max]</p>
+<ul>
+<li>destination：交集计算结果保存到这个键</li>
+<li>numkeys：需要做交集计算键的个数</li>
+<li>key[key…]：需要做交集计算的键</li>
+<li>weights weight[weight…]：每个键的权重，在做交集计算时，每个键中的每个member会将自己分数乘以这个权重，每个键的权重默认是1</li>
+<li>aggregate sum|min|max：计算成员交集后，分值可以按照sum（和）、min（最小值）、max（最大值）做汇总，默认值是sum</li>
+</ul>
+<p>下面操作对user：ranking：1和user：ranking：2做交集，weights和aggregate使用了默认配置，可以看到目标键user：ranking：1_inter_2对分值做了sum操作</p>
+<p>127.0.0.1:6379&gt; zinterstore user:ranking:1_inter_2 2 user:ranking:1 user:ranking:2<br>(integer) 1<br>127.0.0.1:6379&gt; zrange user:ranking:1_inter_2 0 -1 withscores<br>1) “Zhang”<br>2) “688”</p>
+<p>2.并集</p>
+<p>zunionstore destination numkeys key [key …] [weights weight [weight …]] [aggregate sum|min|max]</p>
+<p>生成key为“user:ranking:1_union_2”的并集</p>
+<p>127.0.0.1:6379&gt; zunionstore user:ranking:1_union_2 2 user:ranking:1 user:ranking:2<br>(integer) 6<br>127.0.0.1:6379&gt; zrange user:ranking:1_union_2 0 -1 withscores<br> 1) “Carlie”<br> 2) “1”<br> 3) “Tom”<br> 4) “5”<br> 5) “Day”<br> 6) “15”<br> 7) “Jerry”<br> 8) “35”<br> 9) “Lin”<br>10) “67”<br>11) “Zhang”<br>12) “688”</p>
+<p><strong>内部编码</strong></p>
+<ul>
+<li>ziplist（压缩列表）：当有序集合的元素个数小于zset-max-ziplist-entries配置（默认128个），同时每个元素的值都小于zset-max-ziplist-value配置（默认64字节）时，Redis会用ziplist来作为有序集合的内部实现，ziplist可以有效减少内存的使用</li>
+<li>skiplist（跳跃表）：当ziplist条件不满足时，有序集合会使用skiplist作为内部实现，因为此时ziplist的读写效率会下降。</li>
+</ul>
+<p><strong>使用场景</strong></p>
+<p>排行榜系统</p>
+<p>1.添加用户赞数可以使用zadd和zincrby功能</p>
+<p>2.取消用户赞数，用户作弊或者注销，可以用zrem</p>
+<p>3.展示排行榜使用zrevrange命令</p>
+<p>4.展示用户信息或者分数可以使用zscore和zrank两个功能</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/08/Redis学习笔记—数据类型：集合（set）/" rel="next" title="Redis学习笔记—数据类型：集合（set）">
+                <i class="fa fa-chevron-left"></i> Redis学习笔记—数据类型：集合（set）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-94-ae-e7-ae-a1-e7-90-86/" rel="prev" title="Redis学习笔记—单个键管理">
+                Redis学习笔记—单个键管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/doe50.png" alt="Charlie">
+            
+              <p class="site-author-name" itemprop="name">Charlie</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aiguoba" title="GitHub &rarr; https://github.com/aiguoba" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/" title="Weibo &rarr; https://weibo.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://www.google.com/" title="Google &rarr; https://www.google.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/" title="StackOverflow &rarr; https://stackoverflow.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charlie</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,0" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

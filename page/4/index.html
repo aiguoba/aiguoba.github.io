@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—客户端通讯协议RESP/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/05/09/微信小程序解密手机号/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +390,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/26/Redis学习笔记—客户端通讯协议RESP/" class="post-title-link" itemprop="url">Redis学习笔记—客户端通讯协议RESP</a>
+                <a href="/2019/05/09/微信小程序解密手机号/" class="post-title-link" itemprop="url">微信小程序解密手机号</a>
               
             
           </h2>
@@ -415,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2019-03-26 10:24:20" itemprop="dateCreated datePublished" datetime="2019-03-26T10:24:20+08:00">2019-03-26</time>
+              <time title="创建时间：2019-05-09 18:57:26" itemprop="dateCreated datePublished" datetime="2019-05-09T18:57:26+08:00">2019-05-09</time>
             </span>
           
 
@@ -444,7 +444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微信开发/" itemprop="url" rel="index"><span itemprop="name">微信开发</span></a></span>
 
                 
                 
@@ -485,27 +485,13 @@
         
           
             <p>
-              Redis制定了RESP（REdis Serialization Protocol，Redis序列化协议）实现客户端与服务端的正常交互，这种协议简单高效，既能够被机器解析，又容易被人类识别
-发送命令格式RESP的规定一条命令的格式如下，CRLF代表”\r\n”
-*&lt; 参数数量 &gt; CRLF
-$&lt; 参数 1 的字节数量 &gt; CRLF
-&lt; 参数 1&gt; CRLF
-...
-$&lt; 参数 N 的字节数量 &gt; CRLF
-&lt; 参数 N&gt; CRLF以set hell world这条命令进行说明，参数数量为3个，因此第一行为：
-*3参数字节数分别是355，因此后面几行为：
-$3
-SET
-$5
-hello
-$5
-world这样传输的格
+              接收三个参数：分别是wx.login()接口获取的code，调起获取手机号按钮的两个参数encryptedData和iv； 调用auth.code2Session接口可以解析出openid，session_key和unionid，session_key是用来解密个人信息的关键参数。 查看登录凭证校验
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/26/Redis学习笔记—客户端通讯协议RESP/#more" rel="contents">
+              <a class="btn" href="/2019/05/09/微信小程序解密手机号/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -565,7 +551,7 @@ world这样传输的格
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-geo/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/18/kafka消费者（customer）—— 从Kafka读取数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -585,7 +571,7 @@ world这样传输的格
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-geo/" class="post-title-link" itemprop="url">Redis学习笔记—地理信息定位（GEO）</a>
+                <a href="/2019/04/18/kafka消费者（customer）—— 从Kafka读取数据/" class="post-title-link" itemprop="url">kafka消费者（customer）—— 从Kafka读取数据</a>
               
             
           </h2>
@@ -610,7 +596,7 @@ world这样传输的格
                 
               
 
-              <time title="创建时间：2019-03-25 17:51:50" itemprop="dateCreated datePublished" datetime="2019-03-25T17:51:50+08:00">2019-03-25</time>
+              <time title="创建时间：2019-04-18 11:12:49" itemprop="dateCreated datePublished" datetime="2019-04-18T11:12:49+08:00">2019-04-18</time>
             </span>
           
 
@@ -639,7 +625,7 @@ world这样传输的格
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
@@ -680,17 +666,13 @@ world这样传输的格
         
           
             <p>
-              Redis3.2版本提供了GEO（地理信息定位）功能，支持存储地理位置信息用来实现诸如附近位置、摇一摇这类依赖于地理位置信息的功能，对于需要实现这些功能的开发者来说是一大福音 增加地理位置信息
-geoadd key longitude latitude member [longitude latitude member …]
-longitude、latitude、member分别是该地理位置的经度、纬度、成员 添加北京的位置信息
-127.0.0.1:6379&gt; geoadd cities 116.28 39.55 beijing(integer) 1
-如果添加成功返回1，已存在会返回0，如果是做修改操作同样使用geoadd，返回0 同时添加三个城市位置信息天津、上海
+              KafkaCustomer概念消费者和消费者群组 如果我们有一个应用程序需要从一个Kafka主题读取消息并验证这些消息，然后再把它们保存起来。应用程序需要创建一个消费者对象，订阅主题并开始接受消息，然后验证消息并保存结果。过一阵子，生产者往主题写入消息的速度超过了应用程序验证证据的速度，这个时候该怎
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-geo/#more" rel="contents">
+              <a class="btn" href="/2019/04/18/kafka消费者（customer）—— 从Kafka读取数据/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -750,7 +732,7 @@ longitude、latitude、member分别是该地理位置的经度、纬度、成员
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/15/kafka-e7-94-9f-e4-ba-a7-e8-80-85-ef-bc-88producer-ef-bc-89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -770,7 +752,7 @@ longitude、latitude、member分别是该地理位置的经度、纬度、成员
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85/" class="post-title-link" itemprop="url">Redis学习笔记—发布订阅</a>
+                <a href="/2019/04/15/kafka-e7-94-9f-e4-ba-a7-e8-80-85-ef-bc-88producer-ef-bc-89/" class="post-title-link" itemprop="url">kafka生产者（producer）—— 向Kafka写入数据</a>
               
             
           </h2>
@@ -795,7 +777,7 @@ longitude、latitude、member分别是该地理位置的经度、纬度、成员
                 
               
 
-              <time title="创建时间：2019-03-25 17:13:04" itemprop="dateCreated datePublished" datetime="2019-03-25T17:13:04+08:00">2019-03-25</time>
+              <time title="创建时间：2019-04-15 16:35:24" itemprop="dateCreated datePublished" datetime="2019-04-15T16:35:24+08:00">2019-04-15</time>
             </span>
           
 
@@ -824,7 +806,7 @@ longitude、latitude、member分别是该地理位置的经度、纬度、成员
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
@@ -865,20 +847,15 @@ longitude、latitude、member分别是该地理位置的经度、纬度、成员
         
           
             <p>
-              Redis提供了基于“发布/订阅”模式的消息机制，此种模式下，消息发布者和订阅者不进行直接通信，发布者客户端向指定的频道（channel）发布消息，订阅该频道的每个客户端都可以收到该消息
+              生产者发送消息向kafka发送消息的主要步骤如下图：
 
-和很多专业的消息队列系统（例如Kafka、RocketMQ）相比，Redis的发布订阅略显粗糙，例如无法实现消息堆积和回溯。但胜在足够简单，如果当前场景可以容忍的这些缺点，也不失为一个不错的选择
-Redis主要提供了发布消息、订阅频道、取消订阅以及按照模式订阅和取消订阅等命令；
-发布消息
-publish channel message
-发布一条”channel:sports”体育频道消息”James in Los Angeles”
-127.0.0.1:6379&gt; publish 
+创建ProducerRecord对象，其中包含主题(topic)和内容(value)两个必传参数，也可以添加键(key)和分区(partition)两个非必传参数； 然后在发送ProducerRecord对象，生产者要先把键值对象序列化成字节数
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85/#more" rel="contents">
+              <a class="btn" href="/2019/04/15/kafka-e7-94-9f-e4-ba-a7-e8-80-85-ef-bc-88producer-ef-bc-89/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -938,7 +915,7 @@ publish channel message
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/22/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-e4-b8-8elua/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/12/kafka-e7-ae-80-e4-bb-8b/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -958,7 +935,7 @@ publish channel message
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/22/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-e4-b8-8elua/" class="post-title-link" itemprop="url">Redis学习笔记—Redis与Lua</a>
+                <a href="/2019/04/12/kafka-e7-ae-80-e4-bb-8b/" class="post-title-link" itemprop="url">kafka简介</a>
               
             
           </h2>
@@ -983,7 +960,7 @@ publish channel message
                 
               
 
-              <time title="创建时间：2019-03-22 17:56:58" itemprop="dateCreated datePublished" datetime="2019-03-22T17:56:58+08:00">2019-03-22</time>
+              <time title="创建时间：2019-04-12 11:12:50" itemprop="dateCreated datePublished" datetime="2019-04-12T11:12:50+08:00">2019-04-12</time>
             </span>
           
 
@@ -1012,7 +989,7 @@ publish channel message
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
@@ -1053,24 +1030,13 @@ publish channel message
         
           
             <p>
-              使用Lua的好处
-
-Lua脚本在Redis中是原子执行的，执行过程中间不会插入其他命令
-Lua脚本可以帮助开发和运维人员创造出自己定制的命令，并可以将这些命令常驻在Redis内存中，实现复用的效果
-Lua脚本可以将多条命令一次性打包，有效地减少网络开销
-
-在Redis执行Lua脚本有两种方法：eval和evalsha
-eval
-eval  脚本内容 key 个数 key 列表 参数列表
-下面例子使用了key列表和参数列表来为Lua脚本提供更多的灵活性
-127.0.0.1:6379&gt; eval ‘return “hello “ ..KEYS[1]..ARGV[1]‘ 1 redis world“hello redisworld”
-此时KEYS[1]=”redis”，A
+              Kafka is a distributed,partitioned,replicated commit logservice。 Kafka是一个分布式、分区、复制的提交日志服务。 kafka对消息保存时根据主题（Topic）进行归类，发送消息者成为生产者（Producer）,消息接受者成为消费者（
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/22/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-e4-b8-8elua/#more" rel="contents">
+              <a class="btn" href="/2019/04/12/kafka-e7-ae-80-e4-bb-8b/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1130,7 +1096,7 @@ eval  脚本内容 key 个数 key 列表 参数列表
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/11/初识kafka—发布与订阅消息系统/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -1150,7 +1116,7 @@ eval  脚本内容 key 个数 key 列表 参数列表
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/" class="post-title-link" itemprop="url">Lua的基本使用</a>
+                <a href="/2019/04/11/初识kafka—发布与订阅消息系统/" class="post-title-link" itemprop="url">初识kafka—发布与订阅消息系统</a>
               
             
           </h2>
@@ -1175,7 +1141,7 @@ eval  脚本内容 key 个数 key 列表 参数列表
                 
               
 
-              <time title="创建时间：2019-03-22 16:33:54" itemprop="dateCreated datePublished" datetime="2019-03-22T16:33:54+08:00">2019-03-22</time>
+              <time title="创建时间：2019-04-11 18:03:22" itemprop="dateCreated datePublished" datetime="2019-04-11T18:03:22+08:00">2019-04-11</time>
             </span>
           
 
@@ -1204,7 +1170,7 @@ eval  脚本内容 key 个数 key 列表 参数列表
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
@@ -1245,973 +1211,15 @@ eval  脚本内容 key 个数 key 列表 参数列表
         
           
             <p>
-              从打印hello world开始
-输入命令 lua -i 或 lua 来启用交互式编程模式，使用print函数打印字符串”hello world”：
-[root@vmzq1l0l ~]# luaLua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio&gt; print(“hello world”)hello world&gt; 
-有交互是编程，也有脚本式编程
-编写脚本指定解释器为 /bash/lua （本人为centos7的系统，自带lua，如果其他版本没有Lua的需要自行安装）
-编写脚本
-[root@vmzq1l0l ~]# vim hello.lua
-脚本内容
-#!/bin/luaprint(“hello world”)
+              发布与订阅消息系统的数据的发送者不会把消息直接发送给接受者； 发送者以某种方式对消息进行分类，接受者订阅他们，以便接受特定类型的消息； 发布和订阅系统一般会有一个broker,也就是发布消息的中心点。 没有使用发布订阅消息系统的结构如下图:
+
+如果多个服务之间需要互相获取消息，需要专门写对应的接口，
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/21/linux-e4-bf-ae-e6-94-b9shell-e8-84-9a-e6-9c-ac-e7-bc-96-e7-a0-81-e6-a0-bc-e5-bc-8f/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/21/linux-e4-bf-ae-e6-94-b9shell-e8-84-9a-e6-9c-ac-e7-bc-96-e7-a0-81-e6-a0-bc-e5-bc-8f/" class="post-title-link" itemprop="url">linux修改Shell脚本编码格式</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-21 17:08:50" itemprop="dateCreated datePublished" datetime="2019-03-21T17:08:50+08:00">2019-03-21</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              问题
-从windows用ftp传到linux的脚本往往编码格式是dos，如果想要在linux执行，必须修改为unix编码格式
-解决
-vim打开要改变编码的文件，然后输入告诉我们该脚本是utf-8编码的，这种编码无法在linux运行
-:set fffileformat=dos
-修改编码,保存退出
-:set ff=unix:wq
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/21/linux-e4-bf-ae-e6-94-b9shell-e8-84-9a-e6-9c-ac-e7-bc-96-e7-a0-81-e6-a0-bc-e5-bc-8f/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/20/Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码/" class="post-title-link" itemprop="url">Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-20 11:17:34" itemprop="dateCreated datePublished" datetime="2019-03-20T11:17:34+08:00">2019-03-20</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              起因 别人提交的东西不是我需要的，但是git pull拉取的时候会报冲突，不revert线上的版本就拉不到其他代码 解决办法 git stash 创建本地的暂存代码   这样就可以创建本地的暂存代码了 然后git pull再拉取代码就不会出现冲突的情况了 git unstash 还原之前的暂存代码 还原的代码是线上和本地stash的合并代码  
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/20/Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-conf-e9-85-8d-e7-bd-ae-e8-af-a6-e7-bb-86-e8-a7-a3-e6-9e-90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-conf-e9-85-8d-e7-bd-ae-e8-af-a6-e7-bb-86-e8-a7-a3-e6-9e-90/" class="post-title-link" itemprop="url">redis.conf配置文件（中文翻译）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 18:48:45" itemprop="dateCreated datePublished" datetime="2019-03-19T18:48:45+08:00">2019-03-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              部分配置做了中文翻译，也可对照英文默认配置文档阅读
-# Redis 配置文件样本
-#
-# 注意：如果想要读取配置文件的参数，必须将配置文件以第一参数的形式启动，如下启动示例:
-#
-# ./redis-server /path/to/redis.conf
-
-# 单位说明：当需要设置内存大小时，可以用1K 5GB 4M等常用格式指定：
-#
-# 1k =&gt; 1000 bytes
-# 1kb =&gt; 1024 bytes
-# 1m =&gt; 1000000 bytes
-# 1mb =&gt; 1024*1024 bytes
-# 1g =&gt; 1000000000 bytes
-# 1gb =&gt; 1024*1024*1024 bytes
-#
-# 单位不区分大小写
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-conf-e9-85-8d-e7-bd-ae-e8-af-a6-e7-bb-86-e8-a7-a3-e6-9e-90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-conf-e9-bb-98-e8-ae-a4-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-conf-e9-bb-98-e8-ae-a4-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6/" class="post-title-link" itemprop="url">redis.conf配置文件（英文原文）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 18:48:06" itemprop="dateCreated datePublished" datetime="2019-03-19T18:48:06+08:00">2019-03-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              配置文件中有很详细的注释，告诉各个配置参数的用途，可以对照部分中文翻译的文档阅读
-# Redis configuration file example.
-#
-# Note that in order to read the configuration file, Redis must be
-# started with the file path as first argument:
-#
-# ./redis-server /path/to/redis.conf
-
-# Note on units: when memory size is needed, it is possible to specify
-# it in the usual form of 1k 5GB 4M
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-conf-e9-bb-98-e8-ae-a4-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e4-ba-8b-e5-8a-a1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e4-ba-8b-e5-8a-a1/" class="post-title-link" itemprop="url">Redis学习笔记—事务</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 18:07:20" itemprop="dateCreated datePublished" datetime="2019-03-19T18:07:20+08:00">2019-03-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              事务简单理解就是一组命令要么执行，要么全部不执行，否则执行一部分数据会造成数据不一致的问题 Redis提供了简单的事务功能，不支持回滚操作，将一组需要批量执行的命令放到multi和exec两个命令之间就可以实现简单地事务功能。
-
-multi命令代表事务开始
-exec命令代表事务结束
-discard命令代表中途中断
-
-下面添加一个名字为Charlie的成绩信息，要求一气呵成的添加，如果没有输入exec之前，数据的返回值是“QUEUED”排队的状态，输入exec之后数据就被写入到Redis里面了（如果中途想要中断就输入discard）
-127.0.0.1:6379&gt; multiOK127.0.0.1:6379&gt; set Charlie:english:score 
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e4-ba-8b-e5-8a-a1/#more" rel="contents">
+              <a class="btn" href="/2019/04/11/初识kafka—发布与订阅消息系统/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2260,7 +1268,7 @@ discard命令代表中途中断
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2521,6 +1529,15 @@ discard命令代表中途中断
 
 
 
+
+
+<span id="busuanzi_container_site_pv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
         
 

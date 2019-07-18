@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/23/maven-e6-89-93-e5-8c-85-e6-8c-87-e5-ae-9a-e5-8c-85-e5-90-8d/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +390,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/23/maven-e6-89-93-e5-8c-85-e6-8c-87-e5-ae-9a-e5-8c-85-e5-90-8d/" class="post-title-link" itemprop="url">maven打包指定包名</a>
+                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/" class="post-title-link" itemprop="url">Redis学习笔记—Pipeline</a>
               
             
           </h2>
@@ -415,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2019-01-23 10:24:37" itemprop="dateCreated datePublished" datetime="2019-01-23T10:24:37+08:00">2019-01-23</time>
+              <time title="创建时间：2019-03-19 17:22:22" itemprop="dateCreated datePublished" datetime="2019-03-19T17:22:22+08:00">2019-03-19</time>
             </span>
           
 
@@ -444,7 +444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/maven/" itemprop="url" rel="index"><span itemprop="name">maven</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -485,14 +485,21 @@
         
           
             <p>
-              在标签中添加标签指定打包的包名
-&lt;**build**&gt;  &lt;**finalName**&gt;brain-system-status_&lt;/_**finalName**&gt;  &lt;**plugins**&gt;  &lt;**plugin**&gt;  &lt;**groupId**&gt;org.springframework.boot_&lt;/_**groupId**&gt;  &lt;**artifactId**&gt;spring-boot-maven-plugin_&lt;/_**artifactId**&gt;  _&lt;/_**plugin**&gt;  _&lt;/_**plugins&gt;_&lt;/build&gt;
+              Redis客户端执行一条命令分为如下四个过程
+
+
+发送命令
+命令排队
+执行命令
+返回结果
+
+无论网络延如何延时，数据包总是能从客户端到达服务器，并从服务器返回数据回复客户端，这样的从1~4所需要的时间称为Round Trip Time（RTT，往返时间） Redis提供了批量操作命令（例如mget、
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/01/23/maven-e6-89-93-e5-8c-85-e6-8c-87-e5-ae-9a-e5-8c-85-e5-90-8d/#more" rel="contents">
+              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -552,7 +559,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/21/err-1235-this-version-of-mysql-doesnt-yet-support-limit-in-all-any-some-subquery/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -572,7 +579,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/21/err-1235-this-version-of-mysql-doesnt-yet-support-limit-in-all-any-some-subquery/" class="post-title-link" itemprop="url">[Err] 1235 - This version of MySQL doesn't yet support 'LIMIT & IN/ALL/ANY/SOME subquery'</a>
+                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-benchmark详解</a>
               
             
           </h2>
@@ -597,7 +604,7 @@
                 
               
 
-              <time title="创建时间：2019-01-21 16:40:45" itemprop="dateCreated datePublished" datetime="2019-01-21T16:40:45+08:00">2019-01-21</time>
+              <time title="创建时间：2019-03-19 16:41:20" itemprop="dateCreated datePublished" datetime="2019-03-19T16:41:20+08:00">2019-03-19</time>
             </span>
           
 
@@ -626,7 +633,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -667,18 +674,19 @@
         
           
             <p>
-              IN/ALL/ANY/SOME 的子查询中用了limit关键词无法执行
-select * from table_example where  id in (select t.id from table_example_b t limit 5)  
-这样执行会报错
-[Err] 1235 - This version of MySQL doesn’t yet support ‘LIMIT &amp; IN/ALL/ANY/SOME subquery’  
-只需要在in里面在包一层select即可解决问题
-select * from table_example where  id in (select t.id (select id from table_example_b l
+              redis-benchmark可以为Redis做基准性能测试，它提供了很多选项帮助开发和运维人员测试Redis的相关性能
+-c
+-c（clients）选项代表客户端的并发量（默认50）
+-n
+-n（num）选项代表客户端请求数量（默认100000）
+例如测试100个客户端一共请求20000次
+[ro
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/01/21/err-1235-this-version-of-mysql-doesnt-yet-support-limit-in-all-any-some-subquery/#more" rel="contents">
+              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -738,7 +746,7 @@ select * from table_example where  id in (select t.id (select id from table_exam
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/21/Linux批量删除进程（以java进程举例）/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -758,7 +766,7 @@ select * from table_example where  id in (select t.id (select id from table_exam
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/21/Linux批量删除进程（以java进程举例）/" class="post-title-link" itemprop="url">Linux批量删除进程（以java进程举例）</a>
+                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-server详解</a>
               
             
           </h2>
@@ -783,7 +791,7 @@ select * from table_example where  id in (select t.id (select id from table_exam
                 
               
 
-              <time title="创建时间：2019-01-21 11:30:30" itemprop="dateCreated datePublished" datetime="2019-01-21T11:30:30+08:00">2019-01-21</time>
+              <time title="创建时间：2019-03-19 16:32:15" itemprop="dateCreated datePublished" datetime="2019-03-19T16:32:15+08:00">2019-03-19</time>
             </span>
           
 
@@ -812,7 +820,7 @@ select * from table_example where  id in (select t.id (select id from table_exam
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -853,784 +861,13 @@ select * from table_example where  id in (select t.id (select id from table_exam
         
           
             <p>
-              Linux查看所有Java进程 (“grep -v grep”是在列出的进程中去除含有关键字”grep”的进程)
-ps -ef | grep java | grep -v grep 
-使用awk分割结果，获取PID
-awk ‘{print $2}’
-ps -ef | grep java | grep -v grep | awk ‘{print $2}’
-杀死进程命令
-kill -9 PID
-xargs 作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题
-ps -ef | grep java | grep -v grep | awk ‘{print $2}’ | xargs kill -9
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/21/Linux批量删除进程（以java进程举例）/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/15/e9-99-90-e5-88-b6-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-94-a8-e6-88-b7-e7-99-bb-e5-bd-95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/15/e9-99-90-e5-88-b6-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-94-a8-e6-88-b7-e7-99-bb-e5-bd-95/" class="post-title-link" itemprop="url">限制服务器用户登录</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-15 09:40:06" itemprop="dateCreated datePublished" datetime="2019-01-15T09:40:06+08:00">2019-01-15</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/Linux安全/" itemprop="url" rel="index"><span itemprop="name">Linux安全</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              查看IP尝试登录次数脚本
-cat /var/log/secure|awk ‘/Failed/{print $(NF-3)}’|sort|uniq -c|awk ‘{print $2” = “$1;}’  
-直接查看尝试登录的日志
-tail -fn500 /var/ogs/secure
-限制某个ip的访问（编辑/etc/hosts.deny,添加限制IP信息）
-vim /etc/hosts.deny
-限制192.168.11.112的访问  
-sshd:192.168.11.112
-直接用通配符限制某个网段
-sshd:192.168.1.*
-限制登录次数
-vim /etc/ssh/sshd_config  
-设置验证超过10次断开连接
-MaxAuthTries=10
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/15/e9-99-90-e5-88-b6-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-94-a8-e6-88-b7-e7-99-bb-e5-bd-95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/10/spring cloud中使用Ribbon实现客户端的软负载均衡/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/10/spring cloud中使用Ribbon实现客户端的软负载均衡/" class="post-title-link" itemprop="url">spring cloud中使用Ribbon实现客户端的软负载均衡</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-10 15:14:57" itemprop="dateCreated datePublished" datetime="2019-01-10T15:14:57+08:00">2019-01-10</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              https://blog.csdn.net/liuchuanhong1/article/details/54691566
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/10/spring cloud中使用Ribbon实现客户端的软负载均衡/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/09/CentOS 7 开放端口/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/09/CentOS 7 开放端口/" class="post-title-link" itemprop="url">CentOS 7 开放端口</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-09 15:48:38" itemprop="dateCreated datePublished" datetime="2019-01-09T15:48:38+08:00">2019-01-09</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/Linux安全/" itemprop="url" rel="index"><span itemprop="name">Linux安全</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              查看到zone名称
-firewall-cmd –get-active-zones
-添加开放端口（public为上一步查出的zone名称）
-firewall-cmd –zone=public –add-port=6379/tcp –permanent
-重启防火墙
-firewall-cmd –reload 
-查看端口开启状态
-firewall-cmd –query-port=6379/tcp
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/09/CentOS 7 开放端口/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/01/03/java-e5-b9-b6-e8-a1-8c-e6-89-a7-e8-a1-8c-e4-bb-bb-e5-8a-a1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/03/java-e5-b9-b6-e8-a1-8c-e6-89-a7-e8-a1-8c-e4-bb-bb-e5-8a-a1/" class="post-title-link" itemprop="url">Java并行执行任务</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-03 13:39:20" itemprop="dateCreated datePublished" datetime="2019-01-03T13:39:20+08:00">2019-01-03</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              /* \ 并行执行任务 */ public class TestFuture {    @Test    public void test(){    CompletableFuture&lt;String&gt; future1 = CompletableFuture.supplyAsync(() -&gt; method1());        CompletableFuture&lt;String&gt; future2 = CompletableFuture.supplyAsync(() -&gt; method2());
-try {  System.out.println(future1.get());            System.out.println
+              redis-server除了启动Redis外，还有一个–test-memory选项。redis-server –test-memory可以用来检测当前操作系统能否稳定地分配指定容量的内存给Redis，通过这种检测可以有效避免因为内存问题造成Redis崩溃，例如下面操作检测当前操作系统能否提供1G的内
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/01/03/java-e5-b9-b6-e8-a1-8c-e6-89-a7-e8-a1-8c-e4-bb-bb-e5-8a-a1/#more" rel="contents">
+              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1690,7 +927,7 @@ try {  System.out.println(future1.get());            System.out.println
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/12/28/报错：Data truncation Incorrect···/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -1710,7 +947,7 @@ try {  System.out.println(future1.get());            System.out.println
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/28/报错：Data truncation Incorrect···/" class="post-title-link" itemprop="url">Data truncation: Incorrect datetime value: ” for column ‘create_time’ at row 1</a>
+                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-cli详解</a>
               
             
           </h2>
@@ -1735,197 +972,7 @@ try {  System.out.println(future1.get());            System.out.println
                 
               
 
-              <time title="创建时间：2018-12-28 13:37:45" itemprop="dateCreated datePublished" datetime="2018-12-28T13:37:45+08:00">2018-12-28</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 15:44:06" itemprop="dateModified" datetime="2019-07-18T15:44:06+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              报错：'Data truncation: Incorrect datetime value: ” for column ‘create_time’ at row 1'
-
-换mysql-connector-java依赖包版本从5.0.4换到5.1.35
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/12/28/报错：Data truncation Incorrect···/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/12/10/服务注册发现consul之一：consul介绍、安装、及功能介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/10/服务注册发现consul之一：consul介绍、安装、及功能介绍/" class="post-title-link" itemprop="url">服务注册发现consul之一：consul介绍、安装、及功能介绍</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-10 18:04:58" itemprop="dateCreated datePublished" datetime="2018-12-10T18:04:58+08:00">2018-12-10</time>
+              <time title="创建时间：2019-03-19 16:17:33" itemprop="dateCreated datePublished" datetime="2019-03-19T16:17:33+08:00">2019-03-19</time>
             </span>
           
 
@@ -1954,7 +1001,7 @@ try {  System.out.println(future1.get());            System.out.println
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -1995,14 +1042,17 @@ try {  System.out.println(future1.get());            System.out.println
         
           
             <p>
-              https://www.cnblogs.com/duanxz/p/7053301.html
-
-              
+              输入 redis-cli 连接到命令行客户端（默认host=127.0.0.1，port=6379）
+[root@vmzq1l0l ~]# redis-cli127.0.0.1:6379&gt; 
+-h
+-h（host：主机）选项代表主机IP，不输入默认为127.0.0.1
+[root@vmzq1l
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/12/10/服务注册发现consul之一：consul介绍、安装、及功能介绍/#more" rel="contents">
+              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2062,7 +1112,7 @@ try {  System.out.println(future1.get());            System.out.println
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/12/10/windows下 安装 rabbitMQ 及操作常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-85-a2-e6-9f-a5-e8-af-a2-e5-88-86-e6-9e-90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -2082,7 +1132,7 @@ try {  System.out.println(future1.get());            System.out.println
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/10/windows下 安装 rabbitMQ 及操作常用命令/" class="post-title-link" itemprop="url">windows下 安装 rabbitMQ 及操作常用命令</a>
+                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-85-a2-e6-9f-a5-e8-af-a2-e5-88-86-e6-9e-90/" class="post-title-link" itemprop="url">Redis学习笔记—慢查询分析</a>
               
             
           </h2>
@@ -2107,7 +1157,7 @@ try {  System.out.println(future1.get());            System.out.println
                 
               
 
-              <time title="创建时间：2018-12-10 17:05:05" itemprop="dateCreated datePublished" datetime="2018-12-10T17:05:05+08:00">2018-12-10</time>
+              <time title="创建时间：2019-03-19 11:00:36" itemprop="dateCreated datePublished" datetime="2019-03-19T11:00:36+08:00">2019-03-19</time>
             </span>
           
 
@@ -2136,7 +1186,7 @@ try {  System.out.println(future1.get());            System.out.println
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -2177,14 +1227,13 @@ try {  System.out.println(future1.get());            System.out.println
         
           
             <p>
-              https://www.cnblogs.com/ericli-ericli/p/5902270.html
-
-              
+              慢查询日志帮助开发人员定位系统存在的慢操作，慢查询就是系统在命令执行前后计算的每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间，耗时，命令的详细信息）记录下来，Redis提供类似的功能  客户端请求的四个执行步骤 1.发送命令——2.排队等待执行——3.执行命令——4.返回
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/12/10/windows下 安装 rabbitMQ 及操作常用命令/#more" rel="contents">
+              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-85-a2-e6-9f-a5-e8-af-a2-e5-88-86-e6-9e-90/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2233,7 +1282,7 @@ try {  System.out.println(future1.get());            System.out.println
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2494,6 +1543,15 @@ try {  System.out.println(future1.get());            System.out.println
 
 
 
+
+
+<span id="busuanzi_container_site_pv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
         
 

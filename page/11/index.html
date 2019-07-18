@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/11/09/mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/Redis学习笔记—数据类型：列表（list）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +390,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/11/09/mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用/" class="post-title-link" itemprop="url">mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用</a>
+                <a href="/2019/03/08/Redis学习笔记—数据类型：列表（list）/" class="post-title-link" itemprop="url">Redis学习笔记—数据类型：列表（list）</a>
               
             
           </h2>
@@ -415,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2018-11-09 18:15:50" itemprop="dateCreated datePublished" datetime="2018-11-09T18:15:50+08:00">2018-11-09</time>
+              <time title="创建时间：2019-03-08 16:08:52" itemprop="dateCreated datePublished" datetime="2019-03-08T16:08:52+08:00">2019-03-08</time>
             </span>
           
 
@@ -444,7 +444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -485,15 +485,18 @@
         
           
             <p>
-              建表插数据
-CREATE TABLE `score_info`(`id` INT(11) NOT NULL AUTO_INCREMENT,`stuName` VARCHAR(22) DEFAULT NULL,`course` VARCHAR(22) DEFAULT NULL,`score` INT(11) DEFAULT NULL,PRIMARY KEY(`id`)) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INSERT INTO `score_info` VALUES (‘2’,’张三’,’数学’,
+              列表（list）类型是用来存储多个有序的字符串。列表是一种比较灵活的数据结构，它可以充当栈和队列的角色，在实际开发上有很多应用场景。
+添加操作
+1.从右边插入元素
+rpush key value [value …]
+从右边插入a,b,c
+127.0.0.1:6379&gt; rpush mylist
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/11/09/mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用/#more" rel="contents">
+              <a class="btn" href="/2019/03/08/Redis学习笔记—数据类型：列表（list）/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -553,7 +556,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/11/09/Git开启二次验证需要配置Access_Tokens才可以拉代码/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-88-e5-b8-8c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -573,7 +576,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/11/09/Git开启二次验证需要配置Access_Tokens才可以拉代码/" class="post-title-link" itemprop="url">Git开启二次验证需要配置Access_Tokens才可以拉代码</a>
+                <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-88-e5-b8-8c/" class="post-title-link" itemprop="url">Redis学习笔记—数据类型：哈希（hash）</a>
               
             
           </h2>
@@ -598,7 +601,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
                 
               
 
-              <time title="创建时间：2018-11-09 14:56:24" itemprop="dateCreated datePublished" datetime="2018-11-09T14:56:24+08:00">2018-11-09</time>
+              <time title="创建时间：2019-03-08 14:15:35" itemprop="dateCreated datePublished" datetime="2019-03-08T14:15:35+08:00">2019-03-08</time>
             </span>
           
 
@@ -627,7 +630,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -668,13 +671,13 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
         
           
             <p>
-              gitlab开启二次验证拉代码会报权限错，这时候需要生成个人令牌通过令牌拉代码。 拉代码就需要用如下方式才能拉到代码： git clone https://oauth2:Access_Tokens@example.com/package.git 举例说明步骤如下： 登录gitlab右上角头像Settings（设置）→ Access Tokens（访问令牌） 填写Personal Access Token（个人访问令牌）名称和勾选范围，点击生成按钮  生成了个人访问令牌，复制这个令牌，拉代码需要通过这个令牌才能够拉取  按照本文图例就是对应输入 git clone https://oauth2:ogr73sajdr8obJGtDAAn@example.com/package
+              几乎所有的编程语言都提供了哈希（hash）类型，它们的叫法可能是哈希、字典、关联数组。在Redis中，哈希类型是指键值本身又是一个键值对结构，形如value={ {field1，value1}，…{fieldN，valueN}}  哈希类型中的映射关系叫作field-value，注意这里的value
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/11/09/Git开启二次验证需要配置Access_Tokens才可以拉代码/#more" rel="contents">
+              <a class="btn" href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-88-e5-b8-8c/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -734,7 +737,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/22/sql查询varchar类型MAX函数查询不准确，需要String转int/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-ad-97-e7-ac-a6-e4-b8-b2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -754,7 +757,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/08/22/sql查询varchar类型MAX函数查询不准确，需要String转int/" class="post-title-link" itemprop="url">sql查询varchar类型MAX函数查询不准确，需要String转int</a>
+                <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-ad-97-e7-ac-a6-e4-b8-b2/" class="post-title-link" itemprop="url">Redis学习笔记—数据类型：字符串（string）</a>
               
             
           </h2>
@@ -779,7 +782,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
                 
               
 
-              <time title="创建时间：2018-08-22 11:42:19" itemprop="dateCreated datePublished" datetime="2018-08-22T11:42:19+08:00">2018-08-22</time>
+              <time title="创建时间：2019-03-08 10:10:53" itemprop="dateCreated datePublished" datetime="2019-03-08T10:10:53+08:00">2019-03-08</time>
             </span>
           
 
@@ -808,7 +811,7 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -849,197 +852,14 @@ INSERT INTO `score_info` VALUES (‘1’,’张三’,’语文’,’87’);INS
         
           
             <p>
-              看个例子   最大的数明明是10000但是查出来的最大数是9999，因为这个是varchar类型，需要在sql的时候转类型  sql解决办法
-SELECT MAX(CAST(m.student_code AS SIGNED)) FROM member_detail m;
-
-
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/22/sql查询varchar类型MAX函数查询不准确，需要String转int/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/21/nginx-conf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/21/nginx-conf/" class="post-title-link" itemprop="url">nginx.conf</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-21 09:13:51" itemprop="dateCreated datePublished" datetime="2018-08-21T09:13:51+08:00">2018-08-21</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              #user nobody; worker_processes 1; #error_log logs/error.log; #error_log logs/error.log notice; #error_log logs/error.log info; #pid logs/nginx.pid; events { worker_connections 1024; } http { include mime.types; default_type application/octet-stream; #access_log logs/access.log main; access_log off; keepalive_requests 5120; keepalive_timeo
+              字符串是Redis最基础的数据结构。首先键是字符串类型，而且其他几种类型都是在字符串类型的基础上构建的。字符串类型的值实际可以是字符串（简单的字符串、复杂的字符串（例如JSON、XML））、数字（整数、浮点数），甚至是二进制（图片、音频、视频），但是值最大不能超过512MB。 设置值 set命令
+s
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/08/21/nginx-conf/#more" rel="contents">
+              <a class="btn" href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-ad-97-e7-ac-a6-e4-b8-b2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1099,7 +919,7 @@ SELECT MAX(CAST(m.student_code AS SIGNED)) FROM member_detail m;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/16/localtunnel-e5-9c-a8windows-e7-8e-af-e5-a2-83-e4-b8-8b-e5-86-85-e7-bd-91-e7-a9-bf-e9-80-8f/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8d-95-e7-ba-bf-e7-a8-8b-e6-9e-b6-e6-9e-84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -1119,7 +939,7 @@ SELECT MAX(CAST(m.student_code AS SIGNED)) FROM member_detail m;
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/08/16/localtunnel-e5-9c-a8windows-e7-8e-af-e5-a2-83-e4-b8-8b-e5-86-85-e7-bd-91-e7-a9-bf-e9-80-8f/" class="post-title-link" itemprop="url">localtunnel在windows环境下内网穿透</a>
+                <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8d-95-e7-ba-bf-e7-a8-8b-e6-9e-b6-e6-9e-84/" class="post-title-link" itemprop="url">Redis学习笔记—单线程架构</a>
               
             
           </h2>
@@ -1144,7 +964,7 @@ SELECT MAX(CAST(m.student_code AS SIGNED)) FROM member_detail m;
                 
               
 
-              <time title="创建时间：2018-08-16 12:34:12" itemprop="dateCreated datePublished" datetime="2018-08-16T12:34:12+08:00">2018-08-16</time>
+              <time title="创建时间：2019-03-08 10:07:51" itemprop="dateCreated datePublished" datetime="2019-03-08T10:07:51+08:00">2019-03-08</time>
             </span>
           
 
@@ -1173,7 +993,7 @@ SELECT MAX(CAST(m.student_code AS SIGNED)) FROM member_detail m;
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -1214,22 +1034,13 @@ SELECT MAX(CAST(m.student_code AS SIGNED)) FROM member_detail m;
         
           
             <p>
-              本机需要有nodejs环境，不做赘述 *命令提示符输入下面命令安装localtunnel *
-npm i localtunnel -g
-配置环境变量 我是安装到下面目录（安装完成之后会提示安装到了哪个目录），目录会有个lt.cmd
-C:\Users\charlie\AppData\Roaming\npm
-将这个配置到环境变量Path后面 
-使用localtunnel
-运行命令：端口号填写什么就是代理什么端口出去，然后localtunnel会给你一个公网可以访问的域名，然后就可以用这个域名愉快地玩耍了
-lt –port 端口号
-
-
-              
+              Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/08/16/localtunnel-e5-9c-a8windows-e7-8e-af-e5-a2-83-e4-b8-8b-e5-86-85-e7-bd-91-e7-a9-bf-e9-80-8f/#more" rel="contents">
+              <a class="btn" href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8d-95-e7-ba-bf-e7-a8-8b-e6-9e-b6-e6-9e-84/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1289,7 +1100,7 @@ lt –port 端口号
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/13/mysql-e4-bc-98-e5-8c-96-e5-ae-9e-e6-88-98/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-9f-ba-e7-a1-80-e5-91-bd-e4-bb-a4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -1309,7 +1120,7 @@ lt –port 端口号
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/08/13/mysql-e4-bc-98-e5-8c-96-e5-ae-9e-e6-88-98/" class="post-title-link" itemprop="url">MySQL索引优化</a>
+                <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-9f-ba-e7-a1-80-e5-91-bd-e4-bb-a4/" class="post-title-link" itemprop="url">Redis学习笔记—初识Redis</a>
               
             
           </h2>
@@ -1334,7 +1145,7 @@ lt –port 端口号
                 
               
 
-              <time title="创建时间：2018-08-13 12:03:31" itemprop="dateCreated datePublished" datetime="2018-08-13T12:03:31+08:00">2018-08-13</time>
+              <time title="创建时间：2019-03-08 10:06:50" itemprop="dateCreated datePublished" datetime="2019-03-08T10:06:50+08:00">2019-03-08</time>
             </span>
           
 
@@ -1363,7 +1174,7 @@ lt –port 端口号
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
@@ -1404,755 +1215,16 @@ lt –port 端口号
         
           
             <p>
-              索引：索引是数据结构；最简单的索引相当于书的目录，通过目录找书本章节内容，顺序结构 索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引 唯一索引(Unique)：索引列的值必须唯一，但允许有空值 复合索引：即一个索引包含多个列 聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（技术上来说就是B+Tree）和数据行。 非聚簇索引：不是聚簇索引就是非聚簇索引 Show global variables like “%datadir%”; 基础语法:略 查看索引：show index from 表名; 创建索引： ①CREATE UNIQUE INDEX 索
+              连接命令行客户端（redis-cli）#redis-cli插入字符串类型的键值对（set key）127.0.0.1:6379&gt; set hello world
+OK
+127.0.0.1:6379&gt; set java jedis
+OK插入列表类型（list）的键值对（set listke
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/08/13/mysql-e4-bc-98-e5-8c-96-e5-ae-9e-e6-88-98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/07/(转载)一个四五年的Java开发程序员，该准备哪些去面试？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/07/(转载)一个四五年的Java开发程序员，该准备哪些去面试？/" class="post-title-link" itemprop="url">(转载)一个四五年的Java开发程序员，该准备哪些去面试？</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-07 10:20:23" itemprop="dateCreated datePublished" datetime="2018-08-07T10:20:23+08:00">2018-08-07</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              转自：https://www.cnblogs.com/zgghb/p/7073136.html 上周面试了一周，感触颇深，总结一下。 面试了公司大概有阿里，携程，爱奇艺，唯品会，途牛，bilibili，大众点评，阿里和爱奇艺是电话面试，其他现场面试。 首先，五年左右，应该算高级开发工程师，大部分面试不用去做题，背string和stringbuilder区别的，几乎都是底层和远离，分布式等。虽然一个程序员，在工作中大部分还是写流水代码，增删查改。
-1 JVM这个大公司基本都会问，内存模型，GC，jvm都有哪些区域？栈桢存了什么？ 常用垃圾回收器哪些，特点？jvm性能调优，这些从周志明的jvm特性那本书基本都有答案，一个高级程序员必读，出去面试，至少得读两遍，理解，不是死记硬
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/07/(转载)一个四五年的Java开发程序员，该准备哪些去面试？/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/01/冒泡算法对String字符串的数据进行排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/01/冒泡算法对String字符串的数据进行排序/" class="post-title-link" itemprop="url">冒泡算法对String字符串的数据进行排序</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-01 12:08:11" itemprop="dateCreated datePublished" datetime="2018-08-01T12:08:11+08:00">2018-08-01</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 14:45:08" itemprop="dateModified" datetime="2019-07-18T14:45:08+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              public class test &#123;    public static void main(String\[\] args) &#123;        String s = "58627";        //split转换s为arr数组  String\[\] arr =  s.split("");        //冒泡对arr数组进行排序  for(int i=0;i&lt;arr.length-1;i++)&#123;            for (int j=0;j&lt;arr.length-1-i;j++) &#123;                if(Integer.parseInt(arr\[j\])&gt;Integer.parse
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/01/冒泡算法对String字符串的数据进行排序/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/01/e7-ba-bf-e7-a8-8b-e5-ae-89-e5-85-a8-e6-80-a7-e6-9c-89-e5-ba-8f-e6-80-a7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/08/01/e7-ba-bf-e7-a8-8b-e5-ae-89-e5-85-a8-e6-80-a7-e6-9c-89-e5-ba-8f-e6-80-a7/" class="post-title-link" itemprop="url">线程安全性有序性</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-01 09:32:57" itemprop="dateCreated datePublished" datetime="2018-08-01T09:32:57+08:00">2018-08-01</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高并发/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              Java内存模型中，允许编译器和处理器对指令进行重排序，但是重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性 Java里面可以通过volatile、synchronized、Lock保证有序性
-happens-before原则
-程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作；
-锁定规则：一个unLock操作先行发生于后面对同一个锁的lock操作
-volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作
-传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C
-线程启动规则：Thread对象的start()方法先行发生于此线程的每个动作
-线程中断原则：对线
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/08/01/e7-ba-bf-e7-a8-8b-e5-ae-89-e5-85-a8-e6-80-a7-e6-9c-89-e5-ba-8f-e6-80-a7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/07/31/e7-ba-bf-e7-a8-8b-e5-8f-af-e8-a7-81-e6-80-a7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/31/e7-ba-bf-e7-a8-8b-e5-8f-af-e8-a7-81-e6-80-a7/" class="post-title-link" itemprop="url">线程可见性</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-31 17:20:14" itemprop="dateCreated datePublished" datetime="2018-07-31T17:20:14+08:00">2018-07-31</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/高并发/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              导致共享变量在线程间不可见的原因
-线程交叉执行
-重排序结合线程交叉执行
-共享变量更新后的值没有在工作内存和主内存直接即时更新
-
-可见性synchronizedJMM（java内存模型）关于synchronized的两条规定：
-线程解锁前，必须把共享变量的最新值刷新到主内存
-线程加锁时，将清空工作内存中共享变量的值，从而使用共享变量时需要从主内存中重新读取最新的值（注意：加锁和解锁是通一把锁）
-
-volatile通过加入内存屏障和禁止重排序优化来实现对volatile变量写操作时，会在写操作后加入一条store屏障指令，将本地内存中的共享变量值刷新到主内存（每次线程访问volatile变量都会强迫从主内存读取变量值）
-volatile写操作会在volatile写操作之前加上
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/31/e7-ba-bf-e7-a8-8b-e5-8f-af-e8-a7-81-e6-80-a7/#more" rel="contents">
+              <a class="btn" href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-9f-ba-e7-a1-80-e5-91-bd-e4-bb-a4/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2201,7 +1273,7 @@ volatile写操作会在volatile写操作之前加上
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2462,6 +1534,15 @@ volatile写操作会在volatile写操作之前加上
 
 
 
+
+
+<span id="busuanzi_container_site_pv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
         
 

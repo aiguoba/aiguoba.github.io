@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/09/zookeeper+kafka单机安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +390,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/" class="post-title-link" itemprop="url">Redis学习笔记—Pipeline</a>
+                <a href="/2019/04/09/zookeeper+kafka单机安装/" class="post-title-link" itemprop="url">zookeeper+kafka单机安装</a>
               
             
           </h2>
@@ -415,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2019-03-19 17:22:22" itemprop="dateCreated datePublished" datetime="2019-03-19T17:22:22+08:00">2019-03-19</time>
+              <time title="创建时间：2019-04-09 14:20:50" itemprop="dateCreated datePublished" datetime="2019-04-09T14:20:50+08:00">2019-04-09</time>
             </span>
           
 
@@ -430,7 +430,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-07-18 14:49:44" itemprop="dateModified" datetime="2019-07-18T14:49:44+08:00">2019-07-18</time>
               </span>
             
           
@@ -444,7 +444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
@@ -485,21 +485,15 @@
         
           
             <p>
-              Redis客户端执行一条命令分为如下四个过程
-
-
-发送命令
-命令排队
-执行命令
-返回结果
-
-无论网络延如何延时，数据包总是能从客户端到达服务器，并从服务器返回数据回复客户端，这样的从1~4所需要的时间称为Round Trip Time（RTT，往返时间） Redis提供了批量操作命令（例如mget、mset等），有效地节约RTT，但是大部分命令不支持批量操作，这样每次去请求在网络上消耗时间是非常不明智的，Pipeline（流水线）机制能改善上面这类问题，它能将一组Redis命令进行组装，通过一次RTT传输给Redis，再将这组Redis命令的执行结果按顺序返回给客户端 下图是不使用Pipeline的情况，请求多少次就会有多少RTT，会在网络传输上耗费大量的时间  Pipe
+              本篇使用的zookeeper+kafka单机安装的版本见下文描述，软件版本不一致可能配置不尽相同，慎重参考。 不论是zookeeper还是kafka的安装都需要安装jdk环境，不再赘述
+zookeeper的安装下载zookeeper（本篇使用3.4.14版本）
+# wget https://mirr
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/#more" rel="contents">
+              <a class="btn" href="/2019/04/09/zookeeper+kafka单机安装/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -559,7 +553,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/04/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e7-b3-bb-e5-88-97-e7-9b-ae-e5-bd-95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -579,7 +573,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-benchmark详解</a>
+                <a href="/2019/04/04/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e7-b3-bb-e5-88-97-e7-9b-ae-e5-bd-95/" class="post-title-link" itemprop="url">Redis学习笔记系列目录</a>
               
             
           </h2>
@@ -604,7 +598,7 @@
                 
               
 
-              <time title="创建时间：2019-03-19 16:41:20" itemprop="dateCreated datePublished" datetime="2019-03-19T16:41:20+08:00">2019-03-19</time>
+              <time title="创建时间：2019-04-04 15:27:47" itemprop="dateCreated datePublished" datetime="2019-04-04T15:27:47+08:00">2019-04-04</time>
             </span>
           
 
@@ -674,21 +668,13 @@
         
           
             <p>
-              redis-benchmark可以为Redis做基准性能测试，它提供了很多选项帮助开发和运维人员测试Redis的相关性能
--c
--c（clients）选项代表客户端的并发量（默认50）
--n
--n（num）选项代表客户端请求数量（默认100000）
-例如测试100个客户端一共请求20000次
-[root@vmzq1l0l ~]# redis-benchmark -c 100 -n 20000
-redis-benchmark会对各类数据结构的命令进行测试，并给出性能指标
-====== MSET (10 keys) ======  20000 requests completed in 0.28 seconds  100 parallel clients  3 bytes p
+              本系列参考书是《Redis开发与运维》，没有通篇看完，摘取自己认为比较重要的章节做成笔记，杂糅一些网友智慧结晶，为有缘人的学习和日后自己的复习提供一个材料。 Redis特性 Redis安装、配置、启动、关闭 初识Redis 单线程架构 数据类型：字符串（string） 数据类型：哈希（hash） 数
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/#more" rel="contents">
+              <a class="btn" href="/2019/04/04/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e7-b3-bb-e5-88-97-e7-9b-ae-e5-bd-95/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -748,7 +734,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/02/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-9b-86-e7-be-a4-ef-bc-88redis-cluster-ef-bc-89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -768,7 +754,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-server详解</a>
+                <a href="/2019/04/02/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-9b-86-e7-be-a4-ef-bc-88redis-cluster-ef-bc-89/" class="post-title-link" itemprop="url">Redis学习笔记—集群（Redis Cluster）</a>
               
             
           </h2>
@@ -793,7 +779,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
                 
               
 
-              <time title="创建时间：2019-03-19 16:32:15" itemprop="dateCreated datePublished" datetime="2019-03-19T16:32:15+08:00">2019-03-19</time>
+              <time title="创建时间：2019-04-02 14:34:01" itemprop="dateCreated datePublished" datetime="2019-04-02T14:34:01+08:00">2019-04-02</time>
             </span>
           
 
@@ -863,16 +849,14 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
         
           
             <p>
-              redis-server除了启动Redis外，还有一个–test-memory选项。redis-server –test-memory可以用来检测当前操作系统能否稳定地分配指定容量的内存给Redis，通过这种检测可以有效避免因为内存问题造成Redis崩溃，例如下面操作检测当前操作系统能否提供1G的内存给Redis：
-[root@vmzq1l0l ~]# redis-server –test-memory 1024
-整个内存检测的时间比较长。当输出passed this test时说明内存检测完毕，最后会提示–test-memory只是简单检测，如果有质疑可以使用更加专业的内存检测工具：
-...========================================
+              Redis Cluster是Redis的分布式解决方案，在3.0版本正式推出，有效地解决了Redis分布式方面的需求。当遇到单机内存、并发、流量等瓶颈时，可以采用Cluster架构方案达到负载均衡的目的
+数据分布Redis数据分区Redis Cluser采用虚拟槽分区，所有的键根据哈希函数映射到0~
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-9b-86-e7-be-a4-ef-bc-88redis-cluster-ef-bc-89/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -932,7 +916,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/02/数据分布理论—常见的哈希分区规则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -952,7 +936,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-cli详解</a>
+                <a href="/2019/04/02/数据分布理论—常见的哈希分区规则/" class="post-title-link" itemprop="url">数据分布理论—常见的哈希分区规则</a>
               
             
           </h2>
@@ -977,7 +961,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
                 
               
 
-              <time title="创建时间：2019-03-19 16:17:33" itemprop="dateCreated datePublished" datetime="2019-03-19T16:17:33+08:00">2019-03-19</time>
+              <time title="创建时间：2019-04-02 14:00:18" itemprop="dateCreated datePublished" datetime="2019-04-02T14:00:18+08:00">2019-04-02</time>
             </span>
           
 
@@ -1006,7 +990,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其他/" itemprop="url" rel="index"><span itemprop="name">其他</span></a></span>
 
                 
                 
@@ -1047,23 +1031,21 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
         
           
             <p>
-              输入 redis-cli 连接到命令行客户端（默认host=127.0.0.1，port=6379）
-[root@vmzq1l0l ~]# redis-cli127.0.0.1:6379&gt; 
--h
--h（host：主机）选项代表主机IP，不输入默认为127.0.0.1
-[root@vmzq1l0l ~]# redis-cli -h 127.0.0.1127.0.0.1:6379&gt; 
--p
--p（port：端口）选项代表端口号，不输入默认为6379
-[root@vmzq1l0l ~]# redis-cli -p 6379127.0.0.1:6379&gt; 
-** -r**
--r（repeat：重复）选项表示将命令执行多次，例如执行三次ping操作
-[root@
+              分布式数据库首先要解决把整个数据集按照分区规则映射到多个节点的问题，即把数据集划分到多个节点上，每个节点负责整体数据的一个子集,如下图：
+
+数据分区规则,常见的分区规则有哈希分区和顺序分区两种：
+分区方式
+特点
+代表产品
+哈希分区
+①离散性好②数据分布业务无关③无法顺序访问
+Redis cluste
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/数据分布理论—常见的哈希分区规则/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1123,7 +1105,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-85-a2-e6-9f-a5-e8-af-a2-e5-88-86-e6-9e-90/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/02/记一次内存溢出的调试经历，线程无限创建，直到报OOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -1143,7 +1125,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-85-a2-e6-9f-a5-e8-af-a2-e5-88-86-e6-9e-90/" class="post-title-link" itemprop="url">Redis学习笔记—慢查询分析</a>
+                <a href="/2019/04/02/记一次内存溢出的调试经历，线程无限创建，直到报OOM/" class="post-title-link" itemprop="url">记一次内存溢出的调试经历，线程无限创建，直到报OOM</a>
               
             
           </h2>
@@ -1168,7 +1150,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
                 
               
 
-              <time title="创建时间：2019-03-19 11:00:36" itemprop="dateCreated datePublished" datetime="2019-03-19T11:00:36+08:00">2019-03-19</time>
+              <time title="创建时间：2019-04-02 11:28:57" itemprop="dateCreated datePublished" datetime="2019-04-02T11:28:57+08:00">2019-04-02</time>
             </span>
           
 
@@ -1197,7 +1179,7 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -1238,949 +1220,14 @@ redis-benchmark会对各类数据结构的命令进行测试，并给出性能�
         
           
             <p>
-              慢查询日志帮助开发人员定位系统存在的慢操作，慢查询就是系统在命令执行前后计算的每条命令的执行时间，当超过预设阈值，就将这条命令的相关信息（例如：发生时间，耗时，命令的详细信息）记录下来，Redis提供类似的功能  客户端请求的四个执行步骤 1.发送命令——2.排队等待执行——3.执行命令——4.返回结果 慢查询只统计步骤3执行命令的这一步，所以没有慢查询并不等于客户端没有超时的情况 慢查询的配置参数 在redis.conf配置文件中有两个配置项：slowlog-log-slower-than和slowlog-max-len  slowlog-log-slower-than表示预设的阈值，默认为10000微秒（1秒=1000毫秒=1000000微秒），如果一条命令执行时间超
+              问题一个java服务运行差不多一天就会崩溃，报java.lang.OutOfMemoryError: unable to create new native thread
+分析可能原因1：服务器设置无法满足服务创建的线程数量 可能原因2：jvm配置无法满足创建的线程数量 可能原因3：代码问题，有死循
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-85-a2-e6-9f-a5-e8-af-a2-e5-88-86-e6-9e-90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/18/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-95-b0-e6-8d-ae-e5-ba-93-e7-ae-a1-e7-90-86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/18/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-95-b0-e6-8d-ae-e5-ba-93-e7-ae-a1-e7-90-86/" class="post-title-link" itemprop="url">Redis学习笔记—数据库管理</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-18 18:34:38" itemprop="dateCreated datePublished" datetime="2019-03-18T18:34:38+08:00">2019-03-18</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              切换收据库
-select dbindex
-MySQL支持在一个实例下有多个数据库存在，但是关系型数据库是用字符来区分不同的数据库名，Redis只用数字来区分不同数据库，redis默认是16个数据库，在redis.conf配置文件有个默认配置databases 16。一般情况下不建议使用多数据库管理缓存，比如Redis的分布式实现Redis Cluster只允许使用0号数据库，如果想用多个数据库最好是布置多个redis实例用端口区分，用所有的实例的0号数据库，尽量不要做切换数据库的操作，以免难以维护 在14号数据库设置key为Charlie的数据，在其他数据库数据不互通
-127.0.0.1:6379&gt; get Charlie(nil)127.0.0.1:6379&gt
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/18/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-95-b0-e6-8d-ae-e5-ba-93-e7-ae-a1-e7-90-86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/18/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-81-8d-e5-8e-86-e9-94-ae/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/18/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-81-8d-e5-8e-86-e9-94-ae/" class="post-title-link" itemprop="url">Redis学习笔记—遍历键</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-18 17:36:45" itemprop="dateCreated datePublished" datetime="2019-03-18T17:36:45+08:00">2019-03-18</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              全量遍历键
-keys pattern
-查看所有的key、“J”开头的key、“T”或者“J”开头的key
-127.0.0.1:6379&gt; keys *1) “Tom”2) “Jerry”3) “hello”4) “Java”127.0.0.1:6379&gt; keys J*1) “Jerry”2) “Java”127.0.0.1:6379&gt; keys [T,J]*1) “Tom”2) “Jerry”3) “Java”
-如果redis数据量数据量有大量键， keys命令有可能造成redis阻塞，如果不清楚有多少键的情况下避免在生产环境使用keys命令 渐进式遍历 Redis从2.8版本后，提供了一个新的命令scan，它能有效的解决keys命令存在的问题。和ke
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/18/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-81-8d-e5-8e-86-e9-94-ae/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/11/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-94-ae-e7-ae-a1-e7-90-86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/11/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-94-ae-e7-ae-a1-e7-90-86/" class="post-title-link" itemprop="url">Redis学习笔记—单个键管理</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-11 15:11:31" itemprop="dateCreated datePublished" datetime="2019-03-11T15:11:31+08:00">2019-03-11</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              键重命名
-rename key newkey
-重命名键名“python”为“java”
-127.0.0.1:6379&gt; set python jedisOK127.0.0.1:6379&gt; rename python javaOK127.0.0.1:6379&gt; get python(nil)127.0.0.1:6379&gt; get java“jedis”
-如果原来的键存在，rename会覆盖原来的键的值
-127.0.0.1:6379&gt; set a bOK127.0.0.1:6379&gt; set c dOK127.0.0.1:6379&gt; rename a cOK127.0.0.1:6379&gt; get a(nil)127.0.0.1:
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/11/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e9-94-ae-e7-ae-a1-e7-90-86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/11/Redis学习笔记—数据类型：有序集合（zset）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/11/Redis学习笔记—数据类型：有序集合（zset）/" class="post-title-link" itemprop="url">Redis学习笔记—数据类型：有序集合（zset）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-11 13:42:08" itemprop="dateCreated datePublished" datetime="2019-03-11T13:42:08+08:00">2019-03-11</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              有序集合相对于哈希、列表、集合来说会有一点点陌生，但既然叫有序集合，那么它和集合必然有着联系，它保留了集合不能有重复成员的特性，但不同的是，有序集合中的元素可以排序。但是它和列表使用索引下标作为排序依据不同的是，它给每个元素设置一个分数（score）作为排序的依据。
-集合内操作
-1.添加成员
-zadd key [nx|xx] [ch] [incr] score member [score member …]
-
-nx：member必须不存在，才可以设置成功，用于添加
-xx：member必须存在，才可以设置成功，用于更新
-ch：返回此次操作后，有序集合元素和分数发生变化的个数
-incr：对score做增加，相当于后面介绍的zincrby
-有序集合相比集合提供了排序字段，但是也
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/11/Redis学习笔记—数据类型：有序集合（zset）/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/Redis学习笔记—数据类型：集合（set）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/08/Redis学习笔记—数据类型：集合（set）/" class="post-title-link" itemprop="url">Redis学习笔记—数据类型：集合（set）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-08 18:22:19" itemprop="dateCreated datePublished" datetime="2019-03-08T18:22:19+08:00">2019-03-08</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              集合（set）类型也是用来保存多个的字符串元素，但和列表类型不一样的是，集合中不允许有重复元素，并且集合中的元素是无序的，不能通过索引下标获取元素。
-** 集合内操作**
-1.添加元素
-sadd key element [element …]
-添加key为“myset”的集合，返回的是添加的个数
-127.0.0.1:6379&gt; sadd myset a b c(integer) 3127.0.0.1:6379&gt; sadd myset a b(integer) 0
-2.获取所有元素
-smembers key
-获取key为“myset”的集合所有元素
-127.0.0.1:6379&gt; smembers myset1) “c”2) “a”3) “b”
-3.删除元
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/08/Redis学习笔记—数据类型：集合（set）/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/记一次内存溢出的调试经历，线程无限创建，直到报OOM/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2229,7 +1276,7 @@ smembers key
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2490,6 +1537,15 @@ smembers key
 
 
 
+
+
+<span id="busuanzi_container_site_pv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv" class="theme-info">
+&nbsp;&nbsp;|&nbsp;&nbsp;本站访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
         
 

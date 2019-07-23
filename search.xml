@@ -654,7 +654,7 @@
   <entry>
     <title><![CDATA[[Err] 1235 - This version of MySQL doesn't yet support 'LIMIT & IN/ALL/ANY/SOME subquery']]></title>
     <url>%2F2019%2F01%2F21%2Ferr-1235-this-version-of-mysql-doesnt-yet-support-limit-in-all-any-some-subquery%2F</url>
-    <content type="text"><![CDATA[IN/ALL/ANY/SOME 的子查询中用了limit关键词无法执行 select * from table_example where id in (select t.id from table_example_b t limit 5) 这样执行会报错 [Err] 1235 - This version of MySQL doesn’t yet support ‘LIMIT &amp; IN/ALL/ANY/SOME subquery’ 只需要在in里面在包一层select即可解决问题 select * from table_example where id in (select t.id (select id from table_example_b limit 5) t)]]></content>
+    <content type="text"><![CDATA[IN/ALL/ANY/SOME 的子查询中用了limit关键词无法执行 1select * from table\_example where id in (select t.id from table\_example_b t limit 5) 这样执行会报错 1_\[Err\] 1235 - This version of MySQL doesn&apos;t yet support &apos;LIMIT &amp; IN/ALL/ANY/SOME subquery&apos;_ 只需要在in里面在包一层select即可解决问题 1select * from table\_example where id in (select t.id (select id from table\_example_b limit 5) t)]]></content>
       <categories>
         <category>mysql</category>
       </categories>
@@ -669,8 +669,8 @@
   </entry>
   <entry>
     <title><![CDATA[限制服务器用户登录]]></title>
-    <url>%2F2019%2F01%2F15%2Fe9-99-90-e5-88-b6-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-94-a8-e6-88-b7-e7-99-bb-e5-bd-95%2F</url>
-    <content type="text"><![CDATA[查看IP尝试登录次数脚本 cat /var/log/secure|awk ‘/Failed/{print $(NF-3)}’|sort|uniq -c|awk ‘{print $2” = “$1;}’ 直接查看尝试登录的日志 tail -fn500 /var/ogs/secure 限制某个ip的访问（编辑/etc/hosts.deny,添加限制IP信息） vim /etc/hosts.deny 限制192.168.11.112的访问 sshd:192.168.11.112 直接用通配符限制某个网段 sshd:192.168.1.* 限制登录次数 vim /etc/ssh/sshd_config 设置验证超过10次断开连接 MaxAuthTries=10]]></content>
+    <url>%2F2019%2F01%2F15%2F%E9%99%90%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[查看IP尝试登录次数脚本 1cat /var/log/secure|awk '/Failed/&#123;print $(NF-3)&#125;'|sort|uniq -c|awk '&#123;print $2" = "$1;&#125;' 直接查看尝试登录的日志 1tail -fn500 /var/ogs/secure 限制某个ip的访问（编辑/etc/hosts.deny,添加限制IP信息） 1vim /etc/hosts.deny 限制192.168.11.112的访问 1sshd:192.168.11.112 直接用通配符限制某个网段 1sshd:192.168.1.* 限制登录次数 1vim /etc/ssh/sshd_config 设置验证超过10次断开连接 1MaxAuthTries=10]]></content>
       <categories>
         <category>Linux</category>
         <category>Linux安全</category>
@@ -793,7 +793,7 @@
   </entry>
   <entry>
     <title><![CDATA[IDEA中使用Git管理项目]]></title>
-    <url>%2F2018%2F11%2F13%2Fgit-e7-bb-93-e5-90-88idea-e4-bd-bf-e7-94-a8%2F</url>
+    <url>%2F2018%2F11%2F13%2FIDEA%E4%B8%AD%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%2F</url>
     <content type="text"><![CDATA[菜单栏VCS→Checkout from Version Contorol→Git拉下版本库代码 菜单栏File→Open导入项目，并根据项目进行配置 右键项目如果没有git的选项需要加入版本库才可以提交代码，菜单栏VCS→Enable Version Control Integration如图选择Git，点击OK按钮 这时项目右键就有git选项 Commit Directory，具体如下图，可以直接Commit and push推送线上也可以先提交到本地库再Repository→Push]]></content>
       <categories>
         <category>Git</category>
@@ -802,8 +802,8 @@
   </entry>
   <entry>
     <title><![CDATA[Git拉取分支]]></title>
-    <url>%2F2018%2F11%2F12%2Fgit-e6-8b-89-e5-8f-96-e5-88-86-e6-94-af%2F</url>
-    <content type="text"><![CDATA[git clone 不指定分支https://example.com/account/service.git //默认拉master主分支的代码 git clone 指定分支git clone -b branch2 https://example.com/account/service.git 加上-b参数，后面跟上分支名，以上面为例，branch2就是另外一个分支]]></content>
+    <url>%2F2018%2F11%2F12%2FGit%E6%8B%89%E5%8F%96%E5%88%86%E6%94%AF%2F</url>
+    <content type="text"><![CDATA[git clone 不指定分支默认拉master主分支的代码 1https://example.com/account/service.git git clone 指定分支加上-b参数，后面跟上分支名，以上面为例，branch2就是另外一个分支 1git clone -b branch2 https://example.com/account/service.git]]></content>
       <categories>
         <category>Git</category>
       </categories>
@@ -874,7 +874,7 @@
   </entry>
   <entry>
     <title><![CDATA[线程安全性有序性]]></title>
-    <url>%2F2018%2F08%2F01%2Fe7-ba-bf-e7-a8-8b-e5-ae-89-e5-85-a8-e6-80-a7-e6-9c-89-e5-ba-8f-e6-80-a7%2F</url>
+    <url>%2F2018%2F08%2F01%2F%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7%E6%9C%89%E5%BA%8F%E6%80%A7%2F</url>
     <content type="text"><![CDATA[Java内存模型中，允许编译器和处理器对指令进行重排序，但是重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性 Java里面可以通过volatile、synchronized、Lock保证有序性 happens-before原则 程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作； 锁定规则：一个unLock操作先行发生于后面对同一个锁的lock操作 volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作 传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C 线程启动规则：Thread对象的start()方法先行发生于此线程的每个动作 线程中断原则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生 线程终结规则：线程中所有的操作都先行发生于现成的终止检测，我们可以通过Thread.join()方法结束、Thread。isAlive()的返回值手段检测到线程已经终止执行 对象终结原则：一个对象的初始化完成先行发生于他的finalize()方法的开始]]></content>
       <categories>
         <category>高并发</category>
@@ -882,7 +882,7 @@
   </entry>
   <entry>
     <title><![CDATA[线程可见性]]></title>
-    <url>%2F2018%2F07%2F31%2Fe7-ba-bf-e7-a8-8b-e5-8f-af-e8-a7-81-e6-80-a7%2F</url>
+    <url>%2F2018%2F07%2F31%2F%E7%BA%BF%E7%A8%8B%E5%8F%AF%E8%A7%81%E6%80%A7%2F</url>
     <content type="text"><![CDATA[导致共享变量在线程间不可见的原因 线程交叉执行 重排序结合线程交叉执行 共享变量更新后的值没有在工作内存和主内存直接即时更新 可见性synchronizedJMM（java内存模型）关于synchronized的两条规定： 线程解锁前，必须把共享变量的最新值刷新到主内存 线程加锁时，将清空工作内存中共享变量的值，从而使用共享变量时需要从主内存中重新读取最新的值（注意：加锁和解锁是通一把锁） volatile通过加入内存屏障和禁止重排序优化来实现对volatile变量写操作时，会在写操作后加入一条store屏障指令，将本地内存中的共享变量值刷新到主内存（每次线程访问volatile变量都会强迫从主内存读取变量值） volatile写操作会在volatile写操作之前加上StoreStore屏障禁止前面的普通写和后面的volatile写重排序， 会在Volatile写操作之后加上StoreLoad屏障，防止前面的volatile写与后面可能有的volatile读/写重排序。 对volatile变量读操作时，会在读操作前加入一条load屏障指令，从主内存中读取共享变量（volatile变量发生改变都会强迫线程刷新变量到主内存） volatile读操作会在volatile读操作和普通读操作中间加上LoadLoad屏障禁止后面的所有普通读操作和volatile读操作重排序； LoadStore屏障禁止后面的所有写操作和前面的volatile读操作重排序。]]></content>
       <categories>
         <category>高并发</category>
@@ -890,7 +890,7 @@
   </entry>
   <entry>
     <title><![CDATA[线程安全原子性对比]]></title>
-    <url>%2F2018%2F07%2F31%2Fe7-ba-bf-e7-a8-8b-e5-ae-89-e5-85-a8-e5-8e-9f-e5-ad-90-e6-80-a7-e5-af-b9-e6-af-94%2F</url>
+    <url>%2F2018%2F07%2F31%2F%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8E%9F%E5%AD%90%E6%80%A7%E5%AF%B9%E6%AF%94%2F</url>
     <content type="text"><![CDATA[synchronized：不可中断锁，适合竞争不激烈，可读性好 Lock：可中断锁。多样化同步，竞争激烈时能维持常态 Atomic：竞争激烈时能维持常态，比Lock性能好；只能同步一个值]]></content>
       <categories>
         <category>高并发</category>
@@ -970,7 +970,7 @@
   </entry>
   <entry>
     <title><![CDATA[工厂模式]]></title>
-    <url>%2F2018%2F07%2F04%2Fe8-ae-be-e8-ae-a1-e6-a8-a1-e5-bc-8f-e5-b7-a5-e5-8e-82-e6-a8-a1-e5-bc-8f%2F</url>
+    <url>%2F2018%2F07%2F04%2F%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式。 创建接口类public interface Animal { void sounds(); }实体类实现接口public class Dog implements Animal { @Override public void sounds() { System.out.println(&quot;狗叫汪汪&quot;); } } public class Cat implements Animal { @Override public void sounds() { System.out.println(&quot;猫叫喵喵&quot;); } }创建一个工厂类，根据传入的参数生成对应的对象public class AnimalFactory { public Animal getAnimal(String animal) { if (&quot;cat&quot;.equals(animal)) { return new Cat(); } if (&quot;dog&quot;.equals(animal)) { return new Dog(); } return null; } }测试类检验成果public class FactoryPatternDemo { public static void main(String[] args) { AnimalFactory animalFactory = new AnimalFactory(); Animal animal = animalFactory.getAnimal(&quot;cat&quot;); animal.sounds(); Animal animal2 = animalFactory.getAnimal(&quot;dog&quot;); animal2.sounds(); } }输出结果猫叫喵喵 狗叫汪汪]]></content>
       <categories>
         <category>设计模式</category>
@@ -1042,7 +1042,7 @@
   </entry>
   <entry>
     <title><![CDATA[Git常用命令速查表]]></title>
-    <url>%2F2018%2F05%2F31%2Fgit-e5-b8-b8-e7-94-a8-e5-91-bd-e4-bb-a4-e9-80-9f-e6-9f-a5-e8-a1-a8%2F</url>
+    <url>%2F2018%2F05%2F31%2FGit%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[]]></content>
       <categories>
         <category>Git</category>
@@ -1178,15 +1178,15 @@
   </entry>
   <entry>
     <title><![CDATA[find命令]]></title>
-    <url>%2F2018%2F04%2F12%2Ffind-e5-91-bd-e4-bb-a4%2F</url>
-    <content type="text"><![CDATA[find格式 find pathname -options选项（options） 含义 -name filename 查找名为filename的文件 -perm 按执行权限来查找 -user username 按文件属主来查找 -group groupname 按组来查找 -mtime -n +n 按文件更改时间来查找文件，-n指n天以内，+n指n天以前 -atime -n +n 按文件访问时间来查找文件，-n指n天以内，+n指n天以前 -ctime -n +n 按文件创建时间来查找文件，-n指n天以内，+n指n天以前 -nogroup 查无有效属组的文件，即文件的属组在/etc/groups中不存在 -nouser 查无有效属主的文件，即文件的属主在/etc/passwd中不存在 -newer f1 !f2 查更改时间比f1新但比f2旧的文件 -type b/d/c/p/l/f 查是块设备、目录、字符设备、管道、符号链接、普通文件 -size n[c] 查长度为n块[或n字节]的文件（1块=512byte，1024byte=1kb=2块） -depth 使查找在进入子目录前先行查找完本目录 -maxdepth n 查找包括当前目录加上当前目录子目录总共n层 -fstype 查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到 -mount 查文件时不跨越文件系统mount点 -follow 如果遇到符号链接文件，就跟踪链接所指的文件 -cpio 对匹配的文件使用cpio命令，将他们备份到磁带设备中 -prune 忽略某个目录，格式：find pathname -path ignorepath -prune -o [options] 举例说明： 查找“/usr/local/”目录下（包含子目录）所有以”.txt”结尾的文件 find /usr/local/ -name &quot;*.txt&quot;查找当前目录（包含子目录）以大写字母开头的文件 find -name &quot;[A-Z]*&quot;查找当前目录（包含子目录）以一个英文一个数字开头的txt文件 find . -name &quot;[a-z][0-9]*.txt&quot;查找当前目录（包含子目录）权限为755的文件 find -perm -755查找当前目录（包含一层子目录）所有txt文件；“2”表示当前目录和一层子目录两层目录 find -maxdepth 2 -name &quot;*.txt&quot;查找当前目录（不包含子目录）七天内创建的文件名为小写英文字母的所有文件 find -maxdepth 1 -ctime -7 -name &quot;[a-z]*&quot;查找当前目录（包含子目录）所有文件夹 find -type d查找当前目录（包含子目录）所有以小写字母“t”开头的文件夹 find -type d -name &quot;[t]*&quot;查找当前目录（包含子目录）所有以小写字母“a”或“b”或“c”开头的文件 find -type f -name &quot;[a-c]*&quot;查找当前目录（包含三层子目录）所有以小写字母“e”开头的文件 find -maxdepth 4 -name &quot;[e]*&quot; -type d查找当前目录（包含子目录）所有大于243字节的文件 find -size +243c查找当前目录（包含子目录）所有等于4096字节的 文件夹（-type d） find -type d -size 4096c查找当前目录（不包含子目录）所有大于“7块（1块=512字节）”的文件 find -maxdepth 1 -type f -size +7查找当前目录（不包含子目录）所有小于5k的文件 find -maxdepth 1 -type f -size -5k查找当前目录（不包含子目录）所有大于1M的文件 find -maxdepth 1 -type f -size +1M查找当前目录（不包含子目录）所有大于1G的文件 find -maxdepth 1 -type f -size +1G查找当前目录（不包含子目录）所有大于1M且小于266M的文件 find -maxdepth 1 -type f -size +1M -size -266M查找 /usr 目录下除了 /usr/lib 目录所有的以小写字母“e”开头的txt文件 find /usr/ -path /usr/lib -prune -o -name &quot;[e]*.txt&quot;]]></content>
+    <url>%2F2018%2F04%2F12%2Ffind%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[find格式 1find pathname -options 选项（options） 含义 -name filename 查找名为filename的文件 -perm 按执行权限来查找 -user username 按文件属主来查找 -group groupname 按组来查找 -mtime -n +n 按文件更改时间来查找文件，-n指n天以内，+n指n天以前 -atime -n +n 按文件访问时间来查找文件，-n指n天以内，+n指n天以前 -ctime -n +n 按文件创建时间来查找文件，-n指n天以内，+n指n天以前 -nogroup 查无有效属组的文件，即文件的属组在/etc/groups中不存在 -nouser 查无有效属主的文件，即文件的属主在/etc/passwd中不存在 -newer f1 !f2 查更改时间比f1新但比f2旧的文件 -type b/d/c/p/l/f 查是块设备、目录、字符设备、管道、符号链接、普通文件 -size n[c] 查长度为n块[或n字节]的文件（1块=512byte，1024byte=1kb=2块） -depth 使查找在进入子目录前先行查找完本目录 -maxdepth n 查找包括当前目录加上当前目录子目录总共n层 -fstype 查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到 -mount 查文件时不跨越文件系统mount点 -follow 如果遇到符号链接文件，就跟踪链接所指的文件 -cpio 对匹配的文件使用cpio命令，将他们备份到磁带设备中 -prune 忽略某个目录，格式：find pathname -path ignorepath -prune -o [options] 举例说明： 查找/usr/local/目录下（包含子目录）所有以.txt结尾的文件 1find /usr/local/ -name "*.txt" 查找当前目录（包含子目录）以大写字母开头的文件 1find -name "[A-Z]*" 查找当前目录（包含子目录）以一个英文一个数字开头的txt文件 1find . -name "[a-z][0-9]*.txt" 查找当前目录（包含子目录）权限为755的文件 1find -perm -755 查找当前目录（包含一层子目录）所有txt文件；“2”表示当前目录和一层子目录两层目录 1find -maxdepth 2 -name "*.txt" 查找当前目录（不包含子目录）七天内创建的文件名为小写英文字母的所有文件 1find -maxdepth 1 -ctime -7 -name "[a-z]*" 查找当前目录（包含子目录）所有文件夹 1find -type d 查找当前目录（包含子目录）所有以小写字母t开头的文件夹 1find -type d -name "[t]*" 查找当前目录（包含子目录）所有以小写字母a或b或c开头的文件 1find -type f -name "[a-c]*" 查找当前目录（包含三层子目录）所有以小写字母e开头的文件 1find -maxdepth 4 -name "[e]*" -type d 查找当前目录（包含子目录）所有大于243字节的文件 1find -size +243c 查找当前目录（包含子目录）所有等于4096字节的 文件夹（-type d） 1find -type d -size 4096c 查找当前目录（不包含子目录）所有大于7块（1块=512字节）的文件 1find -maxdepth 1 -type f -size +7 查找当前目录（不包含子目录）所有小于5k的文件 1find -maxdepth 1 -type f -size -5k 查找当前目录（不包含子目录）所有大于1M的文件 1find -maxdepth 1 -type f -size +1M 查找当前目录（不包含子目录）所有大于1G的文件 1find -maxdepth 1 -type f -size +1G 查找当前目录（不包含子目录）所有大于1M且小于266M的文件 1find -maxdepth 1 -type f -size +1M -size -266M 查找 /usr 目录下除了 /usr/lib 目录所有的以小写字母e开头的txt文件 1find /usr/ -path /usr/lib -prune -o -name "[e]*.txt"]]></content>
       <categories>
         <category>Linux命令</category>
       </categories>
   </entry>
   <entry>
     <title><![CDATA[阿里fastjson的基础使用]]></title>
-    <url>%2F2018%2F04%2F10%2Fe9-98-bf-e9-87-8cfastjson-e7-9a-84-e5-9f-ba-e7-a1-80-e4-bd-bf-e7-94-a8%2F</url>
+    <url>%2F2018%2F04%2F10%2F%E9%98%BF%E9%87%8Cfastjson%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[实体类或集合转JSONString jsonString = JSONObject.toJSONString(实体类);JSON转JSONObjectJSONObject jsonObject = JSONObject.parseObject(jsonString);JSON转实体类实体类 javaBean = JSON.parseObject(json, 实体类.class);JSON转带泛型的List的集合List&lt;T&gt; list = JSON.parseObject(json, new TypeReference&lt;List&lt;T&gt;&gt;(){});]]></content>
       <categories>
         <category>Java</category>
@@ -1334,14 +1334,6 @@
     <title><![CDATA[Windows10无法更新]]></title>
     <url>%2F2018%2F02%2F01%2FWindows10%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0%2F</url>
     <content type="text"><![CDATA[更新时提示：你的设备已过期，并缺少重要的安全和质量更新，因此存在风险。让我们带你重回正轨，这样 Windows 可以更安全地运行。选择此按钮继续操作: 解决办法：右键此电脑选择管理，选择服务和应用程序，在服务项里找到Windows Update服务选择停止然后把手动项选择禁用，然后把C盘Windows目录下SoftwareDistribution文件夹里的东西都删除，重启系统然后再在服务里找到Windows Update服务启用再检查更新应该就可以了]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[FinalSpeed]]></title>
-    <url>%2F2018%2F01%2F31%2Ffinalspeed%2F</url>
-    <content type="text"><![CDATA[FinalSpeedFinalSpeed是高速双边加速软件,可加速所有基于tcp协议的网络服务,在高丢包和高延迟环境下,仍可达到90%的物理带宽利用率,即使高峰时段也能轻松跑满带宽. 安装教程客户端安装说明 服务端安装说明 说明finalspeed作者开始卖收费版了，所以停止了免费版的更新，并且删除了所有代码。不过还好我fork了一份。。作为Openvz的救星，还是有不少人对finalspeed有需求的。所以我就做了这个一键安装包。 这个一键安装包完全重写了作者原来的安装代码，启动，停止代码。并加入了服务，可以使用 service finalspeed star | stop 来控制，加入了开机启动启动。总之，你需要做的就是真正的一键。一键安装包安装的服务器端版本为1.2.需要1.0的自行到github下载。欢迎大家测试，有问题及时留言给我。 github地址：https://github.com/91yun/finalspeed github里也有服务器端和客户端的文件。大家有需求可以自行去下载。 一键安装代码：wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/finalspeed/master/install_fs.sh &amp;&amp; bash install_fs.sh###一键卸载代码 wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/finalspeed/master/install_fs.sh &amp;&amp; bash install_fs.sh uninstallfinalspeed操作命令启动： /etc/init.d/finalspeed start 停止命令：/etc/init.d/finalspeed stop 状态命令（查看日志）：/etc/init.d/finalspeed status finalspeed安装路径安装路径： /fs/ 日志路径：/fs/server.log]]></content>
       <categories>
         <category>其他</category>
       </categories>
@@ -1536,8 +1528,8 @@
   </entry>
   <entry>
     <title><![CDATA[emmet使用手册]]></title>
-    <url>%2F2017%2F12%2F13%2Femmet-e4-bd-bf-e7-94-a8-e6-89-8b-e5-86-8c%2F</url>
-    <content type="text"><![CDATA[截取自emmet官网：https://docs.emmet.io/abbreviations/syntax/详情可去官网查看 Child:&gt;You can use&gt;operator to nest elements inside each other: div&gt;ul&gt;li…will produce &lt;div&gt; &lt;ul&gt; &lt;li&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt;Sibling:+Use+operator to place elements near each other, on the same level: div+p+bq…will output &lt;div&gt;&lt;/div&gt; &lt;p&gt;&lt;/p&gt; &lt;blockquote&gt;&lt;/blockquote&gt;Climb-up:^With&gt;operator you’re descending down the generated tree and positions of all sibling elements will be resolved against the most deepest element: div+div&gt;p&gt;span+em …will be expanded to &lt;div&gt;&lt;/div&gt; &lt;div&gt; &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt; &lt;/div&gt;With^operator, you can climb one level up the tree and change context where following elements should appear: div+div&gt;p&gt;span+em^bq…outputs to &lt;div&gt;&lt;/div&gt; &lt;div&gt; &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt; &lt;blockquote&gt;&lt;/blockquote&gt; &lt;/div&gt;You can use as many^operators as you like, each operator will move one level up: div+div&gt;p&gt;span+em^^^bq…will output to &lt;div&gt;&lt;/div&gt; &lt;div&gt; &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt; &lt;/div&gt; &lt;blockquote&gt;&lt;/blockquote&gt;Multiplication:*With*operator you can define how many times element should be outputted: ul&gt;li*5…outputs to &lt;ul&gt; &lt;li&gt;&lt;/li&gt; &lt;li&gt;&lt;/li&gt; &lt;li&gt;&lt;/li&gt; &lt;li&gt;&lt;/li&gt; &lt;li&gt;&lt;/li&gt; &lt;/ul&gt;Grouping:()Parenthesises are used by Emmets’ power users for grouping subtrees in complex abbreviations: div&gt;(header&gt;ul&gt;li*2&gt;a)+footer&gt;p…expands to &lt;div&gt; &lt;header&gt; &lt;ul&gt; &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/header&gt; &lt;footer&gt; &lt;p&gt;&lt;/p&gt; &lt;/footer&gt; &lt;/div&gt;If you’re working with browser’s DOM, you may think of groups as Document Fragments: each group contains abbreviation subtree and all the following elements are inserted at the same level as the first element of group. You can nest groups inside each other and combine them with multiplication*operator: (div&gt;dl&gt;(dt+dd)*3)+footer&gt;p…produces &lt;div&gt; &lt;dl&gt; &lt;dt&gt;&lt;/dt&gt; &lt;dd&gt;&lt;/dd&gt; &lt;dt&gt;&lt;/dt&gt; &lt;dd&gt;&lt;/dd&gt; &lt;dt&gt;&lt;/dt&gt; &lt;dd&gt;&lt;/dd&gt; &lt;/dl&gt; &lt;/div&gt; &lt;footer&gt; &lt;p&gt;&lt;/p&gt; &lt;/footer&gt;With groups, you can literally write full page mark-up with a single abbreviation, but please don’t do that. Attribute operatorsAttribute operators are used to modify attributes of outputted elements. For example, in HTML and XML you can quickly addclassattribute to generated element. ID and CLASSIn CSS, you useelem#idandelem.classnotation to reach the elements with specifiedidorclassattributes. In Emmet, you can use the very same syntax to_add_these attributes to specified element: div#header+div.page+div#footer.class1.class2.class3…will output &lt;div id=&quot;header&quot;&gt;&lt;/div&gt; &lt;div class=&quot;page&quot;&gt;&lt;/div&gt; &lt;div id=&quot;footer&quot; class=&quot;class1 class2 class3&quot;&gt;&lt;/div&gt;Custom attributesYou can use[attr]notation (as in CSS) to add custom attributes to your element: td[title=&quot;Hello world!&quot; colspan=3]…outputs &lt;td title=&quot;Hello world!&quot; colspan=&quot;3&quot;&gt;&lt;/td&gt; You can place as many attributes as you like inside square brackets. You don’t have to specify attribute values:td[colspan title]will produce&lt;td colspan=&quot;&quot; title=&quot;&quot;&gt;with tabstops inside each empty attribute (if your editor supports them). You can use single or double quotes for quoting attribute values. You don’t need to quote values if they don’t contain spaces:td[title=hello colspan=3]will work. Item numbering:$With multiplication*operator you can repeat elements, but with$you can_number_them. Place$operator inside element’s name, attribute’s name or attribute’s value to output current number of repeated element: ul&gt;li.item$*5…outputs to &lt;ul&gt; &lt;li class=&quot;item1&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item2&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt; &lt;/ul&gt;You can use multiple$in a row to pad number with zeroes: ul&gt;li.item$$$*5…outputs to &lt;ul&gt; &lt;li class=&quot;item001&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item002&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item003&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item004&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item005&quot;&gt;&lt;/li&gt; &lt;/ul&gt;Changing numbering base and directionWith@modifier, you can change numbering direction (ascending or descending) and base (e.g. start value). For example, to change direction, add@-after$: ul&gt;li.item$@-*5…outputs to &lt;ul&gt; &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item2&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item1&quot;&gt;&lt;/li&gt; &lt;/ul&gt;To change counter base value, add@Nmodifier to$: ul&gt;li.item$@3*5…transforms to &lt;ul&gt; &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item6&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item7&quot;&gt;&lt;/li&gt; &lt;/ul&gt;You can use these modifiers together: ul&gt;li.item$@-3*5…is transformed to &lt;ul&gt; &lt;li class=&quot;item7&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item6&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item5&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item4&quot;&gt;&lt;/li&gt; &lt;li class=&quot;item3&quot;&gt;&lt;/li&gt; &lt;/ul&gt;Text:{}You can use curly braces to add text to element: a{Click me}…will produce &lt;a href=&quot;&quot;&gt;Click me&lt;/a&gt;Note that{text}is used and parsed as a separate element (like,div,petc.) but has a special meaning when written right after element. For example,a{click}anda&gt;{click}will produce the same output, buta{click}+b{here}anda&gt;{click}+b{here}won’t: &lt;!-- a{click}+b{here} --&gt; &lt;a href=&quot;&quot;&gt;click&lt;/a&gt;&lt;b&gt;here&lt;/b&gt; &lt;!-- a&gt;{click}+b{here} --&gt; &lt;a href=&quot;&quot;&gt;click&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;In second example the&lt;b&gt;element is placed_inside_&lt;a&gt;element. And that’s the difference: when{text}is written right after element, it doesn’t change parent context. Here’s more complex example showing why it is important: p&gt;{Click }+a{here}+{ to continue}…produces &lt;p&gt;Click &lt;a href=&quot;&quot;&gt;here&lt;/a&gt; to continue&lt;/p&gt;In this example, to writeClick here to continueinside&lt;p&gt;element we have explicitly move down the tree with&gt;operator afterp, but in case ofaelement we don’t have to, since we need&lt;a&gt;element withhereword only, without changing parent context. For comparison, here’s the same abbreviation written without child&gt;operator: p{Click }+a{here}+{ to continue}…produces &lt;p&gt;Click &lt;/p&gt; &lt;a href=&quot;&quot;&gt;here&lt;/a&gt; to continueNotes on abbreviation formattingWhen you get familiar with Emmet’s abbreviations syntax, you may want to use some formatting to make your abbreviations more readable. For example, use spaces between elements and operators, like this: (header &gt; ul.nav &gt; li*5) + footerBut it won’t work, because space is a_stop symbol_where Emmet stops abbreviation parsing.]]></content>
+    <url>%2F2017%2F12%2F13%2Femmet%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%2F</url>
+    <content type="text"><![CDATA[截取自emmet官网：https://docs.emmet.io/abbreviations/syntax/详情可去[官网](https://docs.emmet.io/abbreviations/syntax/)查看 Child: &gt;You can use 1div&gt;ul&gt;li …will produce 12345&lt;div&gt; &lt;ul&gt; &lt;li&gt;li&gt; ul&gt;div&gt; Sibling: +Use 1div+p+bq …will output 123&lt;div&gt;div&gt;&lt;p&gt;p&gt;&lt;blockquote&gt;blockquote&gt; Climb-up: ^With 1div+div&gt;p&gt;span+em …will be expanded to 1234&lt;div&gt;div&gt;&lt;div&gt; &lt;p&gt;&lt;span&gt;span&gt;&lt;em&gt;em&gt;p&gt;div&gt; With 1div+div&gt;p&gt;span+em^bq …outputs to 12345&lt;div&gt;div&gt;&lt;div&gt; &lt;p&gt;&lt;span&gt;span&gt;&lt;em&gt;em&gt;p&gt; &lt;blockquote&gt;blockquote&gt;div&gt; You can use as many 1div+div&gt;p&gt;span+em^^^bq …will output to 12345&lt;div&gt;div&gt;&lt;div&gt; &lt;p&gt;&lt;span&gt;span&gt;&lt;em&gt;em&gt;p&gt;div&gt;&lt;blockquote&gt;blockquote&gt; Multiplication: *With 1ul&gt;li*5 …outputs to 1234567&lt;ul&gt; &lt;li&gt;li&gt; &lt;li&gt;li&gt; &lt;li&gt;li&gt; &lt;li&gt;li&gt; &lt;li&gt;li&gt;ul&gt; Grouping: ()Parenthesises are used by Emmets’ power users for grouping subtrees in complex abbreviations: 1div&gt;(header&gt;ul&gt;li*2&gt;a)+footer&gt;p …expands to 1234567891011&lt;div&gt; &lt;header&gt; &lt;ul&gt; &lt;li&gt;&lt;a href=&quot;&quot;&gt;a&gt;li&gt; &lt;li&gt;&lt;a href=&quot;&quot;&gt;a&gt;li&gt; ul&gt; header&gt; &lt;footer&gt; &lt;p&gt;p&gt; footer&gt;div&gt; If you’re working with browser’s DOM, you may think of groups as Document Fragments: each group contains abbreviation subtree and all the following elements are inserted at the same level as the first element of group. You can nest groups inside each other and combine them with multiplication * operator: 1(div&gt;dl&gt;(dt+dd)*3)+footer&gt;p …produces 12345678910111213&lt;div&gt; &lt;dl&gt; &lt;dt&gt;dt&gt; &lt;dd&gt;dd&gt; &lt;dt&gt;dt&gt; &lt;dd&gt;dd&gt; &lt;dt&gt;dt&gt; &lt;dd&gt;dd&gt; dl&gt;div&gt;&lt;footer&gt; &lt;p&gt;p&gt;footer&gt; With groups, you can literally write full page mark-up with a single abbreviation, but please don’t do that. Attribute operatorsAttribute operators are used to modify attributes of outputted elements. For example, in HTML and XML you can quickly add ID and CLASSIn CSS, you use 1div#header+div.page+div#footer.class1.class2.class3 …will output 123&lt;div id=&quot;header&quot;&gt;div&gt;&lt;div class=&quot;page&quot;&gt;div&gt;&lt;div id=&quot;footer&quot; class=&quot;class1 class2 class3&quot;&gt;div&gt; Custom attributesYou can use 1td[title=&quot;Hello world!&quot; colspan=3] …outputs 1&lt;td title=&quot;Hello world!&quot; colspan=&quot;3&quot;&gt;td&gt; You can place as many attributes as you like inside square brackets. You don’t have to specify attribute values: td[colspan title] will produce ``with tabstops inside each empty attribute (if your editor supports them). You can use single or double quotes for quoting attribute values. You don’t need to quote values if they don’t contain spaces: td[title=hello colspan=3] will work. Item numbering: $With multiplication 1ul&gt;li.item$*5 …outputs to 1234567&lt;ul&gt; &lt;li class=&quot;item1&quot;&gt;li&gt; &lt;li class=&quot;item2&quot;&gt;li&gt; &lt;li class=&quot;item3&quot;&gt;li&gt; &lt;li class=&quot;item4&quot;&gt;li&gt; &lt;li class=&quot;item5&quot;&gt;li&gt;ul&gt; You can use multiple 1ul&gt;li.item$$$*5 …outputs to 1234567&lt;ul&gt; &lt;li class=&quot;item001&quot;&gt;li&gt; &lt;li class=&quot;item002&quot;&gt;li&gt; &lt;li class=&quot;item003&quot;&gt;li&gt; &lt;li class=&quot;item004&quot;&gt;li&gt; &lt;li class=&quot;item005&quot;&gt;li&gt;ul&gt; Changing numbering base and directionWith For example, to change direction, add @- after $: 1ul&gt;li.item$@-*5 …outputs to 1234567&lt;ul&gt; &lt;li class=&quot;item5&quot;&gt;li&gt; &lt;li class=&quot;item4&quot;&gt;li&gt; &lt;li class=&quot;item3&quot;&gt;li&gt; &lt;li class=&quot;item2&quot;&gt;li&gt; &lt;li class=&quot;item1&quot;&gt;li&gt;ul&gt; To change counter base value, add @N modifier to $: 1ul&gt;li.item$@3*5 …transforms to 1234567&lt;ul&gt; &lt;li class=&quot;item3&quot;&gt;li&gt; &lt;li class=&quot;item4&quot;&gt;li&gt; &lt;li class=&quot;item5&quot;&gt;li&gt; &lt;li class=&quot;item6&quot;&gt;li&gt; &lt;li class=&quot;item7&quot;&gt;li&gt;ul&gt; You can use these modifiers together: 1ul&gt;li.item$@-3*5 …is transformed to 1234567&lt;ul&gt; &lt;li class=&quot;item7&quot;&gt;li&gt; &lt;li class=&quot;item6&quot;&gt;li&gt; &lt;li class=&quot;item5&quot;&gt;li&gt; &lt;li class=&quot;item4&quot;&gt;li&gt; &lt;li class=&quot;item3&quot;&gt;li&gt;ul&gt; Text: {}You can use curly braces to add text to element: 1a&#123;Click me&#125; …will produce 1&lt;a href=&quot;&quot;&gt;Click mea&gt; Note that ,petc.) but has a special meaning when written right after element. For example,a{click}anda&gt;{click}will produce the same output, buta{click}+b{here}anda&gt;{click}+b{here}won’t: element is placed inside element. And that’s the difference: when {text} is written right after element, it doesn’t change parent context. Here’s more complex example showing why it is important:p&gt;{Click }+a{here}+{ to continue} …producesClick herea&gt; to continuep&gt; In this example, to write Click here to continue inside element we have explicitly move down the tree with &gt; operator after p, but in case of aelement we don’t have to, since we need element with here word only, without changing parent context.For comparison, here’s the same abbreviation written without child &gt; operator:p{Click }+a{here}+{ to continue} …producesClick p&gt; herea&gt; to continue Notes on abbreviation formattingWhen you get familiar with Emmet’s abbreviations syntax, you may want to use some formatting to make your abbreviations more readable. For example, use spaces between elements and operators, like this:(header &gt; ul.nav &gt; li*5) + footer But it won’t work, because space is a stop symbol where Emmet stops abbreviation parsing.]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
@@ -1576,7 +1568,7 @@
   </entry>
   <entry>
     <title><![CDATA[阿里Java开发手册摘录]]></title>
-    <url>%2F2017%2F12%2F07%2Fe9-98-bf-e9-87-8cjava-e5-bc-80-e5-8f-91-e6-89-8b-e5-86-8c-e6-91-98-e5-bd-95%2F</url>
+    <url>%2F2017%2F12%2F07%2F%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%E6%91%98%E5%BD%95%2F</url>
     <content type="text"><![CDATA[循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。 说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。 反例： String str = “start”; for (int i = 0; i &lt; 100; i++) { str = str + “hello”; }]]></content>
       <categories>
         <category>Java</category>
@@ -1616,8 +1608,8 @@
   </entry>
   <entry>
     <title><![CDATA[flushdns命令]]></title>
-    <url>%2F2017%2F12%2F01%2Fflushdns-e5-91-bd-e4-bb-a4%2F</url>
-    <content type="text"><![CDATA[电脑突然上不了网，或者有些网站能打开，有些网站打不开。对于这种情况很多是DNS缓存延时导致。解决办法需要清除DNS缓存，清空DNS缓存命令为：ipconfig/flushdns。 另外可以输入ipconfig/displaydns命令，用于查看本机已经缓存了的DNS信息。]]></content>
+    <url>%2F2017%2F12%2F01%2Fflushdns%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[问题描述：Windows系统电脑突然上不了网，或者有些网站能打开，有些网站打不开。 可能原因：很有可能是DNS缓存延时导致的 解决办法：需要清除DNS缓存，清空DNS缓存命令为： 1ipconfig/flushdns 另外可以使用如下命令，用于查看本机已经缓存了的DNS信息 1ipconfig/displaydns]]></content>
       <categories>
         <category>其他</category>
       </categories>
@@ -1858,8 +1850,8 @@
   </entry>
   <entry>
     <title><![CDATA[equals使用的注意点]]></title>
-    <url>%2F2017%2F03%2F21%2Fequals-e4-bd-bf-e7-94-a8-e7-9a-84-e6-b3-a8-e6-84-8f-e7-82-b9%2F</url>
-    <content type="text"><![CDATA[equals左边不能为null否则会报空指针异常，如果在不确定equals左边参数的值是否为null的情况下，最好能够谨慎一点，多加判断，以保证程序的健壮。 下面的代码执行会直接报空指针异常 String s = null;if(s.equals(“”)){} 优化一下,这样在执行&amp;&amp;左边第一个判断的时候直接false，&amp;&amp;后面的代码将不再进行运算，这样就不会报空指针异常了（这里使用了org.apache.commons.lang3的StringUtils类用作非null值判断，返回boolean值） String s = null;if(StringUtils.isNotEmpty(s)&amp;&amp;s.equals(“”)){}]]></content>
+    <url>%2F2017%2F03%2F21%2Fequals%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[equals左边不能为null否则会报空指针异常，如果在不确定equals左边参数的值是否为null的情况下，最好能够谨慎一点，多加判断，以保证程序的健壮。 下面的代码执行会直接报空指针异常 12String s = null;if(s.equals(""))&#123;&#125; 优化一下,这样在执行&amp;&amp;左边第一个判断的时候直接false，&amp;&amp;后面的代码将不再进行运算，这样就不会报空指针异常了（这里使用了org.apache.commons.lang3的StringUtils类用作非null值判断，返回boolean值） 12String s = null;if(StringUtils.isNotEmpty(s)&amp;&amp;s.equals(""))&#123;&#125;]]></content>
       <categories>
         <category>java基础</category>
       </categories>

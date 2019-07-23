@@ -94,17 +94,17 @@
 
 
 
-  <meta name="description" content="git clone 不指定分支https://example.com/account/service.git   //默认拉master主分支的代码 git clone 指定分支git clone -b branch2 https://example.com/account/service.git 加上-b参数，后面跟上分支名，以上面为例，branch2就是另外一个分支">
+  <meta name="description" content="循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。 说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。 反例： String str = “start”; for (int i = 0; i &amp;lt; 10">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git拉取分支">
-<meta property="og:url" content="http://blog.oeteo.cn/2018/11/12/git-e6-8b-89-e5-8f-96-e5-88-86-e6-94-af/index.html">
+<meta property="og:title" content="阿里Java开发手册摘录">
+<meta property="og:url" content="http://blog.oeteo.cn/2017/12/07/阿里Java开发手册摘录/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="git clone 不指定分支https://example.com/account/service.git   //默认拉master主分支的代码 git clone 指定分支git clone -b branch2 https://example.com/account/service.git 加上-b参数，后面跟上分支名，以上面为例，branch2就是另外一个分支">
+<meta property="og:description" content="循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。 说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。 反例： String str = “start”; for (int i = 0; i &amp;lt; 10">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.170Z">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.167Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git拉取分支">
-<meta name="twitter:description" content="git clone 不指定分支https://example.com/account/service.git   //默认拉master主分支的代码 git clone 指定分支git clone -b branch2 https://example.com/account/service.git 加上-b参数，后面跟上分支名，以上面为例，branch2就是另外一个分支">
+<meta name="twitter:title" content="阿里Java开发手册摘录">
+<meta name="twitter:description" content="循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。 说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。 反例： String str = “start”; for (int i = 0; i &amp;lt; 10">
 
 
 
@@ -112,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2018/11/12/git-e6-8b-89-e5-8f-96-e5-88-86-e6-94-af/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2017/12/07/阿里Java开发手册摘录/">
 
 
 
@@ -122,7 +122,7 @@
   };
 </script>
 
-  <title>Git拉取分支 | doeat's blog</title>
+  <title>阿里Java开发手册摘录 | doeat's blog</title>
   
 
 
@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/11/12/git-e6-8b-89-e5-8f-96-e5-88-86-e6-94-af/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2017/12/07/阿里Java开发手册摘录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +390,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Git拉取分支
+          <h2 class="post-title" itemprop="name headline">阿里Java开发手册摘录
 
               
             
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2018-11-12 17:48:35" itemprop="dateCreated datePublished" datetime="2018-11-12T17:48:35+08:00">2018-11-12</time>
+              <time title="创建时间：2017-12-07 07:58:43" itemprop="dateCreated datePublished" datetime="2017-12-07T07:58:43+08:00">2017-12-07</time>
             </span>
           
 
@@ -445,7 +445,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -483,9 +483,7 @@
       
 
       
-        <h4 id="git-clone-不指定分支"><a href="#git-clone-不指定分支" class="headerlink" title="git clone 不指定分支"></a>git clone 不指定分支</h4><p><a href="https://example.com/account/service.git" target="_blank" rel="noopener">https://example.com/account/service.git</a>   //默认拉master主分支的代码</p>
-<h4 id="git-clone-指定分支"><a href="#git-clone-指定分支" class="headerlink" title="git clone 指定分支"></a>git clone 指定分支</h4><p>git clone -b branch2 <a href="https://example.com/account/service.git" target="_blank" rel="noopener">https://example.com/account/service.git</a></p>
-<p>加上-b参数，后面跟上分支名，以上面为例，branch2就是另外一个分支</p>
+        <p>循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。 说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行 append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。 反例： String str = “start”; for (int i = 0; i &lt; 100; i++) { str = str + “hello”; }</p>
 
       
     </div>
@@ -516,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/09/mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用/" rel="next" title="mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用">
-                <i class="fa fa-chevron-left"></i> mysql字符串拼接函数CONCAT()、CONCAT_WS()、GROUP_CONCAT()的使用
+              <a href="/2017/12/05/ios微信扫描二维码跳转App Store/" rel="next" title="ios微信扫描二维码跳转App Store">
+                <i class="fa fa-chevron-left"></i> ios微信扫描二维码跳转App Store
               </a>
             
           </div>
@@ -526,8 +524,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/13/git-e7-bb-93-e5-90-88idea-e4-bd-bf-e7-94-a8/" rel="prev" title="IDEA中使用Git管理项目">
-                IDEA中使用Git管理项目 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/08/vi编辑器的三种模式/" rel="prev" title="vi编辑器的三种模式">
+                vi编辑器的三种模式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -572,17 +570,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -599,7 +588,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-count">226</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -784,23 +773,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-clone-不指定分支"><span class="nav-number">1.</span> <span class="nav-text">git clone 不指定分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-clone-指定分支"><span class="nav-number">2.</span> <span class="nav-text">git clone 指定分支</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

@@ -94,17 +94,24 @@
 
 
 
-  <meta name="description" content="find格式 find pathname -options选项（options） 含义 -name filename 查找名为filename的文件 -perm 按执行权限来查找 -user username 按文件属主来查找 -group groupname 按组来查找 -mtime -n +n 按文件更改时间来查找文件，-n指n天以内，+n指n天以前 -atime -n +n 按文件访问时间来">
+  <meta name="description" content="菜单栏VCS→Checkout from Version Contorol→Git拉下版本库代码   菜单栏File→Open导入项目，并根据项目进行配置   右键项目如果没有git的选项需要加入版本库才可以提交代码，菜单栏VCS→Enable Version Control Integration如图选择Git，点击OK按钮     这时项目右键就有git选项    Commit Directo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="find命令">
-<meta property="og:url" content="http://blog.oeteo.cn/2018/04/12/find-e5-91-bd-e4-bb-a4/index.html">
+<meta property="og:title" content="IDEA中使用Git管理项目">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/11/13/IDEA中使用Git管理项目/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="find格式 find pathname -options选项（options） 含义 -name filename 查找名为filename的文件 -perm 按执行权限来查找 -user username 按文件属主来查找 -group groupname 按组来查找 -mtime -n +n 按文件更改时间来查找文件，-n指n天以内，+n指n天以前 -atime -n +n 按文件访问时间来">
+<meta property="og:description" content="菜单栏VCS→Checkout from Version Contorol→Git拉下版本库代码   菜单栏File→Open导入项目，并根据项目进行配置   右键项目如果没有git的选项需要加入版本库才可以提交代码，菜单栏VCS→Enable Version Control Integration如图选择Git，点击OK按钮     这时项目右键就有git选项    Commit Directo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.168Z">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/1-5.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/2-2.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/1-6.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/2-3.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/1-7.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/2-4.png">
+<meta property="og:updated_time" content="2019-07-23T02:44:59.935Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="find命令">
-<meta name="twitter:description" content="find格式 find pathname -options选项（options） 含义 -name filename 查找名为filename的文件 -perm 按执行权限来查找 -user username 按文件属主来查找 -group groupname 按组来查找 -mtime -n +n 按文件更改时间来查找文件，-n指n天以内，+n指n天以前 -atime -n +n 按文件访问时间来">
+<meta name="twitter:title" content="IDEA中使用Git管理项目">
+<meta name="twitter:description" content="菜单栏VCS→Checkout from Version Contorol→Git拉下版本库代码   菜单栏File→Open导入项目，并根据项目进行配置   右键项目如果没有git的选项需要加入版本库才可以提交代码，菜单栏VCS→Enable Version Control Integration如图选择Git，点击OK按钮     这时项目右键就有git选项    Commit Directo">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2018/11/1-5.png">
 
 
 
@@ -112,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2018/04/12/find-e5-91-bd-e4-bb-a4/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/11/13/IDEA中使用Git管理项目/">
 
 
 
@@ -122,7 +129,7 @@
   };
 </script>
 
-  <title>find命令 | doeat's blog</title>
+  <title>IDEA中使用Git管理项目 | doeat's blog</title>
   
 
 
@@ -373,7 +380,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/04/12/find-e5-91-bd-e4-bb-a4/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/11/13/IDEA中使用Git管理项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +397,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">find命令
+          <h2 class="post-title" itemprop="name headline">IDEA中使用Git管理项目
 
               
             
@@ -416,7 +423,7 @@
                 
               
 
-              <time title="创建时间：2018-04-12 13:54:52" itemprop="dateCreated datePublished" datetime="2018-04-12T13:54:52+08:00">2018-04-12</time>
+              <time title="创建时间：2018-11-13 10:00:52" itemprop="dateCreated datePublished" datetime="2018-11-13T10:00:52+08:00">2018-11-13</time>
             </span>
           
 
@@ -431,7 +438,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-07-23 10:44:59" itemprop="dateModified" datetime="2019-07-23T10:44:59+08:00">2019-07-23</time>
               </span>
             
           
@@ -445,7 +452,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux命令/" itemprop="url" rel="index"><span itemprop="name">Linux命令</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
 
                 
                 
@@ -483,66 +497,18 @@
       
 
       
-        <p>find格式</p>
-<pre><code>find pathname -options</code></pre><p>选项（options）</p>
-<p>含义</p>
-<p>-name filename</p>
-<p>查找名为filename的文件</p>
-<p>-perm</p>
-<p>按执行权限来查找</p>
-<p>-user username</p>
-<p>按文件属主来查找</p>
-<p>-group groupname</p>
-<p>按组来查找</p>
-<p>-mtime -n +n</p>
-<p>按文件更改时间来查找文件，-n指n天以内，+n指n天以前</p>
-<p>-atime -n +n</p>
-<p>按文件访问时间来查找文件，-n指n天以内，+n指n天以前</p>
-<p>-ctime -n +n</p>
-<p>按文件创建时间来查找文件，-n指n天以内，+n指n天以前</p>
-<p>-nogroup</p>
-<p>查无有效属组的文件，即文件的属组在/etc/groups中不存在</p>
-<p>-nouser</p>
-<p>查无有效属主的文件，即文件的属主在/etc/passwd中不存在</p>
-<p>-newer f1 !f2</p>
-<p>查更改时间比f1新但比f2旧的文件</p>
-<p>-type b/d/c/p/l/f</p>
-<p>查是块设备、目录、字符设备、管道、符号链接、普通文件</p>
-<p>-size n[c]</p>
-<p>查长度为n块[或n字节]的文件（1块=512byte，1024byte=1kb=2块）</p>
-<p>-depth</p>
-<p>使查找在进入子目录前先行查找完本目录</p>
-<p>-maxdepth n</p>
-<p>查找包括当前目录加上当前目录子目录总共n层</p>
-<p>-fstype</p>
-<p>查位于某一类型文件系统中的文件，这些文件系统类型通常可 在/etc/fstab中找到</p>
-<p>-mount</p>
-<p>查文件时不跨越文件系统mount点</p>
-<p>-follow</p>
-<p>如果遇到符号链接文件，就跟踪链接所指的文件</p>
-<p>-cpio</p>
-<p>对匹配的文件使用cpio命令，将他们备份到磁带设备中</p>
-<p>-prune</p>
-<p>忽略某个目录，格式：find pathname -path ignorepath -prune -o [options]</p>
-<p>举例说明： 查找“/usr/local/”目录下（包含子目录）所有以”.txt”结尾的文件</p>
-<pre><code>find /usr/local/ -name &quot;*.txt&quot;</code></pre><p>查找当前目录（包含子目录）以大写字母开头的文件</p>
-<pre><code>find -name &quot;[A-Z]*&quot;</code></pre><p>查找当前目录（包含子目录）以一个英文一个数字开头的txt文件</p>
-<pre><code>find . -name &quot;[a-z][0-9]*.txt&quot;</code></pre><p>查找当前目录（包含子目录）权限为755的文件</p>
-<pre><code>find -perm -755</code></pre><p>查找当前目录（包含一层子目录）所有txt文件；“2”表示当前目录和一层子目录两层目录</p>
-<pre><code>find -maxdepth 2 -name &quot;*.txt&quot;</code></pre><p>查找当前目录（不包含子目录）七天内创建的文件名为小写英文字母的所有文件</p>
-<pre><code>find -maxdepth 1 -ctime -7 -name &quot;[a-z]*&quot;</code></pre><p>查找当前目录（包含子目录）所有文件夹</p>
-<pre><code>find -type d</code></pre><p>查找当前目录（包含子目录）所有以小写字母“t”开头的文件夹</p>
-<pre><code>find -type d -name &quot;[t]*&quot;</code></pre><p>查找当前目录（包含子目录）所有以小写字母“a”或“b”或“c”开头的文件</p>
-<pre><code>find -type f -name &quot;[a-c]*&quot;</code></pre><p>查找当前目录（包含三层子目录）所有以小写字母“e”开头的文件</p>
-<pre><code>find -maxdepth 4 -name &quot;[e]*&quot; -type d</code></pre><p>查找当前目录（包含子目录）所有大于243字节的文件</p>
-<pre><code>find -size +243c</code></pre><p>查找当前目录（包含子目录）所有等于4096字节的 文件夹（-type d）</p>
-<pre><code>find -type d -size 4096c</code></pre><p>查找当前目录（不包含子目录）所有大于“7块（1块=512字节）”的文件</p>
-<pre><code>find -maxdepth 1 -type f -size +7</code></pre><p>查找当前目录（不包含子目录）所有小于5k的文件</p>
-<pre><code>find -maxdepth 1 -type f -size -5k</code></pre><p>查找当前目录（不包含子目录）所有大于1M的文件</p>
-<pre><code>find -maxdepth 1 -type f -size +1M</code></pre><p>查找当前目录（不包含子目录）所有大于1G的文件</p>
-<pre><code>find -maxdepth 1 -type f -size +1G</code></pre><p>查找当前目录（不包含子目录）所有大于1M且小于266M的文件</p>
-<pre><code>find -maxdepth 1 -type f -size +1M -size -266M</code></pre><p>查找 /usr 目录下除了 /usr/lib 目录所有的以小写字母“e”开头的txt文件</p>
-<pre><code>find /usr/ -path /usr/lib  -prune -o -name &quot;[e]*.txt&quot;</code></pre>
+        <p><strong>菜单栏VCS→Checkout from Version Contorol→Git拉下版本库代码</strong> </p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2018/11/1-5.png" alt></p>
+<p><strong>菜单栏File→Open导入项目，并根据项目进行配置</strong></p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2018/11/2-2.png" alt> </p>
+<p><strong>右键项目如果没有git的选项需要加入版本库才可以提交代码，菜单栏VCS→Enable Version Control Integration如图选择Git，点击OK按钮</strong></p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2018/11/1-6.png" alt> </p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2018/11/2-3.png" alt> </p>
+<p><strong>这时项目右键就有git选项</strong> </p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2018/11/1-7.png" alt> </p>
+<p><strong>Commit Directory，具体如下图，可以直接Commit and push推送线上也可以先提交到本地库再Repository→Push</strong> </p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2018/11/2-4.png" alt></p>
+
       
     </div>
 
@@ -572,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/10/e9-98-bf-e9-87-8cfastjson-e7-9a-84-e5-9f-ba-e7-a1-80-e4-bd-bf-e7-94-a8/" rel="next" title="阿里fastjson的基础使用">
-                <i class="fa fa-chevron-left"></i> 阿里fastjson的基础使用
+              <a href="/2018/11/12/Git拉取分支/" rel="next" title="Git拉取分支">
+                <i class="fa fa-chevron-left"></i> Git拉取分支
               </a>
             
           </div>
@@ -582,8 +548,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/17/webstorm-nodejs-ti-shi/" rel="prev" title="Webstorm NodeJs 提示">
-                Webstorm NodeJs 提示 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/13/IDEA中使用lombok/" rel="prev" title="IDEA中使用lombok">
+                IDEA中使用lombok <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -646,7 +612,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-count">226</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -94,22 +94,20 @@
 
 
 
-  <meta name="description" content="AOF（append only file）持久化：以独立日志的方式记录每次写命令，重启时再重新执行AOF文件中的命令达到恢复数据的目的。AOF的主要作用是解决了数据持久化的实时性，目前已经是Redis持久化的主流方式。 开启AOF功能需要设置配置：appendonly yes，AOF文件名通过appendfilename配置设置，默认文件名是appendonly.aof。保存路径同RDB持久化方式">
+  <meta name="description" content="字符串是Redis最基础的数据结构。首先键是字符串类型，而且其他几种类型都是在字符串类型的基础上构建的。字符串类型的值实际可以是字符串（简单的字符串、复杂的字符串（例如JSON、XML））、数字（整数、浮点数），甚至是二进制（图片、音频、视频），但是值最大不能超过512MB。 设置值set命令 1set key value [ex seconds] [px milliseconds] [nx|xx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习笔记—持久化机制之AOF">
-<meta property="og:url" content="http://blog.oeteo.cn/2019/03/27/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-8c-81-e4-b9-85-e5-8c-96-e6-9c-ba-e5-88-b6-e4-b9-8baof/index.html">
+<meta property="og:title" content="Redis学习笔记—数据类型：字符串（string）">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/03/08/Redis学习笔记—数据类型：字符串（string）/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="AOF（append only file）持久化：以独立日志的方式记录每次写命令，重启时再重新执行AOF文件中的命令达到恢复数据的目的。AOF的主要作用是解决了数据持久化的实时性，目前已经是Redis持久化的主流方式。 开启AOF功能需要设置配置：appendonly yes，AOF文件名通过appendfilename配置设置，默认文件名是appendonly.aof。保存路径同RDB持久化方式">
+<meta property="og:description" content="字符串是Redis最基础的数据结构。首先键是字符串类型，而且其他几种类型都是在字符串类型的基础上构建的。字符串类型的值实际可以是字符串（简单的字符串、复杂的字符串（例如JSON、XML））、数字（整数、浮点数），甚至是二进制（图片、音频、视频），但是值最大不能超过512MB。 设置值set命令 1set key value [ex seconds] [px milliseconds] [nx|xx">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/AOF%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/AOF%E9%87%8D%E5%86%99%E8%BF%90%E4%BD%9C%E6%B5%81%E7%A8%8B-1.png">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B-1.png">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/%E4%BD%BF%E7%94%A8everysec%E5%81%9A%E5%88%B7%E7%9B%98%E7%AD%96%E7%95%A5%E7%9A%84%E6%B5%81%E7%A8%8B.png">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190308104904-1.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190308110331.png">
+<meta property="og:updated_time" content="2019-07-23T09:35:11.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习笔记—持久化机制之AOF">
-<meta name="twitter:description" content="AOF（append only file）持久化：以独立日志的方式记录每次写命令，重启时再重新执行AOF文件中的命令达到恢复数据的目的。AOF的主要作用是解决了数据持久化的实时性，目前已经是Redis持久化的主流方式。 开启AOF功能需要设置配置：appendonly yes，AOF文件名通过appendfilename配置设置，默认文件名是appendonly.aof。保存路径同RDB持久化方式">
-<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/AOF%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
+<meta name="twitter:title" content="Redis学习笔记—数据类型：字符串（string）">
+<meta name="twitter:description" content="字符串是Redis最基础的数据结构。首先键是字符串类型，而且其他几种类型都是在字符串类型的基础上构建的。字符串类型的值实际可以是字符串（简单的字符串、复杂的字符串（例如JSON、XML））、数字（整数、浮点数），甚至是二进制（图片、音频、视频），但是值最大不能超过512MB。 设置值set命令 1set key value [ex seconds] [px milliseconds] [nx|xx">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190308104904-1.png">
 
 
 
@@ -117,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/27/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-8c-81-e4-b9-85-e5-8c-96-e6-9c-ba-e5-88-b6-e4-b9-8baof/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/08/Redis学习笔记—数据类型：字符串（string）/">
 
 
 
@@ -127,7 +125,7 @@
   };
 </script>
 
-  <title>Redis学习笔记—持久化机制之AOF | doeat's blog</title>
+  <title>Redis学习笔记—数据类型：字符串（string） | doeat's blog</title>
   
 
 
@@ -378,7 +376,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/27/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-8c-81-e4-b9-85-e5-8c-96-e6-9c-ba-e5-88-b6-e4-b9-8baof/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/Redis学习笔记—数据类型：字符串（string）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -395,7 +393,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Redis学习笔记—持久化机制之AOF
+          <h2 class="post-title" itemprop="name headline">Redis学习笔记—数据类型：字符串（string）
 
               
             
@@ -421,7 +419,7 @@
                 
               
 
-              <time title="创建时间：2019-03-27 11:27:53" itemprop="dateCreated datePublished" datetime="2019-03-27T11:27:53+08:00">2019-03-27</time>
+              <time title="创建时间：2019-03-08 10:10:53" itemprop="dateCreated datePublished" datetime="2019-03-08T10:10:53+08:00">2019-03-08</time>
             </span>
           
 
@@ -436,7 +434,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-07-23 17:35:11" itemprop="dateModified" datetime="2019-07-23T17:35:11+08:00">2019-07-23</time>
               </span>
             
           
@@ -488,58 +486,100 @@
       
 
       
-        <p>AOF（append only file）持久化：以独立日志的方式记录每次写命令，重启时再重新执行AOF文件中的命令达到恢复数据的目的。AOF的主要作用是解决了数据持久化的实时性，目前已经是Redis持久化的主流方式。 开启AOF功能需要设置配置：appendonly yes，AOF文件名通过appendfilename配置设置，默认文件名是appendonly.aof。保存路径同RDB持久化方式一致，通过dir配置指定。 appendonly默认是no，需要改成yes</p>
-<p># By default Redis asynchronously dumps the dataset on disk. This mode is<br># good enough in many applications, but an issue with the Redis process or<br># a power outage may result into a few minutes of writes lost (depending on<br># the configured save points).<br>#<br># The Append Only File is an alternative persistence mode that provides<br># much better durability. For instance using the default data fsync policy<br># (see later in the config file) Redis can lose just one second of writes in a<br># dramatic event like a server power outage, or a single write if something<br># wrong with the Redis process itself happens, but the operating system is<br># still running correctly.<br>#<br># AOF and RDB persistence can be enabled at the same time without problems.<br># If the AOF is enabled on startup Redis will load the AOF, that is the file<br># with the better durability guarantees.<br>#<br># Please check <a href="http://redis.io/topics/persistence" target="_blank" rel="noopener">http://redis.io/topics/persistence</a> for more information.</p>
-<p><strong>appendonly no</strong></p>
-<p>文件名，默认是appendonly.aof</p>
-<p># The name of the append only file (default: “appendonly.aof”)</p>
-<p>appendfilename “appendonly.aof”</p>
-<p>AOF的工作流程操作：命令写入（append）、文件同步（sync）、文件重写（rewrite）、重启加载（load），如下图 <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/AOF%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" alt></p>
-<ol>
-<li>所有的写入命令会追加到aof_buf（缓冲区）中</li>
-<li>AOF缓冲区根据对应的策略向硬盘做同步操作</li>
-<li>随着AOF文件越来越大，需要定期对AOF文件进行重写，达到压缩的目的</li>
-<li>当Redis服务器重启时，可以加载AOF文件进行数据恢复。</li>
-</ol>
-<p><strong>命令写入</strong> AOF命令写入的内容直接是文本协议格式，即是<a href="https://blog.doeat.cn/index.php/2019/03/26/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" target="_blank" rel="noopener">RESP</a>，Redis序列化协议 例如set hello world这条命令，在AOF缓冲区会追加如下文本</p>
-<p>*3\r\n$3\r\nset\r\n$5\r\nhello\r\n$5\r\nworld\r\n</p>
-<p>AOF会把命令追加到aof_buf中的好处：Redis使用单线程响应命令，如果每次写AOF文件命令都直接追加到硬盘，那么性能完全取决于当前硬盘负载。先写入缓冲区aof_buf中，还有另一个好处，Redis可以提供多种缓冲区同步硬盘的策略，在性能和安全性方面做出平衡 <strong>文件同步</strong> Redis提供了多种AOF缓冲区同步文件策略，由参数appendfsync控制</p>
-<p># The fsync() call tells the Operating System to actually write data on disk<br># instead of waiting for more data in the output buffer. Some OS will really flush<br># data on disk, some other OS will just try to do it ASAP.<br>#<br># Redis supports three different modes:<br>#<br># no: don’t fsync, just let the OS flush the data when it wants. Faster.<br># always: fsync after every write to the append only log. Slow, Safest.<br># everysec: fsync only one time every second. Compromise.<br>#<br># The default is “everysec”, as that’s usually the right compromise between<br># speed and data safety. It’s up to you to understand if you can relax this to<br># “no” that will let the operating system flush the output buffer when<br># it wants, for better performances (but if you can live with the idea of<br># some data loss consider the default persistence mode that’s snapshotting),<br># or on the contrary, use “always” that’s very slow but a bit safer than<br># everysec.<br>#<br># More details please check the following article:<br># <a href="http://antirez.com/post/redis-persistence-demystified.html" target="_blank" rel="noopener">http://antirez.com/post/redis-persistence-demystified.html</a><br>#<br># If unsure, use “everysec”.</p>
-<p># appendfsync always<br>appendfsync everysec<br># appendfsync no</p>
-<p>系统调用write和fsync说明</p>
+        <p>字符串是Redis最基础的数据结构。首先键是字符串类型，而且其他几种类型都是在字符串类型的基础上构建的。字符串类型的值实际可以是字符串（简单的字符串、复杂的字符串（例如JSON、XML））、数字（整数、浮点数），甚至是二进制（图片、音频、视频），但是值最大不能超过512MB。</p>
+<h4 id="设置值"><a href="#设置值" class="headerlink" title="设置值"></a>设置值</h4><p><code>set</code>命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> key value [ex seconds] [px milliseconds] [nx|xx]</span><br></pre></td></tr></table></figure>
+
+<p><code>ex seconds</code>：为键设置秒级过期时间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world ex 50</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><code>px milliseconds</code>：为键设置毫秒级过期时间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world px 50000</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><code>nx</code>：键必须不存在，才可以设置成功，用于添加。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world nx</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world nx</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+
+<p><code>xx</code>：与nx相反，键必须存在，才可以设置成功，用于更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; del hello</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world xx</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world1 xx</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p><code>setex</code>命令（设置过期时间）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setex key seconds value</span><br></pre></td></tr></table></figure>
+
+<p>下面四个例子都是设置key为hello的缓存过期时间50秒</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; setex hello 50 world</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world ex 50</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world px 50000</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; expire java 50</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+
+<p><code>setnx</code>命令（如果key存在则不做操作，如果没有则创建）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setnx key value</span><br></pre></td></tr></table></figure>
+
+<p>由于Redis的单线程命令处理机制，如果有多个客户端同时执行setnx key value，根据setnx的特性只有一个客户端能设置成功，setnx可以作为分布式锁的一种实现方案，Redis官方给出了使用setnx实现分布式锁的方法：<a href="http://redis.io/topics/distlock" target="_blank" rel="noopener">http://redis.io/topics/distlock</a>。 </p>
+<h4 id="获取值"><a href="#获取值" class="headerlink" title="获取值"></a><strong>获取值</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get key</span><br></pre></td></tr></table></figure>
+
+<h4 id="批量设置值"><a href="#批量设置值" class="headerlink" title="批量设置值"></a>批量设置值</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mset key value [key value ...]</span><br></pre></td></tr></table></figure>
+
+<p>批量设置a,b,c三个key</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mset a 1 b 2 c 3</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<h4 id="批量获取值按顺序返回"><a href="#批量获取值按顺序返回" class="headerlink" title="批量获取值按顺序返回"></a>批量获取值按顺序返回</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mget key [key ...]</span><br></pre></td></tr></table></figure>
+
+<p>批量获取a,b,c三个key值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mget a b c</span><br><span class="line">1) <span class="string">"1"</span></span><br><span class="line">2) <span class="string">"2"</span></span><br><span class="line">3) <span class="string">"3"</span></span><br></pre></td></tr></table></figure>
+
+<p>批量操作可以减少项目和redis数据库的网络请求，如果循环获取每条，那每条都要走网络请求，跟内存速度比，网络绝对是性能的瓶颈，所以批量操作是交给redis内部处理，一次请求，一次返回，有利于提高业务处理效率；但是要注意的是每次批量操作所发送的命令数不是无节制的，如果数量过多可能会造成Redis的阻塞或者网络拥塞。 </p>
+<h4 id="计数"><a href="#计数" class="headerlink" title="计数"></a>计数</h4><p>自增</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incr key</span><br></pre></td></tr></table></figure>
+
+<p>自减</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decr key</span><br></pre></td></tr></table></figure>
+
+<p>自增指定数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incr key increment</span><br></pre></td></tr></table></figure>
+
+<p>自减指定数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decrby key decrement</span><br></pre></td></tr></table></figure>
+
+<p>自增浮点数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrbyfloat key increment</span><br></pre></td></tr></table></figure>
+
+<p>很多存储系统和编程语言内部使用CAS机制实现计数功能，会有一定的CPU开销，但在Redis中完全不存在这个问题，因为Redis是单线程架构，任何命令到了Redis服务端都要顺序执行。 </p>
+<h4 id="追加值"><a href="#追加值" class="headerlink" title="追加值"></a>追加值</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">append key value</span><br></pre></td></tr></table></figure>
+
+<p>举例说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line"><span class="string">"world"</span></span><br><span class="line">127.0.0.1:6379&gt; append hello is</span><br><span class="line">(<span class="built_in">integer</span>) 7</span><br><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line"><span class="string">"worldis"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strlen key</span><br></pre></td></tr></table></figure>
+
+<p>举例说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; strlen hello</span><br><span class="line">(<span class="built_in">integer</span>) 5</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置并返回值（如果原来有值则返回原来的值）"><a href="#设置并返回值（如果原来有值则返回原来的值）" class="headerlink" title="设置并返回值（如果原来有值则返回原来的值）"></a>设置并返回值（如果原来有值则返回原来的值）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getset key value</span><br></pre></td></tr></table></figure>
+
+<p>举例说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line"><span class="string">"world"</span></span><br><span class="line">127.0.0.1:6379&gt; getset hello world1</span><br><span class="line"><span class="string">"world"</span></span><br><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line"><span class="string">"world1"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="设置指定位置的字符"><a href="#设置指定位置的字符" class="headerlink" title="设置指定位置的字符"></a>设置指定位置的字符</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setrange key offeset value</span><br></pre></td></tr></table></figure>
+
+<p>举例说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> java redis</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; setrange java 0 j</span><br><span class="line">(<span class="built_in">integer</span>) 5</span><br><span class="line">127.0.0.1:6379&gt; get java</span><br><span class="line"><span class="string">"jedis"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取部分字符串"><a href="#获取部分字符串" class="headerlink" title="获取部分字符串"></a>获取部分字符串</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getrange key start end</span><br></pre></td></tr></table></figure>
+
+<p>举例说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; get java</span><br><span class="line"><span class="string">"jedis"</span></span><br><span class="line">127.0.0.1:6379&gt; getrange java 1 3</span><br><span class="line"><span class="string">"edi"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看内部编码"><a href="#查看内部编码" class="headerlink" title="查看内部编码"></a>查看内部编码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; object encoding hello</span><br><span class="line"><span class="string">"embstr"</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串类型的内部编码有3种：</p>
 <ul>
-<li>write操作会触发延迟写（delayed write）机制。Linux在内核提供页缓冲区用来提高硬盘IO性能。write操作在写入系统缓冲区后直接返回。同步硬盘操作依赖于系统调度机制，例如：缓冲区页空间写满或达到特定时间周期。同步文件之前，如果此时系统故障宕机，缓冲区内数据将丢失</li>
-<li>fsync针对单个文件操作（比如AOF文件），做强制硬盘同步，fsync将阻塞直到写入硬盘完成后返回，保证了数据持久化</li>
-<li>配置为always时，每次写入都要同步AOF文件，在一般的SATA硬盘上，Redis只能支持大约几百TPS写入，显然跟Redis高性能特性背道而驰，不建议配置</li>
-<li>配置为no，由于操作系统每次同步AOF文件的周期不可控，而且会加大每次同步硬盘的数据量，虽然提升了性能，但数据安全性无法保证</li>
-<li>配置为everysec，是建议的同步策略，也是默认配置，做到兼顾性能和数据安全性。理论上只有在系统突然宕机的情况下丢失1秒的数据</li>
+<li>int：8个字节的长整型。</li>
+<li>embstr：小于等于39个字节的字符串。</li>
+<li>raw：大于39个字节的字符串。</li>
 </ul>
-<p><strong>重写机制</strong> 随着命令不断写入AOF，文件会越来越大，为了解决这个问题，Redis引入AOF重写机制压缩文件体积。AOF文件重写是把Redis进程内的数据转化为写命令同步到新AOF文件的过程</p>
-<ul>
-<li>重写后的AOF文件会变小的原因：</li>
-<li>进程内已经超时的数据不再写入文件</li>
-<li>旧的AOF文件含有无效命令，如del key1、hdel key2、srem keys、set a 111、set a 222等。重写使用进程内数据直接生成，这样新的AOF文件只保留最终数据的写入命令</li>
-<li>多条写命令可以合并为一个，如：lpush list a、lpush list b、lpush list c可以转化为：lpush list a b c。为了防止单条命令过大造成客户端缓冲区溢出，对于list、set、hash、zset等类型操作，以64个元素为界拆分为多条</li>
-</ul>
-<p>AOF重写降低了文件占用空间，除此之外，另一个目的是：更小的AOF文件可以更快地被Redis加载 AOF重写过程可以手动触发和自动触发 手动触发：直接调用bgrewriteaof命令 自动触发：根据auto-aof-rewrite-min-size和auto-aof-rewrite-percentage参数确定自动触发时机</p>
-<p># Automatic rewrite of the append only file.<br># Redis is able to automatically rewrite the log file implicitly calling<br># BGREWRITEAOF when the AOF log size grows by the specified percentage.<br>#<br># This is how it works: Redis remembers the size of the AOF file after the<br># latest rewrite (if no rewrite has happened since the restart, the size of<br># the AOF at startup is used).<br>#<br># This base size is compared to the current size. If the current size is<br># bigger than the specified percentage, the rewrite is triggered. Also<br># you need to specify a minimal size for the AOF file to be rewritten, this<br># is useful to avoid rewriting the AOF file even if the percentage increase<br># is reached but it is still pretty small.<br>#<br># Specify a percentage of zero in order to disable the automatic AOF<br># rewrite feature.</p>
-<p>auto-aof-rewrite-percentage 100<br>auto-aof-rewrite-min-size 64mb</p>
-<p>auto-aof-rewrite-min-size：表示运行AOF重写时文件最小体积，默认为64MB auto-aof-rewrite-percentage：代表当前AOF文件空间（aof_current_size）和上一次重写后AOF文件空间（aof_base_size）的比值</p>
-<p>自动触发时机=aof_current_size&gt;auto-aof-rewrite-min-size&amp;&amp;（aof_current_size-aof_base_size）/aof_base_size&gt;=auto-aof-rewrite-percentage</p>
-<p>其中aof_current_size和aof_base_size可以在info Persistence统计信息中查看 AOF重写运作流程如下图 <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/AOF%E9%87%8D%E5%86%99%E8%BF%90%E4%BD%9C%E6%B5%81%E7%A8%8B-1.png" alt> 1.执行AOF重写请求 2.父进程执行fork创建子进程，开销等同于bgsave过程 3.1 主进程fork操作完成后，继续响应其他命令。所有修改命令依然写入AOF缓冲区并根据appendfsync策略同步到硬盘，保证原有AOF机制正确性 3.2 由于fork操作运用写时复制技术，子进程只能共享fork操作时的内存数据。由于父进程依然响应命令，Redis使用“AOF重写缓冲区”保存这部分新数据，防止新AOF文件生成期间丢失这部分数据 4 子进程根据内存快照，按照命令合并规则写入到新的AOF文件。每次批量写入硬盘数据量由配置aof-rewrite-incremental-fsync控制，默认为32MB，防止单次刷盘数据过多造成硬盘阻塞 5.1 新AOF文件写入完成后，子进程发送信号给父进程，父进程更新统计信息，具体见info persistence下的aof_<em>相关统计 5.2 父进程把AOF重写缓冲区的数据写入到新的AOF文件 5.3 使用新AOF文件替换老文件，完成AOF重写 *</em>重启加载** AOF和RDB文件都可以用于服务器重启时的数据恢复，下图表示Redis持久化文件加载流程 <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B-1.png" alt> <strong>文件校验</strong> 加载损坏的AOF文件时会拒绝启动，并打印如下日志：</p>
-<p># Bad file format reading the append only file: make a backup of your AOF file,then use ./redis-check-aof –fix <filename></filename></p>
-<p>对于错误格式的AOF文件，先进行备份，然后采用redis-check-aof–fix命令进行修复，修复后使用diff-u对比数据的差异，找出丢失的数据，有些可以人工修改补全。 AOF文件可能存在结尾不完整的情况，比如机器突然掉电导致AOF尾部文件命令写入不全。Redis为我们提供了aof-load-truncated配置来兼容这种情况，默认开启。加载AOF时，当遇到此问题时会忽略并继续启动，同时打印如下警告日志：</p>
-<p># !!! Warning: short read while loading the AOF file !!!<br># !!! Truncating the AOF at offset 397856725 !!!<br># AOF loaded anyway because aof-load-truncated is enabled</p>
-<p>此为配置文件中aof-load-truncated的默认配置和官方的详细说明文档</p>
-<p># An AOF file may be found to be truncated at the end during the Redis<br># startup process, when the AOF data gets loaded back into memory.<br># This may happen when the system where Redis is running<br># crashes, especially when an ext4 filesystem is mounted without the<br># data=ordered option (however this can’t happen when Redis itself<br># crashes or aborts but the operating system still works correctly).<br>#<br># Redis can either exit with an error when this happens, or load as much<br># data as possible (the default now) and start if the AOF file is found<br># to be truncated at the end. The following option controls this behavior.<br>#<br># If aof-load-truncated is set to yes, a truncated AOF file is loaded and<br># the Redis server starts emitting a log to inform the user of the event.<br># Otherwise if the option is set to no, the server aborts with an error<br># and refuses to start. When the option is set to no, the user requires<br># to fix the AOF file using the “redis-check-aof” utility before to restart<br># the server.<br>#<br># Note that if the AOF file will be found to be corrupted in the middle<br># the server will still exit with an error. This option only applies when<br># Redis will try to read more data from the AOF file but not enough bytes<br># will be found.<br>aof-load-truncated yes</p>
-<p><strong>AOF追加阻塞</strong> 当开启AOF持久化时，常用的同步硬盘的策略是everysec，用于平衡性能和数据安全性。对于这种方式，Redis使用另一条线程每秒执行fsync同步硬盘。当系统硬盘资源繁忙时，会造成Redis主线程阻塞。如下图所示： <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/%E4%BD%BF%E7%94%A8everysec%E5%81%9A%E5%88%B7%E7%9B%98%E7%AD%96%E7%95%A5%E7%9A%84%E6%B5%81%E7%A8%8B.png" alt> 1.主线程负责写入AOF缓冲区 2.AOF线程负责每秒执行一次同步磁盘操作，并记录最近一次同步时间 3.主线程负责对比上次AOF同步时间：</p>
-<ul>
-<li>如果距上次同步成功时间在2秒内，主线程直接返回</li>
-<li>如果距上次同步成功时间超过2秒，主线程将会阻塞，直到同步操作完成</li>
-</ul>
-<p>AOF阻塞问题定位: 1.发生AOF阻塞时，Redis输出如下日志，用于记录AOF fsync阻塞导致拖慢Redis服务的行为：</p>
-<p>Asynchronous AOF fsync is taking too long (disk is busy). Writing the AOF buffer<br>without waiting for fsync to complete, this may slow down Redis</p>
-<p>2.每当发生AOF追加阻塞事件发生时，在info Persistence统计中，aof_delayed_fsync指标会累加，查看这个指标方便定位AOF阻塞问题 3.AOF同步最多允许2秒的延迟，当延迟发生时说明硬盘存在高负载问题，可以通过监控工具如iotop，定位消耗硬盘IO资源的进程</p>
+<p>Redis会根据当前值的类型和长度决定使用哪种内部编码实现。 </p>
+<h4 id="典型使用场景-（三个例子）"><a href="#典型使用场景-（三个例子）" class="headerlink" title="典型使用场景  （三个例子）"></a>典型使用场景  （三个例子）</h4><p>1）做存储层不常改变的，但是又经常需要访问的数据的一个缓存层，减轻数据库压力</p>
+<p> <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190308104904-1.png" alt> </p>
+<p>2）做用户session的存储器，解决分布式服务负载均衡而出现的session不同步问题</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190308110331.png" alt></p>
+<p>3）计数，例如网页的浏览量，视频播放量，如果每次都调用接口存数据库会造成大量请求的出现，极大地影响性能，可以先存在redis，之后再进行持久化</p>
 
       
     </div>
@@ -570,8 +610,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/26/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-8c-81-e4-b9-85-e5-8c-96-e6-9c-ba-e5-88-b6-e4-b9-8brdb/" rel="next" title="Redis学习笔记—持久化机制之RDB">
-                <i class="fa fa-chevron-left"></i> Redis学习笔记—持久化机制之RDB
+              <a href="/2019/03/08/Redis学习笔记—单线程架构/" rel="next" title="Redis学习笔记—单线程架构">
+                <i class="fa fa-chevron-left"></i> Redis学习笔记—单线程架构
               </a>
             
           </div>
@@ -580,8 +620,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/27/Redis学习笔记—主从复制/" rel="prev" title="Redis学习笔记—主从复制">
-                Redis学习笔记—主从复制 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/08/Redis学习笔记—数据类型：哈希（hash）/" rel="prev" title="Redis学习笔记—数据类型：哈希（hash）">
+                Redis学习笔记—数据类型：哈希（hash） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -626,8 +666,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -829,6 +878,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置值"><span class="nav-number">1.</span> <span class="nav-text">设置值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取值"><span class="nav-number">2.</span> <span class="nav-text">获取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量设置值"><span class="nav-number">3.</span> <span class="nav-text">批量设置值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量获取值按顺序返回"><span class="nav-number">4.</span> <span class="nav-text">批量获取值按顺序返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计数"><span class="nav-number">5.</span> <span class="nav-text">计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#追加值"><span class="nav-number">6.</span> <span class="nav-text">追加值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取字符串长度"><span class="nav-number">7.</span> <span class="nav-text">获取字符串长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置并返回值（如果原来有值则返回原来的值）"><span class="nav-number">8.</span> <span class="nav-text">设置并返回值（如果原来有值则返回原来的值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置指定位置的字符"><span class="nav-number">9.</span> <span class="nav-text">设置指定位置的字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取部分字符串"><span class="nav-number">10.</span> <span class="nav-text">获取部分字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看内部编码"><span class="nav-number">11.</span> <span class="nav-text">查看内部编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型使用场景-（三个例子）"><span class="nav-number">12.</span> <span class="nav-text">典型使用场景  （三个例子）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

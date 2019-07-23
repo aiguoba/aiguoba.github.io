@@ -94,17 +94,20 @@
 
 
 
-  <meta name="description" content="事务简单理解就是一组命令要么执行，要么全部不执行，否则执行一部分数据会造成数据不一致的问题 Redis提供了简单的事务功能，不支持回滚操作，将一组需要批量执行的命令放到multi和exec两个命令之间就可以实现简单地事务功能。  multi命令代表事务开始 exec命令代表事务结束 discard命令代表中途中断  下面添加一个名字为Charlie的成绩信息，要求一气呵成的添加，如果没有输入exe">
+  <meta name="description" content="Redis Cluster是Redis的分布式解决方案，在3.0版本正式推出，有效地解决了Redis分布式方面的需求。当遇到单机内存、并发、流量等瓶颈时，可以采用Cluster架构方案达到负载均衡的目的 数据分布Redis数据分区Redis Cluser采用虚拟槽分区，所有的键根据哈希函数映射到0~16383整数槽内， 计算公式：slot=CRC16(key)&amp;amp;16383。每一个节点负责维">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习笔记—事务">
-<meta property="og:url" content="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e4-ba-8b-e5-8a-a1/index.html">
+<meta property="og:title" content="Redis学习笔记—集群（Redis Cluster）">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/04/02/Redis学习笔记—集群（Redis Cluster）/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="事务简单理解就是一组命令要么执行，要么全部不执行，否则执行一部分数据会造成数据不一致的问题 Redis提供了简单的事务功能，不支持回滚操作，将一组需要批量执行的命令放到multi和exec两个命令之间就可以实现简单地事务功能。  multi命令代表事务开始 exec命令代表事务结束 discard命令代表中途中断  下面添加一个名字为Charlie的成绩信息，要求一气呵成的添加，如果没有输入exe">
+<meta property="og:description" content="Redis Cluster是Redis的分布式解决方案，在3.0版本正式推出，有效地解决了Redis分布式方面的需求。当遇到单机内存、并发、流量等瓶颈时，可以采用Cluster架构方案达到负载均衡的目的 数据分布Redis数据分区Redis Cluser采用虚拟槽分区，所有的键根据哈希函数映射到0~16383整数槽内， 计算公式：slot=CRC16(key)&amp;amp;16383。每一个节点负责维">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/%E4%BD%BF%E7%94%A8CRC16key16383%E5%B0%86%E9%94%AE%E6%98%A0%E5%B0%84%E5%88%B0%E6%A7%BD%E4%B8%8A.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/Redis%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B.png">
 <meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习笔记—事务">
-<meta name="twitter:description" content="事务简单理解就是一组命令要么执行，要么全部不执行，否则执行一部分数据会造成数据不一致的问题 Redis提供了简单的事务功能，不支持回滚操作，将一组需要批量执行的命令放到multi和exec两个命令之间就可以实现简单地事务功能。  multi命令代表事务开始 exec命令代表事务结束 discard命令代表中途中断  下面添加一个名字为Charlie的成绩信息，要求一气呵成的添加，如果没有输入exe">
+<meta name="twitter:title" content="Redis学习笔记—集群（Redis Cluster）">
+<meta name="twitter:description" content="Redis Cluster是Redis的分布式解决方案，在3.0版本正式推出，有效地解决了Redis分布式方面的需求。当遇到单机内存、并发、流量等瓶颈时，可以采用Cluster架构方案达到负载均衡的目的 数据分布Redis数据分区Redis Cluser采用虚拟槽分区，所有的键根据哈希函数映射到0~16383整数槽内， 计算公式：slot=CRC16(key)&amp;amp;16383。每一个节点负责维">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/%E4%BD%BF%E7%94%A8CRC16key16383%E5%B0%86%E9%94%AE%E6%98%A0%E5%B0%84%E5%88%B0%E6%A7%BD%E4%B8%8A.png">
 
 
 
@@ -112,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e4-ba-8b-e5-8a-a1/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/04/02/Redis学习笔记—集群（Redis Cluster）/">
 
 
 
@@ -122,7 +125,7 @@
   };
 </script>
 
-  <title>Redis学习笔记—事务 | doeat's blog</title>
+  <title>Redis学习笔记—集群（Redis Cluster） | doeat's blog</title>
   
 
 
@@ -373,7 +376,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e4-ba-8b-e5-8a-a1/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/02/Redis学习笔记—集群（Redis Cluster）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -390,7 +393,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Redis学习笔记—事务
+          <h2 class="post-title" itemprop="name headline">Redis学习笔记—集群（Redis Cluster）
 
               
             
@@ -416,7 +419,7 @@
                 
               
 
-              <time title="创建时间：2019-03-19 18:07:20" itemprop="dateCreated datePublished" datetime="2019-03-19T18:07:20+08:00">2019-03-19</time>
+              <time title="创建时间：2019-04-02 14:34:01" itemprop="dateCreated datePublished" datetime="2019-04-02T14:34:01+08:00">2019-04-02</time>
             </span>
           
 
@@ -483,24 +486,227 @@
       
 
       
-        <p>事务简单理解就是一组命令要么执行，要么全部不执行，否则执行一部分数据会造成数据不一致的问题 Redis提供了简单的事务功能，不支持回滚操作，将一组需要批量执行的命令放到multi和exec两个命令之间就可以实现简单地事务功能。</p>
-<ul>
-<li>multi命令代表事务开始</li>
-<li>exec命令代表事务结束</li>
-<li>discard命令代表中途中断</li>
-</ul>
-<p>下面添加一个名字为Charlie的成绩信息，要求一气呵成的添加，如果没有输入exec之前，数据的返回值是“QUEUED”排队的状态，输入exec之后数据就被写入到Redis里面了（如果中途想要中断就输入discard）</p>
-<p>127.0.0.1:6379&gt; multi<br>OK<br>127.0.0.1:6379&gt; set Charlie:english:score 88<br>QUEUED<br>127.0.0.1:6379&gt; set Charlie:math:score 75<br>QUEUED<br>127.0.0.1:6379&gt; set Charlie:totalscore 163<br>QUEUED<br>127.0.0.1:6379&gt; exec<br>1) OK<br>2) OK<br>3) OK</p>
-<ul>
-<li>如果整个执行过程中命令输错，比如set写成了sett写错了，这样整个事务就无法执行了</li>
-<li>如果整个执行过程中输错命令，把set写成功了zset，因为zset原来就存在这个命令所以不会报错，需要开发人员自行处理</li>
-</ul>
-<p>watch 有些应用场景需要在事务之前，确保事务中的key没有被其他客户端修改过，才执行事务，否则不执行（类似乐观锁）。Redis提供了watch命令来解决这类问题 客户端1中使用watch命令标记key为“java”的键</p>
-<p>127.0.0.1:6379&gt; watch java<br>OK</p>
-<p>客户端2操作设置了key为“java”的值</p>
-<p>127.0.0.1:6379&gt; set java jedis<br>OK</p>
-<p>客户端1进行事务操作，会发现exec之后返回（nil）没有执行成功，watch起到了效果</p>
-<p>127.0.0.1:6379&gt; multi<br>OK<br>127.0.0.1:6379&gt; set java Jedis<br>QUEUED<br>127.0.0.1:6379&gt; exec<br>(nil)</p>
+        <p>Redis Cluster是Redis的分布式解决方案，在3.0版本正式推出，有效地解决了Redis分布式方面的需求。当遇到单机内存、并发、流量等瓶颈时，可以采用Cluster架构方案达到负载均衡的目的</p>
+<h3 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h3><h4 id="Redis数据分区"><a href="#Redis数据分区" class="headerlink" title="Redis数据分区"></a>Redis数据分区</h4><p>Redis Cluser采用<a href="https://blog.doeat.cn/index.php/2019/04/02/%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E7%90%86%E8%AE%BA-%E5%B8%B8%E8%A7%81%E7%9A%84%E5%93%88%E5%B8%8C%E5%88%86%E5%8C%BA%E8%A7%84%E5%88%99/" title="虚拟槽分区" target="_blank" rel="noopener">虚拟槽分区</a>，所有的键根据哈希函数映射到0~16383整数槽内， 计算公式：slot=CRC16(key)&amp;16383。每一个节点负责维护一部分槽以及槽所映射的键值数据,使用CRC16key16383将键映射到槽上如下图所示：</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/04/%E4%BD%BF%E7%94%A8CRC16key16383%E5%B0%86%E9%94%AE%E6%98%A0%E5%B0%84%E5%88%B0%E6%A7%BD%E4%B8%8A.png" alt="使用CRC16key16383将键映射到槽上"></p>
+<p>Redis虚拟槽分区的特点： - 解耦数据和节点之间的关系，简化了节点扩容和收缩难度 - 节点自身维护槽的映射关系，不需要客户端或者代理服务维护槽分区元数据 - 支持节点、槽、键之间的映射查询，用于数据路由、在线伸缩等场景 数据分区是分布式存储的核心，理解和灵活运用数据分区规则对于掌握Redis Cluster非常有帮助</p>
+<h4 id="集群功能限制"><a href="#集群功能限制" class="headerlink" title="集群功能限制"></a>集群功能限制</h4><p>①key批量操作支持有限。如mset、mget，目前只支持具有相同slot值的key执行批量操作。对于映射为不同slot值的key由于执行mget、mget等操作可能存在于多个节点上因此不被支持 ②key事务操作支持有限。同理只支持多key在同一节点上的事务操作，当多个key分布在不同的节点上时无法使用事务功能 ③key作为数据分区的最小粒度，因此不能将一个大的键值对象如hash、list等映射到不同的节点 ④不支持多数据库空间。单机下的Redis可以支持16个数据库，集群模式下只能使用一个数据库空间，即db0 ⑤复制结构只支持一层，从节点只能复制主节点，不支持嵌套树状复制结构</p>
+<h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><h4 id="准备节点"><a href="#准备节点" class="headerlink" title="准备节点"></a>准备节点</h4><p>Redis集群一般由多个节点组成，节点数量至少为6个才能保证组成完整高可用的集群。每个节点需要开启配置cluster-enabled yes，让Redis运行在集群模式下，建议为集群内所有节点统一目录，一般划分三个目录：conf、data、log，分别存放配置、数据和日志相关文件。把6个节点配置统一放在conf目录下，集群相关配置如下：</p>
+<pre><code>#节点端口
+port 6380
+#后台运行
+daemonize yes
+#启动生成的pidfile文件
+pidfile  /var/run/redis_6380.pid
+#开启集群模式
+cluster-enabled yes
+#节点超时时间，单位毫秒
+cluster-node-timeout 15000
+#集群内部配置文件
+cluster-config-file &quot;nodes-6380.conf&quot;</code></pre><p>虽然本篇是说集群，但是还是在单机学习集群的部署，如果是多主机部署需要开启外网访问的相关配置：</p>
+<pre><code>#如果是同一局域网多主机需要bind指向本地的内网ip,
+#通过ipconfig查看本地ip，本篇测试机IP为192.168.9.15，所以写成如下配置
+bind 192.168.9.15
+#如果不是同一局域网，需要开启外网访问，需要注释所有指向的bind配置，
+#默认配置只需要注释下面这一行并关闭保护模式
+#bind 127.0.0.1
+#关闭保护模式把默认配置的yes改成no
+protected-mode no</code></pre><p>可选配置</p>
+<pre><code>#如果开启RDB要改一下文件名
+dbfilename &quot;dump-6380.rdb&quot;
+#AOF日志开启，可以根据自身需求设置
+appendonly  yes
+#如果开启AOF记录则改一下记录的文件名对应端口
+appendfilename &quot;appendonly-6380.aof&quot;</code></pre><p>其他配置和单机模式一致即可，配置文件命名规则redis-{port}.conf，准备好配置后启动所有节点，命令如下：</p>
+<pre><code>redis-server conf/redis-6379.conf
+redis-server conf/redis-6380.conf
+redis-server conf/redis-6381.conf
+redis-server conf/redis-6382.conf
+redis-server conf/redis-6383.conf
+redis-server conf/redis-6384.conf</code></pre><p>查看集群服务是否都已经启动，集群后面带一个[cluster]的标识</p>
+<pre><code>[root@vmzq1l0l redis]# ps -ef|grep redis|grep -v grep
+root     20868     1  0 09:14 ?        00:00:11 redis-server 127.0.0.1:6379 [cluster]
+root     20877     1  0 09:14 ?        00:00:06 redis-server 127.0.0.1:6383 [cluster]
+root     20882     1  0 09:14 ?        00:00:05 redis-server 127.0.0.1:6384 [cluster]
+root     31781     1  0 Apr03 ?        00:01:17 redis-server 127.0.0.1:6380 [cluster]
+root     31786     1  0 Apr03 ?        00:01:16 redis-server 127.0.0.1:6381 [cluster]
+root     31791     1  0 Apr03 ?        00:01:16 redis-server 127.0.0.1:6382 [cluster]</code></pre><p>注意：如果有某一个节点无法启动，大概率是配置文件配置疏忽大意漏改造成冲突，可以查看启动日志排查原因。 6379节点启动成功，第一次启动时如果没有集群配置文件，它会自动创建一份，文件名称采用cluster-config-file参数项控制，建议采用node-{port}.conf格式定义，通过使用端口号区分不同节点，防止同一机器下多个节点彼此覆盖，造成集群信息异常。如果启动时存在集群配置文件，节点会使用配置文件内容初始化集群信息。Redis集群模式启动过程如下图所示：</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/04/Redis%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B.png" alt="Redis集群模式启动过程"></p>
+<p>集群模式的Redis除了原有的配置文件之外又加了一份集群配置文件。当集群内节点信息发生变化，如添加节点、节点下线、故障转移等。节点会自动保存集群状态到配置文件中。需要注意的是，Redis自动维护集群配置文件，不要手动修改，防止节点重启时产生集群信息错乱。 查看6379启动生成的集群配置文件</p>
+<pre><code>[root@vmzq1l0l redis]# cat nodes-6379.conf
+4799ea69c91712f3f0b38d786b2de9fca10343ea :6379@16379 myself,master - 0 0 0 connected 12807 15350
+vars currentEpoch 0 lastVoteEpoch 0</code></pre><p>文件内容记录了集群初始状态，这里最重要的是节点ID，它是一个40位16进制字符串，用于唯一标识集群内一个节点，之后很多集群操作都要借助于节点ID来完成。 也可以使用cluster nodes命令在客户端获取集群节点状态：</p>
+<pre><code>127.0.0.1:6379&gt; cluster nodes
+4799ea69c91712f3f0b38d786b2de9fca10343ea :6379@16379 myself,master - 0 0 0 connected 12807 15350</code></pre><h4 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h4><p>官方提供了redis-trib.rb工具用于创建集群 redis-trib.rb是采用Ruby实现的Redis集群管理工具，内部通过Cluster相关命令帮我们简化集群创建、检查、槽迁移和均衡等常见运维操作，使用之前需要安装Ruby依赖环境</p>
+<pre><code># yum -y install ruby ruby-devel rubygems rpm-build
+···
+# gem install redis
+···</code></pre><p>安装redis-trib.rb，在redis的src文件夹中，将redis-trib.rb直接复制到/usr/local/bin目录</p>
+<pre><code>[root@vmzq1l0l ~]# cd /usr/lcoal/redis/src
+[root@vmzq1l0l src]# cp redis-trib.rb /usr/local/bin/</code></pre><p>运行redis-trib.rb创建集群</p>
+<pre><code>[root@vmzq1l0l src]# redis-trib.rb create --replicas 1 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384
+WARNING: redis-trib.rb is not longer available!
+You should use redis-cli instead.
+
+All commands and features belonging to redis-trib.rb have been moved
+to redis-cli.
+In order to use them you should call redis-cli with the --cluster
+option followed by the subcommand name, arguments and options.
+
+Use the following syntax:
+redis-cli --cluster SUBCOMMAND [ARGUMENTS] [OPTIONS]
+
+Example:
+redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384 --cluster-replicas 1
+
+To get help about all subcommands, type:
+redis-cli --cluster help</code></pre><p>如果你装的版本是redis5.0之前的的这里应该不会有问题，直接输入yes就可以部署成功， 但是这里报了个错：“警告：redis-trib.rb不再可用”，而且告知我们使用redis-cli创建集群的语法，Redis5.0之后所有原来redis-trib.rb命令都可以用redis-cli –cluster替换</p>
+<pre><code>WARNING: redis-trib.rb is not longer available!</code></pre><p>redis5.0之后不再使用redis-trib.rb创建集群了，而是使用redis-cli作为创建集群的命令,这意味着不用再装ruby，有如下命令创建集群（–cluster-replicas参数指定集群中每个主节点配备几个从节点，这里设置为1。）</p>
+<pre><code>[root@vmzq1l0l redis]# redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384 --cluster-replicas 1
+&gt;&gt;&gt; Performing hash slots allocation on 6 nodes...
+Master[0] -&gt; Slots 0 - 5460
+Master[1] -&gt; Slots 5461 - 10922
+Master[2] -&gt; Slots 10923 - 16383
+Adding replica 127.0.0.1:6382 to 127.0.0.1:6379
+Adding replica 127.0.0.1:6383 to 127.0.0.1:6380
+Adding replica 127.0.0.1:6384 to 127.0.0.1:6381
+&gt;&gt;&gt; Trying to optimize slaves allocation for anti-affinity
+[WARNING] Some slaves are in the same host as their master
+M: 6d9658051472fd42328e0c2c0fa25d5f77051343 127.0.0.1:6379
+   slots:[0-5460] (5461 slots) master
+M: e27fae258be099a4930fe40854d30384646e33f2 127.0.0.1:6380
+   slots:[5461-10922] (5462 slots) master
+M: 8c60e2b86699769ae3d7473712ba1eb5034894c6 127.0.0.1:6381
+   slots:[10923-16383] (5461 slots) master
+S: bff23ec0350b4e5d0be694f1efa9a9385786a443 127.0.0.1:6382
+   replicates 8c60e2b86699769ae3d7473712ba1eb5034894c6
+S: cfaf4e715eede56ec39a939f826ec394c92678c3 127.0.0.1:6383
+   replicates 6d9658051472fd42328e0c2c0fa25d5f77051343
+S: ef69743523f99bfeb39272eeef98f7b29e1e2217 127.0.0.1:6384
+   replicates e27fae258be099a4930fe40854d30384646e33f2
+Can I set the above configuration? (type &apos;yes&apos; to accept):</code></pre><p>从上述输出内容看出，集群自动分配了主从信息，而不是根据命令中输入的顺序分配的，但是如果是不同的主机ip，redis会尽量做到主从在不同的主机上，虽然上面信息写着“127.0.0.1:6382 to 127.0.0.1:6379···”但是关键还是看下面的“M”和“S”的对应关系，不要被上面几行迷惑； 同时还分配了各自的虚拟槽分区的槽值，如果接受这个分配的配置，输入yes，开始执行节点握手和槽分配操作，输出如下：</p>
+<pre><code>······
+Can I set the above configuration? (type &apos;yes&apos; to accept): yes
+&gt;&gt;&gt; Nodes configuration updated
+&gt;&gt;&gt; Assign a different config epoch to each node
+&gt;&gt;&gt; Sending CLUSTER MEET messages to join the cluster
+Waiting for the cluster to join
+..
+&gt;&gt;&gt; Performing Cluster Check (using node 127.0.0.1:6379)
+M: 6d9658051472fd42328e0c2c0fa25d5f77051343 127.0.0.1:6379
+   slots:[0-5460] (5461 slots) master
+   1 additional replica(s)
+S: ef69743523f99bfeb39272eeef98f7b29e1e2217 127.0.0.1:6384
+   slots: (0 slots) slave
+   replicates e27fae258be099a4930fe40854d30384646e33f2
+M: 8c60e2b86699769ae3d7473712ba1eb5034894c6 127.0.0.1:6381
+   slots:[10923-16383] (5461 slots) master
+   1 additional replica(s)
+M: e27fae258be099a4930fe40854d30384646e33f2 127.0.0.1:6380
+   slots:[5461-10922] (5462 slots) master
+   1 additional replica(s)
+S: cfaf4e715eede56ec39a939f826ec394c92678c3 127.0.0.1:6383
+   slots: (0 slots) slave
+   replicates 6d9658051472fd42328e0c2c0fa25d5f77051343
+S: bff23ec0350b4e5d0be694f1efa9a9385786a443 127.0.0.1:6382
+   slots: (0 slots) slave
+   replicates 8c60e2b86699769ae3d7473712ba1eb5034894c6
+[OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+[OK] All 16384 slots covered.</code></pre><p>最后输出报告说明：16384个槽全部被分配，集群创建成功。这里需要注意给集群的节点地址必须是不包含任何槽/数据的节点，否则会拒绝创建集群。</p>
+<h4 id="检查集群完整性"><a href="#检查集群完整性" class="headerlink" title="检查集群完整性"></a>检查集群完整性</h4><p>命令redis-cli –cluster check IP:port，Redis5.0之前的版本可以用 redis-trib.rb check IP:port命令</p>
+<pre><code>[root@vmzq1l0l redis]# redis-cli --cluster check 127.0.0.1:6379
+127.0.0.1:6379 (6d965805...) -&gt; 0 keys | 5461 slots | 1 slaves.
+127.0.0.1:6381 (8c60e2b8...) -&gt; 0 keys | 5461 slots | 1 slaves.
+127.0.0.1:6380 (e27fae25...) -&gt; 0 keys | 5462 slots | 1 slaves.
+[OK] 0 keys in 3 masters.
+0.00 keys per slot on average.
+&gt;&gt;&gt; Performing Cluster Check (using node 127.0.0.1:6379)
+M: 6d9658051472fd42328e0c2c0fa25d5f77051343 127.0.0.1:6379
+   slots:[0-5460] (5461 slots) master
+   1 additional replica(s)
+S: ef69743523f99bfeb39272eeef98f7b29e1e2217 127.0.0.1:6384
+   slots: (0 slots) slave
+   replicates e27fae258be099a4930fe40854d30384646e33f2
+M: 8c60e2b86699769ae3d7473712ba1eb5034894c6 127.0.0.1:6381
+   slots:[10923-16383] (5461 slots) master
+   1 additional replica(s)
+M: e27fae258be099a4930fe40854d30384646e33f2 127.0.0.1:6380
+   slots:[5461-10922] (5462 slots) master
+   1 additional replica(s)
+S: cfaf4e715eede56ec39a939f826ec394c92678c3 127.0.0.1:6383
+   slots: (0 slots) slave
+   replicates 6d9658051472fd42328e0c2c0fa25d5f77051343
+S: bff23ec0350b4e5d0be694f1efa9a9385786a443 127.0.0.1:6382
+   slots: (0 slots) slave
+   replicates 8c60e2b86699769ae3d7473712ba1eb5034894c6
+[OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+[OK] All 16384 slots covered.</code></pre><p>重点是最后这四句，告诉我们集群所有的槽都已经分配到节点</p>
+<h4 id="Redis集群客户端redis-cluster-client"><a href="#Redis集群客户端redis-cluster-client" class="headerlink" title="Redis集群客户端redis cluster client"></a>Redis集群客户端redis cluster client</h4><p>平时连接命令行客户端用redis-cli即可，如果想连接集群客户端需要加个-c的参数</p>
+<pre><code>redis-cli -c -h ip地址 -p 端口</code></pre><p>连接到127.0.0.1:6379的默认节点客户端,可以看出如果key名算出的槽值（slot）不在当前节点分配的范围内，会重定向到属于的槽值节点，并且切换连接到那个节点</p>
+<pre><code>[root@vmzq1l0l redis]# redis-cli -c
+127.0.0.1:6379&gt; set Jerry mouse
+OK
+127.0.0.1:6379&gt; set Tom cat
+-&gt; Redirected to slot [9233] located at 127.0.0.1:6380
+OK
+127.0.0.1:6380&gt; set Jerry &apos;bad mouse&apos;
+-&gt; Redirected to slot [1468] located at 127.0.0.1:6379
+OK
+127.0.0.1:6379&gt; get Tom
+-&gt; Redirected to slot [9233] located at 127.0.0.1:6380
+&quot;cat&quot;
+127.0.0.1:6380&gt; get Jerry
+-&gt; Redirected to slot [1468] located at 127.0.0.1:6379
+&quot;bad mouse&quot;</code></pre><p>查看集群中的节点 cluster nodes命令</p>
+<pre><code>127.0.0.1:6379&gt; cluster nodes
+ef69743523f99bfeb39272eeef98f7b29e1e2217 127.0.0.1:6384@16384 slave e27fae258be099a4930fe40854d30384646e33f2 0 1554358007269 6 connected
+8c60e2b86699769ae3d7473712ba1eb5034894c6 127.0.0.1:6381@16381 master - 0 1554358009283 3 connected 10923-16383
+e27fae258be099a4930fe40854d30384646e33f2 127.0.0.1:6380@16380 master - 0 1554358007000 2 connected 5461-10922
+cfaf4e715eede56ec39a939f826ec394c92678c3 127.0.0.1:6383@16383 slave 6d9658051472fd42328e0c2c0fa25d5f77051343 0 1554358008277 5 connected
+bff23ec0350b4e5d0be694f1efa9a9385786a443 127.0.0.1:6382@16382 slave 8c60e2b86699769ae3d7473712ba1eb5034894c6 0 1554358008000 4 connected
+6d9658051472fd42328e0c2c0fa25d5f77051343 127.0.0.1:6379@16379 myself,master - 0 1554358007000 1 connected 0-5460</code></pre><p>使用命令redis-cli –cluster help可以查看所有关于集群的命令，诸如添加节点删除节点,不再逐个实验</p>
+<pre><code>[root@vmzq1l0l redis]# redis-cli --cluster help
+Cluster Manager Commands:
+  create         host1:port1 ... hostN:portN
+                 --cluster-replicas &lt;arg&gt;
+  check          host:port
+                 --cluster-search-multiple-owners
+  info           host:port
+  fix            host:port
+                 --cluster-search-multiple-owners
+  reshard        host:port
+                 --cluster-from &lt;arg&gt;
+                 --cluster-to &lt;arg&gt;
+                 --cluster-slots &lt;arg&gt;
+                 --cluster-yes
+                 --cluster-timeout &lt;arg&gt;
+                 --cluster-pipeline &lt;arg&gt;
+                 --cluster-replace
+  rebalance      host:port
+                 --cluster-weight &lt;node1=w1...nodeN=wN&gt;
+                 --cluster-use-empty-masters
+                 --cluster-timeout &lt;arg&gt;
+                 --cluster-simulate
+                 --cluster-pipeline &lt;arg&gt;
+                 --cluster-threshold &lt;arg&gt;
+                 --cluster-replace
+  add-node       new_host:new_port existing_host:existing_port
+                 --cluster-slave
+                 --cluster-master-id &lt;arg&gt;
+  del-node       host:port node_id
+  call           host:port command arg arg .. arg
+  set-timeout    host:port milliseconds
+  import         host:port
+                 --cluster-from &lt;arg&gt;
+                 --cluster-copy
+                 --cluster-replace
+  help
+
+For check, fix, reshard, del-node, set-timeout you can specify the host and port of any working node in the cluster.</code></pre><p>后续做简单说明，如果主服务挂点了，从服务会顶上来变成主服务，这时候这个主服务再次启动会变成从服务；比如6379节点是个主服务，6382是6379的从服务，这时候由于种种原因，6379挂掉了，6382会被提升为主服务，如果6379再次重启，6379会变成6382的从服务。</p>
 
       
     </div>
@@ -531,8 +737,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/" rel="next" title="Redis学习笔记—Pipeline">
-                <i class="fa fa-chevron-left"></i> Redis学习笔记—Pipeline
+              <a href="/2019/04/02/数据分布理论—常见的哈希分区规则/" rel="next" title="数据分布理论—常见的哈希分区规则">
+                <i class="fa fa-chevron-left"></i> 数据分布理论—常见的哈希分区规则
               </a>
             
           </div>
@@ -541,8 +747,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/19/redis-conf-e9-bb-98-e8-ae-a4-e9-85-8d-e7-bd-ae-e6-96-87-e4-bb-b6/" rel="prev" title="redis.conf配置文件（英文原文）">
-                redis.conf配置文件（英文原文） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/04/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e7-b3-bb-e5-88-97-e7-9b-ae-e5-bd-95/" rel="prev" title="Redis学习笔记系列目录">
+                Redis学习笔记系列目录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,8 +793,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -790,6 +1005,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据分布"><span class="nav-number">1.</span> <span class="nav-text">数据分布</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis数据分区"><span class="nav-number">1.1.</span> <span class="nav-text">Redis数据分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集群功能限制"><span class="nav-number">1.2.</span> <span class="nav-text">集群功能限制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建"><span class="nav-number">2.</span> <span class="nav-text">搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备节点"><span class="nav-number">2.1.</span> <span class="nav-text">准备节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建集群"><span class="nav-number">2.2.</span> <span class="nav-text">创建集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检查集群完整性"><span class="nav-number">2.3.</span> <span class="nav-text">检查集群完整性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis集群客户端redis-cluster-client"><span class="nav-number">2.4.</span> <span class="nav-text">Redis集群客户端redis cluster client</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

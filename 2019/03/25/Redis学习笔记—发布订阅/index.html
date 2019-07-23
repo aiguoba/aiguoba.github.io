@@ -94,21 +94,19 @@
 
 
 
-  <meta name="description" content="Redis的主从复制模式下，一旦主节点由于故障不能提供服务，需要人工将从节点晋升为主节点，同时还要通知应用方更新主节点地址，对于很多应用场景这种故障处理的方式是无法接受的。 Redis从2.8开始正式提供了Redis Sentinel（哨兵）架构来解决这个问题，Redis Sentinel是Redis的高可用实现方案，在实际的生产环境中，对提高整个系统的高可用性是非常有帮助的。 主从复制的问题主从">
+  <meta name="description" content="Redis提供了基于“发布/订阅”模式的消息机制，此种模式下，消息发布者和订阅者不进行直接通信，发布者客户端向指定的频道（channel）发布消息，订阅该频道的每个客户端都可以收到该消息  和很多专业的消息队列系统（例如Kafka、RocketMQ）相比，Redis的发布订阅略显粗糙，例如无法实现消息堆积和回溯。但胜在足够简单，如果当前场景可以容忍的这些缺点，也不失为一个不错的选择 Redis主要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习笔记—哨兵（Redis Sentinel）">
-<meta property="og:url" content="http://blog.oeteo.cn/2019/03/28/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-a8-e5-85-b5-ef-bc-88redis-sentinel-ef-bc-89/index.html">
+<meta property="og:title" content="Redis学习笔记—发布订阅">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/03/25/Redis学习笔记—发布订阅/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="Redis的主从复制模式下，一旦主节点由于故障不能提供服务，需要人工将从节点晋升为主节点，同时还要通知应用方更新主节点地址，对于很多应用场景这种故障处理的方式是无法接受的。 Redis从2.8开始正式提供了Redis Sentinel（哨兵）架构来解决这个问题，Redis Sentinel是Redis的高可用实现方案，在实际的生产环境中，对提高整个系统的高可用性是非常有帮助的。 主从复制的问题主从">
+<meta property="og:description" content="Redis提供了基于“发布/订阅”模式的消息机制，此种模式下，消息发布者和订阅者不进行直接通信，发布者客户端向指定的频道（channel）发布消息，订阅该频道的每个客户端都可以收到该消息  和很多专业的消息队列系统（例如Kafka、RocketMQ）相比，Redis的发布订阅略显粗糙，例如无法实现消息堆积和回溯。但胜在足够简单，如果当前场景可以容忍的这些缺点，也不失为一个不错的选择 Redis主要">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis-sentinel%E6%9E%B6%E6%9E%84-1.png">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis-sentinel%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.png">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:updated_time" content="2019-07-23T07:37:53.419Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习笔记—哨兵（Redis Sentinel）">
-<meta name="twitter:description" content="Redis的主从复制模式下，一旦主节点由于故障不能提供服务，需要人工将从节点晋升为主节点，同时还要通知应用方更新主节点地址，对于很多应用场景这种故障处理的方式是无法接受的。 Redis从2.8开始正式提供了Redis Sentinel（哨兵）架构来解决这个问题，Redis Sentinel是Redis的高可用实现方案，在实际的生产环境中，对提高整个系统的高可用性是非常有帮助的。 主从复制的问题主从">
-<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F.png">
+<meta name="twitter:title" content="Redis学习笔记—发布订阅">
+<meta name="twitter:description" content="Redis提供了基于“发布/订阅”模式的消息机制，此种模式下，消息发布者和订阅者不进行直接通信，发布者客户端向指定的频道（channel）发布消息，订阅该频道的每个客户端都可以收到该消息  和很多专业的消息队列系统（例如Kafka、RocketMQ）相比，Redis的发布订阅略显粗糙，例如无法实现消息堆积和回溯。但胜在足够简单，如果当前场景可以容忍的这些缺点，也不失为一个不错的选择 Redis主要">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%9E%8B.png">
 
 
 
@@ -116,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/28/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-a8-e5-85-b5-ef-bc-88redis-sentinel-ef-bc-89/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/25/Redis学习笔记—发布订阅/">
 
 
 
@@ -126,7 +124,7 @@
   };
 </script>
 
-  <title>Redis学习笔记—哨兵（Redis Sentinel） | doeat's blog</title>
+  <title>Redis学习笔记—发布订阅 | doeat's blog</title>
   
 
 
@@ -377,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/28/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-a8-e5-85-b5-ef-bc-88redis-sentinel-ef-bc-89/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/25/Redis学习笔记—发布订阅/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -394,7 +392,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Redis学习笔记—哨兵（Redis Sentinel）
+          <h2 class="post-title" itemprop="name headline">Redis学习笔记—发布订阅
 
               
             
@@ -420,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2019-03-28 17:42:16" itemprop="dateCreated datePublished" datetime="2019-03-28T17:42:16+08:00">2019-03-28</time>
+              <time title="创建时间：2019-03-25 17:13:04" itemprop="dateCreated datePublished" datetime="2019-03-25T17:13:04+08:00">2019-03-25</time>
             </span>
           
 
@@ -435,7 +433,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-07-23 15:37:53" itemprop="dateModified" datetime="2019-07-23T15:37:53+08:00">2019-07-23</time>
               </span>
             
           
@@ -487,81 +485,63 @@
       
 
       
-        <p>Redis的主从复制模式下，一旦主节点由于故障不能提供服务，需要人工将从节点晋升为主节点，同时还要通知应用方更新主节点地址，对于很多应用场景这种故障处理的方式是无法接受的。 Redis从2.8开始正式提供了Redis Sentinel（哨兵）架构来解决这个问题，Redis Sentinel是Redis的高可用实现方案，在实际的生产环境中，对提高整个系统的高可用性是非常有帮助的。</p>
-<h3 id="主从复制的问题"><a href="#主从复制的问题" class="headerlink" title="主从复制的问题"></a>主从复制的问题</h3><p>主从解决的问题 - 如果主节点出故障了，从节点可以作为后备力量顶上来，保证了数据的一致性 - 从节点拓展了主节点的读能力，主节点如果支撑不住，从节点会帮助主节点分担压力 主从可能出现的问题 - 一旦主节点出现故障，需要手动将从节点晋升为主节点，然后将其他从节点的主节点配置改为这个，需要人工干预 - 主节点所只能在一台主机，限制了主节点的写能力 - 主节点只能在一台主机，存储能力受到单机的限制</p>
-<h3 id="Redis-Sentinel的高可用性"><a href="#Redis-Sentinel的高可用性" class="headerlink" title="Redis Sentinel的高可用性"></a>Redis Sentinel的高可用性</h3><p>Redis Sentinel是一个分布式架构，其中包含若干个Sentinel节点和Redis数据节点，每个Sentinel节点会对数据节点和其余Sentinel节点进行监控，当它发现节点不可达时，会对节点做下线标识。如果被标识的是主节点，它还会和其他Sentinel节点进行“协商”，当大多数Sentinel节点都认为主节点不可达时，它们会选举出一个Sentinel节点来完成自动故障转移的工作，同时会将这个变化实时通知给Redis应用方。整个过程完全是自动的，不需要人工来介入，所以这套方案很有效地解决了Redis的高可用问题</p>
-<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/03/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F.png" alt><img src="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis-sentinel%E6%9E%B6%E6%9E%84-1.png" alt></p>
-<p>主从复制模式</p>
-<p>Redis-sentinel架构</p>
-<h3 id="安装和部署"><a href="#安装和部署" class="headerlink" title="安装和部署"></a>安装和部署</h3><p>先画个拓扑图，接下来就按照这个拓扑图为例完成部署</p>
-<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis-sentinel%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.png" alt></p>
-<p>简要说明，会开启6379、6666和7777三个端口的Redis实例，其中6379默认配置的为主节点，6666和7777为从节点，配置三个Sentinel节点端口分别是26379、26666和27777,下面进行详细说明：</p>
-<h4 id="启动主节点"><a href="#启动主节点" class="headerlink" title="启动主节点"></a>启动主节点</h4><pre><code>[root@vmzq1l0l ~]# redis-cli
-127.0.0.1:6379&gt; info replication
-# Replication
-role:master
-connected_slaves:0
-master_replid:14cffeedb4d9635f130d446c9013dfe439ab06c1
-master_replid2:0000000000000000000000000000000000000000
-master_repl_offset:1279
-second_repl_offset:-1
-repl_backlog_active:0
-repl_backlog_size:1048576
-repl_backlog_first_byte_offset:1
-repl_backlog_histlen:1279</code></pre><h4 id="启动两个从节点"><a href="#启动两个从节点" class="headerlink" title="启动两个从节点"></a>启动两个从节点</h4><p>用配置文件的方式启动，复制不同配置文件改相关配置（下面以6666端口实例举例，7777操作完全相同，只是配置从6666改为7777）</p>
-<pre><code>cp redis.conf redis-6666.conf</code></pre><p>需要修改redis-6666.conf文件的以下配置(由于种种原因在5.0以后比较新的版本中，原本配置中slaveof改成了replicaof，会依然保留slaveof命令，本篇使用的是5.0.3版本)</p>
-<pre><code>#端口号
-port 6666
-#保护进程启动（后台启动）
-daemonize yes
-#日志文件
-logfile &quot;6666.log&quot;
-#rdb备份文件名
-dbfilename &quot;dump-6666.rdb&quot;
-replicaof 127.0.0.1 6379</code></pre><p>启动两个实例（7777实例的配置文件按照上述套路再次执行一遍改成7777的配置）</p>
-<pre><code>redis-server redis-6666.conf
-redis-server redis-7777.conf</code></pre><p>如果上述步骤没问题的话，现在看看主节点的主从信息</p>
-<pre><code>[root@vmzq1l0l redis]# redis-cli info replication
-# Replication
-role:master
-connected_slaves:2
-slave0:ip=127.0.0.1,port=7777,state=online,offset=1699,lag=1
-slave1:ip=127.0.0.1,port=6666,state=online,offset=1699,lag=1
-master_replid:471c9174da388dee8f1ac9cd23e00e0778f7658a
-master_replid2:0000000000000000000000000000000000000000
-···</code></pre><p>6666端口实例从节点的主从信息</p>
-<pre><code>[root@vmzq1l0l redis]# redis-cli -h 127.0.0.1 -p 6666 info replication
-# Replication
-role:slave
-master_host:127.0.0.1
-master_port:6379
-master_link_status:up
-master_last_io_seconds_ago:7
-master_sync_in_progress:0
-slave_repl_offset:1867
-slave_priority:100
-slave_read_only:1
-connected_slaves:0
-master_replid:471c9174da388dee8f1ac9cd23e00e0778f7658a
-master_replid2:0000000000000000000000000000000000000000
-···</code></pre><p>至此只是完成了一主两从的主从配置</p>
-<h3 id="部署Redis-Sentinel节点"><a href="#部署Redis-Sentinel节点" class="headerlink" title="部署Redis Sentinel节点"></a>部署Redis Sentinel节点</h3><h4 id="配置Sentinel节点"><a href="#配置Sentinel节点" class="headerlink" title="配置Sentinel节点"></a>配置Sentinel节点</h4><p>redis安装目录下有个sentinel.conf这个配置文件，默认是26379端口，修改以下配置参数：</p>
-<pre><code>port 26379
-daemonize yes
-logfile &quot;26379.log&quot;
-dir /usr/local/redis
-sentinel monitor mymaster 127.0.0.1 6379 2
-sentinel down-after-milliseconds mymaster 60000
-sentinel failover-timeout mymaster 180000
-sentinel parallel-syncs mymaster 1</code></pre><ul>
-<li>sentinel monitor mymaster 127.0.0.1 6379 2配置代表sentinel节点需要监控127.0.0.1:6379这个主节点，2代表判断主节点失败至少需要2个Sentinel节点同意,mymaster是主节点的别名</li>
-<li>down-after-milliseconds 选项指定了 Sentinel 认为服务器已经断线所需的毫秒数</li>
-<li>parallel-syncs 选项指定了在执行故障转移时， 最多可以有多少个从服务器同时对新的主服务器进行同步， 这个数字越小， 完成故障转移所需的时间就越长</li>
-</ul>
-<h4 id="启动Sentinel节点"><a href="#启动Sentinel节点" class="headerlink" title="启动Sentinel节点"></a>启动Sentinel节点</h4><p>方法一，使用redis-sentinel命令：</p>
-<pre><code>redis-sentinel sentinel.conf</code></pre><p>方法二，使用redis-server命令加–sentinel参数：</p>
-<pre><code>redis-server sentinel.conf --sentinel</code></pre><p>两种方法本质上是一样的。</p>
+        <p>Redis提供了基于“发布/订阅”模式的消息机制，此种模式下，消息发布者和订阅者不进行直接通信，发布者客户端向指定的频道（channel）发布消息，订阅该频道的每个客户端都可以收到该消息</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/03/redis%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%9E%8B.png" alt></p>
+<p>和很多专业的消息队列系统（例如Kafka、RocketMQ）相比，Redis的发布订阅略显粗糙，例如无法实现消息堆积和回溯。但胜在足够简单，如果当前场景可以容忍的这些缺点，也不失为一个不错的选择</p>
+<p>Redis主要提供了发布消息、订阅频道、取消订阅以及按照模式订阅和取消订阅等命令；</p>
+<p><strong>发布消息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">publish channel message</span><br></pre></td></tr></table></figure>
 
+<p>发布一条”channel:sports”体育频道消息”James in Los Angeles”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; publish channel:sports <span class="string">"James in Los Angeles"</span>  </span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>订阅消息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subscribe channel [channel ...]</span><br></pre></td></tr></table></figure>
+
+<p>订阅消息可以订阅多条消息</p>
+<p>订阅这个体育频道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; subscribe channel:sports  </span><br><span class="line">Reading messages... (press Ctrl-C to quit)  </span><br><span class="line">1) <span class="string">"subscribe"</span>  </span><br><span class="line">2) <span class="string">"channel:sports"</span>  </span><br><span class="line">3) (<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+
+<p>此时新开一个客户端往这个频道发布一条消息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; publish channel:sports <span class="string">"Harden in Houston"</span>  </span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+
+<p>这时候这个订阅者会受到刚刚发布消息的推送</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; subscribe channel:sports  </span><br><span class="line">Reading messages... (press Ctrl-C to quit)  </span><br><span class="line">1) <span class="string">"subscribe"</span>  </span><br><span class="line">2) <span class="string">"channel:sports"</span>  </span><br><span class="line">3) (<span class="built_in">integer</span>) 1  </span><br><span class="line">1) <span class="string">"message"</span>  </span><br><span class="line">2) <span class="string">"channel:sports"</span>  </span><br><span class="line">3) <span class="string">"Harden in Houston"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>客户端在执行订阅命令之后进入了订阅状态，只能接收subscribe、psubscribe、unsubscribe、punsubscribe的四个命令</li>
+<li>新开启的订阅客户端，无法收到该频道之前的消息，因为Redis不会对发布的消息进行持久化</li>
+</ul>
+<p><strong>取消订阅</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unsubscribe channel [channel ...]</span><br></pre></td></tr></table></figure>
+
+<p>取消订阅体育频道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; unsubscribe channel:sports  </span><br><span class="line">1) <span class="string">"unsubscribe"</span>  </span><br><span class="line">2) <span class="string">"channel:sports"</span>  </span><br><span class="line">3) (<span class="built_in">integer</span>) 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>按照模式订阅和取消订阅</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">psubscribe pattern [pattern...]  </span><br><span class="line">punsubscribe [pattern [pattern ...]]</span><br></pre></td></tr></table></figure>
+
+<p>订阅以it开头的所有频道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; psubscribe it*  </span><br><span class="line">Reading messages... (press Ctrl-C to quit)  </span><br><span class="line">1) <span class="string">"psubscribe"</span>  </span><br><span class="line">2) <span class="string">"it*"</span>  </span><br><span class="line">3) (<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询订阅</strong></p>
+<p>1.查看活跃的频道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pubsub channels [pattern]</span><br></pre></td></tr></table></figure>
+
+<p>所谓活跃指的是最少有一个人订阅，其中[pattern]是可以指定具体的模式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; pubsub channels  </span><br><span class="line">1) <span class="string">"channel:sports"</span></span><br></pre></td></tr></table></figure>
+
+<p>2.查看频道订阅数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pubsub numsub [channel ...]</span><br></pre></td></tr></table></figure>
+
+<p>查询channel:sports频道订阅数是1个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; pubsub numsub channel:sports  </span><br><span class="line">1) <span class="string">"channel:sports"</span>  </span><br><span class="line">2) (<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+
+<p>3.查看模式订阅数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pubsub numpat</span><br></pre></td></tr></table></figure>
+
+<p>当前通过模式订阅的有1个客户端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; pubsub numpat  </span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -591,8 +571,8 @@ sentinel parallel-syncs mymaster 1</code></pre><ul>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/27/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-a4-8d-e5-88-b6/" rel="next" title="Redis学习笔记—主从复制">
-                <i class="fa fa-chevron-left"></i> Redis学习笔记—主从复制
+              <a href="/2019/03/22/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-e4-b8-8elua/" rel="next" title="Redis学习笔记—Redis与Lua">
+                <i class="fa fa-chevron-left"></i> Redis学习笔记—Redis与Lua
               </a>
             
           </div>
@@ -601,8 +581,8 @@ sentinel parallel-syncs mymaster 1</code></pre><ul>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/02/记一次内存溢出的调试经历，线程无限创建，直到报OOM/" rel="prev" title="记一次内存溢出的调试经历，线程无限创建，直到报OOM">
-                记一次内存溢出的调试经历，线程无限创建，直到报OOM <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-geo/" rel="prev" title="Redis学习笔记—地理信息定位（GEO）">
+                Redis学习笔记—地理信息定位（GEO） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -647,17 +627,8 @@ sentinel parallel-syncs mymaster 1</code></pre><ul>
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -859,23 +830,6 @@ sentinel parallel-syncs mymaster 1</code></pre><ul>
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主从复制的问题"><span class="nav-number">1.</span> <span class="nav-text">主从复制的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-Sentinel的高可用性"><span class="nav-number">2.</span> <span class="nav-text">Redis Sentinel的高可用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装和部署"><span class="nav-number">3.</span> <span class="nav-text">安装和部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动主节点"><span class="nav-number">3.1.</span> <span class="nav-text">启动主节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动两个从节点"><span class="nav-number">3.2.</span> <span class="nav-text">启动两个从节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署Redis-Sentinel节点"><span class="nav-number">4.</span> <span class="nav-text">部署Redis Sentinel节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Sentinel节点"><span class="nav-number">4.1.</span> <span class="nav-text">配置Sentinel节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动Sentinel节点"><span class="nav-number">4.2.</span> <span class="nav-text">启动Sentinel节点</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

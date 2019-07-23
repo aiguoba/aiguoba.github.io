@@ -94,19 +94,17 @@
 
 
 
-  <meta name="description" content="Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I/O多路复用技术来解决I/O的问题。 为何单线程还可">
+  <meta name="description" content="问题 从windows用ftp传到linux的脚本往往编码格式是dos，如果想要在linux执行，必须修改为unix编码格式 解决 vim打开要改变编码的文件，然后输入告诉我们该脚本是utf-8编码的，这种编码无法在linux运行 12:set fffileformat=dos  修改编码,保存退出 12:set ff=unix:wq">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习笔记—单线程架构">
-<meta property="og:url" content="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8d-95-e7-ba-bf-e7-a8-8b-e6-9e-b6-e6-9e-84/index.html">
+<meta property="og:title" content="linux修改Shell脚本编码格式">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/03/21/linux修改Shell脚本编码格式/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I/O多路复用技术来解决I/O的问题。 为何单线程还可">
+<meta property="og:description" content="问题 从windows用ftp传到linux的脚本往往编码格式是dos，如果想要在linux执行，必须修改为unix编码格式 解决 vim打开要改变编码的文件，然后输入告诉我们该脚本是utf-8编码的，这种编码无法在linux运行 12:set fffileformat=dos  修改编码,保存退出 12:set ff=unix:wq">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis%E4%BD%BF%E7%94%A8I_O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E8%87%AA%E8%BA%AB%E4%BA%8B%E5%81%87%E6%A8%A1%E5%9E%8B.png">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.171Z">
+<meta property="og:updated_time" content="2019-07-23T07:21:02.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习笔记—单线程架构">
-<meta name="twitter:description" content="Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I/O多路复用技术来解决I/O的问题。 为何单线程还可">
-<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis%E4%BD%BF%E7%94%A8I_O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E8%87%AA%E8%BA%AB%E4%BA%8B%E5%81%87%E6%A8%A1%E5%9E%8B.png">
+<meta name="twitter:title" content="linux修改Shell脚本编码格式">
+<meta name="twitter:description" content="问题 从windows用ftp传到linux的脚本往往编码格式是dos，如果想要在linux执行，必须修改为unix编码格式 解决 vim打开要改变编码的文件，然后输入告诉我们该脚本是utf-8编码的，这种编码无法在linux运行 12:set fffileformat=dos  修改编码,保存退出 12:set ff=unix:wq">
 
 
 
@@ -114,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8d-95-e7-ba-bf-e7-a8-8b-e6-9e-b6-e6-9e-84/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/21/linux修改Shell脚本编码格式/">
 
 
 
@@ -124,7 +122,7 @@
   };
 </script>
 
-  <title>Redis学习笔记—单线程架构 | doeat's blog</title>
+  <title>linux修改Shell脚本编码格式 | doeat's blog</title>
   
 
 
@@ -375,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-8d-95-e7-ba-bf-e7-a8-8b-e6-9e-b6-e6-9e-84/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/21/linux修改Shell脚本编码格式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -392,7 +390,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Redis学习笔记—单线程架构
+          <h2 class="post-title" itemprop="name headline">linux修改Shell脚本编码格式
 
               
             
@@ -418,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2019-03-08 10:07:51" itemprop="dateCreated datePublished" datetime="2019-03-08T10:07:51+08:00">2019-03-08</time>
+              <time title="创建时间：2019-03-21 17:08:50" itemprop="dateCreated datePublished" datetime="2019-03-21T17:08:50+08:00">2019-03-21</time>
             </span>
           
 
@@ -433,7 +431,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-07-23 15:21:02" itemprop="dateModified" datetime="2019-07-23T15:21:02+08:00">2019-07-23</time>
               </span>
             
           
@@ -447,7 +445,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a></span>
 
                 
                 
@@ -485,21 +483,14 @@
       
 
       
-        <h4 id="Redis使用单线程架构和I-O多路复用模型来实现高性能的内存数据库服务"><a href="#Redis使用单线程架构和I-O多路复用模型来实现高性能的内存数据库服务" class="headerlink" title="Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务"></a>Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务</h4><h4 id="Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I-O多路复用技术来解决I-O的问题。"><a href="#Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I-O多路复用技术来解决I-O的问题。" class="headerlink" title="Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I/O多路复用技术来解决I/O的问题。"></a>Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I/O多路复用技术来解决I/O的问题。</h4><blockquote>
-<p>为何单线程还可以这么快</p>
-</blockquote>
-<ol>
-<li>纯内存访问，Redis将所有的数据存放在内存中，内存的响应时间大约为100纳秒，这是Redis达到每秒万级别访问的重要基础</li>
-<li>非阻塞I/O，Redis使用epoll作为I/O多路复用技术的实现，再加上Redis自身的事件处理模型将epoll中的连接、读写、关闭都转为了事件，不在网络I/O上浪费过多的时间</li>
-<li>单线程避免了线程切换和竞态产生的消耗<ul>
-<li>第一，单线程可以简化数据结构和算法的实现。如果对高级编程语言熟悉的读者应该了解并发数据结构实现不但困难而且开发测试比较麻烦。</li>
-<li>第二，单线程避免了线程切换和竞态产生的消耗，对于服务端开发来说，锁和线程切换通常是性能杀手。</li>
-<li>但是单线程会有一个问题：对于每个命令的执行时间是有要求的。如果某个命令执行过长，会造成其他命令的阻塞，对于Redis这种高性能的服务来说是致命的，所以Redis是面向快速执行场景的数据库</li>
-</ul>
-</li>
-</ol>
-<p><a href="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis使用I_O多路复用和自身事假模型.png" title="Redis使用I_O多路复用和自身事假模型" target="_blank" rel="noopener"><img src="http://blog.doeat.cn/wp-content/uploads/2019/03/Redis%E4%BD%BF%E7%94%A8I_O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E8%87%AA%E8%BA%AB%E4%BA%8B%E5%81%87%E6%A8%A1%E5%9E%8B.png" alt="Redis使用I_O多路复用和自身事假模型" title="Redis使用I_O多路复用和自身事假模型"></a></p>
+        <p><strong>问题</strong></p>
+<p>从windows用ftp传到linux的脚本往往编码格式是dos，如果想要在linux执行，必须修改为unix编码格式</p>
+<p><strong>解决</strong></p>
+<p>vim打开要改变编码的文件，然后输入告诉我们该脚本是utf-8编码的，这种编码无法在linux运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:<span class="built_in">set</span> ff</span><br><span class="line">fileformat=dos</span><br></pre></td></tr></table></figure>
 
+<p>修改编码,保存退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:<span class="built_in">set</span> ff=unix</span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -529,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-9f-ba-e7-a1-80-e5-91-bd-e4-bb-a4/" rel="next" title="Redis学习笔记—初识Redis">
-                <i class="fa fa-chevron-left"></i> Redis学习笔记—初识Redis
+              <a href="/2019/03/20/Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码/" rel="next" title="Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码">
+                <i class="fa fa-chevron-left"></i> Git上别人不小心交了配置文件，和你本地不相同，如何在不revert的情况下拉到代码
               </a>
             
           </div>
@@ -539,8 +530,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-ad-97-e7-ac-a6-e4-b8-b2/" rel="prev" title="Redis学习笔记—数据类型：字符串（string）">
-                Redis学习笔记—数据类型：字符串（string） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/22/lua-e7-9a-84-e5-9f-ba-e6-9c-ac-e4-bd-bf-e7-94-a8/" rel="prev" title="Lua的基本使用">
+                Lua的基本使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -585,17 +576,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -797,23 +779,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis使用单线程架构和I-O多路复用模型来实现高性能的内存数据库服务"><span class="nav-number">1.</span> <span class="nav-text">Redis使用单线程架构和I/O多路复用模型来实现高性能的内存数据库服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I-O多路复用技术来解决I-O的问题。"><span class="nav-number">2.</span> <span class="nav-text">Redis是单线程来处理命令，所以一条命令从客户端到达服务端不会立即执行，所有命令都会进入一个队列中，然后逐个被执行，不会出现两条命令同时执行的情况，不会产生并发的问题，这就是Redis单线程的基本模型。但是发送命令、返回结果、命令排队肯定不像描述的这么简单，Redis使用I/O多路复用技术来解决I/O的问题。</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

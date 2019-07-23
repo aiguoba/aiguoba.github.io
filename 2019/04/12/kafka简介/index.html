@@ -94,19 +94,22 @@
 
 
 
-  <meta name="description" content="几乎所有的编程语言都提供了哈希（hash）类型，它们的叫法可能是哈希、字典、关联数组。在Redis中，哈希类型是指键值本身又是一个键值对结构，形如value={ {field1，value1}，…{fieldN，valueN}}  哈希类型中的映射关系叫作field-value，注意这里的value是指field对应的值，不是键对应的值，请注意value在不同上下文的作用。 设置值 hset ke">
+  <meta name="description" content="Kafka is a distributed,partitioned,replicated commit logservice。 Kafka是一个分布式、分区、复制的提交日志服务。 kafka对消息保存时根据主题（Topic）进行归类，发送消息者成为生产者（Producer）,消息接受者成为消费者（Consumer）,此外kafka集群有多个kafka实例组成，一个实例就是一个broker。无论是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习笔记—数据类型：哈希（hash）">
-<meta property="og:url" content="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-88-e5-b8-8c/index.html">
+<meta property="og:title" content="kafka简介">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/04/12/kafka简介/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="几乎所有的编程语言都提供了哈希（hash）类型，它们的叫法可能是哈希、字典、关联数组。在Redis中，哈希类型是指键值本身又是一个键值对结构，形如value={ {field1，value1}，…{fieldN，valueN}}  哈希类型中的映射关系叫作field-value，注意这里的value是指field对应的值，不是键对应的值，请注意value在不同上下文的作用。 设置值 hset ke">
+<meta property="og:description" content="Kafka is a distributed,partitioned,replicated commit logservice。 Kafka是一个分布式、分区、复制的提交日志服务。 kafka对消息保存时根据主题（Topic）进行归类，发送消息者成为生产者（Producer）,消息接受者成为消费者（Consumer）,此外kafka集群有多个kafka实例组成，一个实例就是一个broker。无论是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.171Z">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka-topic%E5%AD%98%E5%82%A8.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BE%A4%E7%BB%84%E4%BB%8E%E4%B8%BB%E9%A2%98%E8%AF%BB%E5%8F%96%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka%E9%9B%86%E7%BE%A4%E5%88%86%E5%8C%BA%E5%A4%8D%E5%88%B6.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/%E5%A4%9A%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E6%9E%B6%E6%9E%84.png">
+<meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习笔记—数据类型：哈希（hash）">
-<meta name="twitter:description" content="几乎所有的编程语言都提供了哈希（hash）类型，它们的叫法可能是哈希、字典、关联数组。在Redis中，哈希类型是指键值本身又是一个键值对结构，形如value={ {field1，value1}，…{fieldN，valueN}}  哈希类型中的映射关系叫作field-value，注意这里的value是指field对应的值，不是键对应的值，请注意value在不同上下文的作用。 设置值 hset ke">
-<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png">
+<meta name="twitter:title" content="kafka简介">
+<meta name="twitter:description" content="Kafka is a distributed,partitioned,replicated commit logservice。 Kafka是一个分布式、分区、复制的提交日志服务。 kafka对消息保存时根据主题（Topic）进行归类，发送消息者成为生产者（Producer）,消息接受者成为消费者（Consumer）,此外kafka集群有多个kafka实例组成，一个实例就是一个broker。无论是">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka-topic%E5%AD%98%E5%82%A8.png">
 
 
 
@@ -114,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-88-e5-b8-8c/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/04/12/kafka简介/">
 
 
 
@@ -124,7 +127,7 @@
   };
 </script>
 
-  <title>Redis学习笔记—数据类型：哈希（hash） | doeat's blog</title>
+  <title>kafka简介 | doeat's blog</title>
   
 
 
@@ -375,7 +378,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-93-88-e5-b8-8c/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/04/12/kafka简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -392,7 +395,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Redis学习笔记—数据类型：哈希（hash）
+          <h2 class="post-title" itemprop="name headline">kafka简介
 
               
             
@@ -418,7 +421,7 @@
                 
               
 
-              <time title="创建时间：2019-03-08 14:15:35" itemprop="dateCreated datePublished" datetime="2019-03-08T14:15:35+08:00">2019-03-08</time>
+              <time title="创建时间：2019-04-12 11:12:50" itemprop="dateCreated datePublished" datetime="2019-04-12T11:12:50+08:00">2019-04-12</time>
             </span>
           
 
@@ -447,7 +450,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
 
                 
                 
@@ -485,57 +488,16 @@
       
 
       
-        <p>几乎所有的编程语言都提供了哈希（hash）类型，它们的叫法可能是哈希、字典、关联数组。在Redis中，哈希类型是指键值本身又是一个键值对结构，形如value={ {field1，value1}，…{fieldN，valueN}} <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png" alt> 哈希类型中的映射关系叫作field-value，注意这里的value是指field对应的值，不是键对应的值，请注意value在不同上下文的作用。 <strong>设置值</strong></p>
-<p>hset key filed value</p>
-<p>为key名为user:1设置field-value</p>
-<p>127.0.0.1:6379&gt; hset user:1 name Tom<br>(integer) 1<br>127.0.0.1:6379&gt; hset user:1 age 26<br>(integer) 1</p>
-<p>Redis额外提供了hsetnx命令；hset和hsetnx的关系与set和setnx的关系类似，如果没有则添加，如果有则不作操作，只不过hsetnx是对于field操作的，setnx是相对于key来做操作 <strong>获取值</strong></p>
-<p>hget key field</p>
-<p>获取key为user:1，分别获取field为name和age的值</p>
-<p>127.0.0.1:6379&gt; hget user:1 name<br>“Tom”<br>127.0.0.1:6379&gt; hget user:1 age<br>“26”</p>
-<p><strong>删除field</strong></p>
-<p>hdel key field [field …]</p>
-<p>删除key为user:1，field为sex的值；返回的是删除的个数</p>
-<p>127.0.0.1:6379&gt; hset user:1 sex male<br>(integer) 1<br>127.0.0.1:6379&gt; hdel user:1 sex<br>(integer) 1</p>
-<p><strong>计算field个数</strong></p>
-<p>hlen key</p>
-<p>获取key为user:1的field个数</p>
-<p>127.0.0.1:6379&gt; hlen user:1<br>(integer) 2</p>
-<p><strong>批量设置field-value</strong></p>
-<p>hmset key field value [field value …]</p>
-<p>批量设置key为user:2的field-value</p>
-<p>127.0.0.1:6379&gt; hmset user:2 name Jerry age 15<br>OK</p>
-<p><strong>批量获取field-value</strong></p>
-<p>hmget key field [field …]</p>
-<p>批量获取key为user:2的field为name和age的value</p>
-<p>127.0.0.1:6379&gt; hmget user:2 name age<br>1) “Jerry”<br>2) “15”</p>
-<p><strong>判断field是否存在</strong></p>
-<p>hexists key field</p>
-<p>返回个数，没有就返回0</p>
-<p>127.0.0.1:6379&gt; hexists user:1 name<br>(integer) 1<br>127.0.0.1:6379&gt; hexists user:1 job<br>(integer) 0</p>
-<p><strong>获取所有field</strong></p>
-<p>hkeys key</p>
-<p>获取key为user:1的所有field</p>
-<p>127.0.0.1:6379&gt; hkeys user:1<br>1) “name”<br>2) “age”</p>
-<p><strong>获取所有value</strong></p>
-<p>hvals key</p>
-<p>获取key为user:1的所有value</p>
-<p>127.0.0.1:6379&gt; hkeys user:1<br>1) “name”<br>2) “age”</p>
-<p>获取所有的filed-value</p>
-<p>hgetall key</p>
-<p>获取key为user:1的所有filed-value</p>
-<p>127.0.0.1:6379&gt; hgetall user:1<br>1) “name”<br>2) “Tom”<br>3) “age”<br>4) “26”</p>
-<p>使用hgetall时如果哈希元素过多，有可能造成Redis阻塞，尽量避免使用，可以用hscan命令渐进式遍历哈希类型 <strong>计数</strong> 增加指定数字</p>
-<p>hincrby key field increment</p>
-<p>给key为user:1，filed为age的value加5</p>
-<p>127.0.0.1:6379&gt; hget user:1 age<br>“26”<br>127.0.0.1:6379&gt; hincrby user:1 age 5<br>(integer) 31</p>
-<p>增加指定浮点数</p>
-<p>hincrbyfloat key field increment</p>
-<p><strong>计算value的字符串长度</strong></p>
-<p>hstrlen key field</p>
-<p>获取key为user:1，field为name的value长度</p>
-<p>127.0.0.1:6379&gt; hstrlen user:1 name<br>(integer) 3</p>
-<p><strong>内部编码</strong> 哈希类型的内部编码有两种： ·ziplist（压缩列表）：当哈希类型元素个数小于hash-max-ziplist-entries配置（默认512个）、同时所有值都小于hash-max-ziplist-value配置（默认64字节）时，Redis会使用ziplist作为哈希的内部实现，ziplist使用更加紧凑的结构实现多个元素的连续存储，所以在节省内存方面比hashtable更加优秀。 ·hashtable（哈希表）：当哈希类型无法满足ziplist的条件时，Redis会使用hashtable作为哈希的内部实现，因为此时ziplist的读写效率会下降，而hashtable的读写时间复杂度为O（1）</p>
+        <p>Kafka is a distributed,partitioned,replicated commit logservice。 Kafka是一个分布式、分区、复制的提交日志服务。 kafka对消息保存时根据主题（Topic）进行归类，发送消息者成为生产者（Producer）,消息接受者成为消费者（Consumer）,此外kafka集群有多个kafka实例组成，一个实例就是一个broker。无论是kafka集群，还是producer和consumer都依赖于zookeeper来保证系统可用性为集群保存一些信息</p>
+<h4 id="主题（topic）和分区（partition）"><a href="#主题（topic）和分区（partition）" class="headerlink" title="主题（topic）和分区（partition）"></a><strong>主题（topic）和分区（partition）</strong></h4><p>kafka的消息通过主题（topic）来分类，一个主题（topic）可以分成若干个分区（partition），一个分区就是一个提交日志，消息以追加的方式写入分区（如下图所示），然后以先入先出的顺序读取。 一个主题一般包含若干个分区，因此无法在整个主题范围内保证消息的顺序，但是可以保证消息在单个分区的顺序。 kafka通过分区来实现数据冗余和伸缩性。分区可以分布在不同的服务器，也就是说一个主题可以横跨多个服务器，以此提供比单个服务器更强大的性能。</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka-topic%E5%AD%98%E5%82%A8.png" alt></p>
+<h4 id="生产者（producer）和消费者（consumer）"><a href="#生产者（producer）和消费者（consumer）" class="headerlink" title="生产者（producer）和消费者（consumer）"></a><strong>生产者（producer）和消费者（consumer）</strong></h4><p><strong>生产者</strong>（producer）创建消息发布到指定的主题上，生产者默认情况下将消息均衡地分布到主题的所有分区，不关系特定消息被写入到哪个分区；当然消费者也可以指定主题的分区写入。 <strong>消费者</strong>（consumer）读取消息，订阅一个或者多个主题，并按照消息生成的顺序读取他们，消费者通过检查数据的偏移量（offset）来区分已经读取过的消息。<strong>偏移量</strong>是一种元数据，是一个不断递增的整数，在创建消息时，kafka会把偏移量添加到消息里面。在给定的分区里，每个消息的偏移量都是唯一的。消费者把每个分区最后读取的消息偏移量保存在zookeeper或者kafka上，如果消费者关闭或者重启他的读取状态不会丢失。 消费者是<strong>消费者群组</strong>（consumer group）的一部分，也就是说会有一个或者多个消费者共同读取一个主题。群组保证每个分区只能被一个消费者使用（如下图所示），通过这种方式消费者可以消费一个大量消息的主题，如果一个消费者失效，其他的消费者可以接管这个失效的消费者的工作。</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BE%A4%E7%BB%84%E4%BB%8E%E4%B8%BB%E9%A2%98%E8%AF%BB%E5%8F%96%E6%B6%88%E6%81%AF.png" alt></p>
+<h4 id="broker和集群"><a href="#broker和集群" class="headerlink" title="broker和集群"></a><strong>broker和集群</strong></h4><p>一个独立的kafka服务器被称为broker。broker接收生产者的消息，为消息设置偏移量，并且提交消息到磁盘保存。broker为消费者提供服务，对读取分区的请求作出响应，返回已经提交到磁盘上的消息，硬件支持的情况下，单个broker可以轻松处理数千个分区以及每秒百万级的消息量。 broker是集群的组成部分，每个集群都有一个broker同时充当了集群控制器的角色（自动从活跃的成员中选举出来）。控制器负责管理工作，包括将分区分配给broker和监控broker。在集群中，一个分区从属于一个broker，该broker被称为分区的首领（leader）。一个分区可以分配给多个broker，这个时候会产生分区复制（如下图所示）。这种复制机制为分区提供了消息冗余，如果有一个broker失效，其他broker可以接管领导权。</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/04/kafka%E9%9B%86%E7%BE%A4%E5%88%86%E5%8C%BA%E5%A4%8D%E5%88%B6.png" alt></p>
+<p><strong>保留策略</strong>：kafka broker默认的消息保留策略要么是保留一段时间，要么保留到数据达到一定大小，当消息上限达到这些要求时，旧消息会被删除，所以根据配置消息不会无限增长保留。主题也可以单独配置自己的保留策略。</p>
+<h4 id="多集群"><a href="#多集群" class="headerlink" title="多集群"></a><strong>多集群</strong></h4><p>如果使用多个数据中心，就需要在他们之间复制消息，但是kafka的消息复制机制只能在单个集群里进行，不能在多集群中进行。 kafka提供了一个叫做MirrorMaker的工具，可以用来实现集群中的消息复制，MirrorMaker的核心组件包含一个生产者和消费者，两者间通过一个队列相连，这个消费者从一个集群读取消息，生产者把消息发送到另外一个集群上（如下图所示）。</p>
+<p><img src="http://blog.doeat.cn/wp-content/uploads/2019/04/%E5%A4%9A%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E6%9E%B6%E6%9E%84.png" alt></p>
 
       
     </div>
@@ -566,8 +528,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/08/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e5-ad-97-e7-ac-a6-e4-b8-b2/" rel="next" title="Redis学习笔记—数据类型：字符串（string）">
-                <i class="fa fa-chevron-left"></i> Redis学习笔记—数据类型：字符串（string）
+              <a href="/2019/04/11/初识kafka—发布与订阅消息系统/" rel="next" title="初识kafka—发布与订阅消息系统">
+                <i class="fa fa-chevron-left"></i> 初识kafka—发布与订阅消息系统
               </a>
             
           </div>
@@ -576,8 +538,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/08/Redis学习笔记—数据类型：列表（list）/" rel="prev" title="Redis学习笔记—数据类型：列表（list）">
-                Redis学习笔记—数据类型：列表（list） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/15/kafka生产者（producer）—— 向Kafka写入数据/" rel="prev" title="kafka生产者（producer）—— 向Kafka写入数据">
+                kafka生产者（producer）—— 向Kafka写入数据 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -622,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -825,6 +796,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#主题（topic）和分区（partition）"><span class="nav-number">1.</span> <span class="nav-text">主题（topic）和分区（partition）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者（producer）和消费者（consumer）"><span class="nav-number">2.</span> <span class="nav-text">生产者（producer）和消费者（consumer）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#broker和集群"><span class="nav-number">3.</span> <span class="nav-text">broker和集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多集群"><span class="nav-number">4.</span> <span class="nav-text">多集群</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

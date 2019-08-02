@@ -94,17 +94,17 @@
 
 
 
-  <meta name="description" content="为Animal创建接口类public interface Animal {     void sounds(); }实体类实现Animal接口public class Dog implements Animal {     @Override     public void sounds() {         System.out.println(&amp;quot;狗叫汪汪&amp;quot;);     }">
+  <meta name="description" content="为Animal创建接口类123public interface Animal &amp;#123;    void sounds();&amp;#125;  实体类实现Animal接口123456public class Dog implements Animal &amp;#123;    @Override    public void sounds() &amp;#123;        System.out.printl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象工厂模式">
 <meta property="og:url" content="http://blog.oeteo.cn/2018/07/04/抽象工厂模式/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="为Animal创建接口类public interface Animal {     void sounds(); }实体类实现Animal接口public class Dog implements Animal {     @Override     public void sounds() {         System.out.println(&amp;quot;狗叫汪汪&amp;quot;);     }">
+<meta property="og:description" content="为Animal创建接口类123public interface Animal &amp;#123;    void sounds();&amp;#125;  实体类实现Animal接口123456public class Dog implements Animal &amp;#123;    @Override    public void sounds() &amp;#123;        System.out.printl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.169Z">
+<meta property="og:updated_time" content="2019-08-02T02:45:12.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象工厂模式">
-<meta name="twitter:description" content="为Animal创建接口类public interface Animal {     void sounds(); }实体类实现Animal接口public class Dog implements Animal {     @Override     public void sounds() {         System.out.println(&amp;quot;狗叫汪汪&amp;quot;);     }">
+<meta name="twitter:description" content="为Animal创建接口类123public interface Animal &amp;#123;    void sounds();&amp;#125;  实体类实现Animal接口123456public class Dog implements Animal &amp;#123;    @Override    public void sounds() &amp;#123;        System.out.printl">
 
 
 
@@ -431,7 +431,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-08-02 10:45:12" itemprop="dateModified" datetime="2019-08-02T10:45:12+08:00">2019-08-02</time>
               </span>
             
           
@@ -483,104 +483,29 @@
       
 
       
-        <h4 id="为Animal创建接口类"><a href="#为Animal创建接口类" class="headerlink" title="为Animal创建接口类"></a>为<code>Animal</code>创建接口类</h4><pre><code>public interface Animal {
-    void sounds();
-}</code></pre><h4 id="实体类实现Animal接口"><a href="#实体类实现Animal接口" class="headerlink" title="实体类实现Animal接口"></a>实体类实现<code>Animal</code>接口</h4><pre><code>public class Dog implements Animal {
-    @Override
-    public void sounds() {
-        System.out.println(&quot;狗叫汪汪&quot;);
-    }
-}
+        <h4 id="为Animal创建接口类"><a href="#为Animal创建接口类" class="headerlink" title="为Animal创建接口类"></a>为<code>Animal</code>创建接口类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sounds</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="实体类实现Animal接口"><a href="#实体类实现Animal接口" class="headerlink" title="实体类实现Animal接口"></a>实体类实现<code>Animal</code>接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">implements</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sounds</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"狗叫汪汪"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class Cat implements Animal {
-    @Override
-    public void sounds() {
-        System.out.println(&quot;猫叫喵喵&quot;);
-    }
-}</code></pre><h4 id="为Food创建接口类"><a href="#为Food创建接口类" class="headerlink" title="为Food创建接口类"></a>为<code>Food</code>创建接口类</h4><pre><code>public interface Food {
-    void eat();
-}</code></pre><h4 id="实体类实现Food接口"><a href="#实体类实现Food接口" class="headerlink" title="实体类实现Food接口"></a>实体类实现<code>Food</code>接口</h4><pre><code>public class Bone implements Food {
-    @Override
-    public void eat() {
-        System.out.println(&quot;狗喜欢吃骨头&quot;);
-    }
-}
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">implements</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sounds</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"猫叫喵喵"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="为Food创建接口类"><a href="#为Food创建接口类" class="headerlink" title="为Food创建接口类"></a>为<code>Food</code>创建接口类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Food</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class Fish implements Food {
-    @Override
-    public void eat() {
-        System.out.println(&quot;猫喜欢吃鱼&quot;);
-    }
-}</code></pre><h4 id="为Animal和Food对象创建抽象类来获取工厂"><a href="#为Animal和Food对象创建抽象类来获取工厂" class="headerlink" title="为Animal和Food对象创建抽象类来获取工厂"></a>为<code>Animal</code>和<code>Food</code>对象创建抽象类来获取工厂</h4><pre><code>public abstract class AbstractFactory {
-    public abstract Animal getAnimal(String animal);
-    public abstract Food getFood(String food);
-}</code></pre><h4 id="为Animal和Food对象创建各自的工厂类继承AbstractFactory"><a href="#为Animal和Food对象创建各自的工厂类继承AbstractFactory" class="headerlink" title="为Animal和Food对象创建各自的工厂类继承AbstractFactory"></a>为<code>Animal</code>和<code>Food</code>对象创建各自的工厂类继承<code>AbstractFactory</code></h4><pre><code>public class AnimalFactory extends AbstractFactory{
+<h4 id="实体类实现Food接口"><a href="#实体类实现Food接口" class="headerlink" title="实体类实现Food接口"></a>实体类实现<code>Food</code>接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bone</span> <span class="keyword">implements</span> <span class="title">Food</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"狗喜欢吃骨头"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    @Override
-    public Animal getAnimal(String animal) {
-        if(&quot;cat&quot;.equals(animal)){
-            return new Cat();
-        }
-        if (&quot;dog&quot;.equals(animal)) {
-            return new Dog();
-        }
-        return null;
-    }
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fish</span> <span class="keyword">implements</span> <span class="title">Food</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"猫喜欢吃鱼"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    @Override
-    public Food getFood(String food) {
-        return null;
-    }
-}
+<h4 id="为Animal和Food对象创建抽象类来获取工厂"><a href="#为Animal和Food对象创建抽象类来获取工厂" class="headerlink" title="为Animal和Food对象创建抽象类来获取工厂"></a>为<code>Animal</code>和<code>Food</code>对象创建抽象类来获取工厂</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Animal <span class="title">getAnimal</span><span class="params">(String animal)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Food <span class="title">getFood</span><span class="params">(String food)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="为Animal和Food对象创建各自的工厂类继承AbstractFactory"><a href="#为Animal和Food对象创建各自的工厂类继承AbstractFactory" class="headerlink" title="为Animal和Food对象创建各自的工厂类继承AbstractFactory"></a>为<code>Animal</code>和<code>Food</code>对象创建各自的工厂类继承<code>AbstractFactory</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnimalFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Animal <span class="title">getAnimal</span><span class="params">(String animal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"cat"</span>.equals(animal))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Cat();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"dog"</span>.equals(animal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Dog();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Food <span class="title">getFood</span><span class="params">(String food)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class FoodFactory extends AbstractFactory {
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FoodFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Animal <span class="title">getAnimal</span><span class="params">(String animal)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Food <span class="title">getFood</span><span class="params">(String food)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"bone"</span>.equals(food))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Bone();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"fish"</span>.equals(food)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Fish();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    @Override
-    public Animal getAnimal(String animal) {
-        return null;
-    }
+<h4 id="创建一个工厂创造器-生成器类，通过传递参数来获取对应工厂"><a href="#创建一个工厂创造器-生成器类，通过传递参数来获取对应工厂" class="headerlink" title="创建一个工厂创造器/生成器类，通过传递参数来获取对应工厂"></a>创建一个工厂创造器/生成器类，通过传递参数来获取对应工厂</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryProducer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AbstractFactory <span class="title">getFactory</span><span class="params">(String choice)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"animal"</span>.equals(choice)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> AnimalFactory();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"food"</span>.equals(choice)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> FoodFactory();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    @Override
-    public Food getFood(String food) {
-        if(&quot;bone&quot;.equals(food)){
-            return new Bone();
-        }
-        if (&quot;fish&quot;.equals(food)) {
-            return new Fish();
-        }
-        return null;
-    }
-}</code></pre><h4 id="创建一个工厂创造器-生成器类，通过传递参数来获取对应工厂"><a href="#创建一个工厂创造器-生成器类，通过传递参数来获取对应工厂" class="headerlink" title="创建一个工厂创造器/生成器类，通过传递参数来获取对应工厂"></a>创建一个工厂创造器/生成器类，通过传递参数来获取对应工厂</h4><pre><code>public class FactoryProducer {
-    public static AbstractFactory getFactory(String choice){
-        if (&quot;animal&quot;.equals(choice)) {
-            return new AnimalFactory();
-        }
-        if (&quot;food&quot;.equals(choice)) {
-            return new FoodFactory();
-        }
-        return null;
-    }
-}</code></pre><h4 id="测试类检验成果"><a href="#测试类检验成果" class="headerlink" title="测试类检验成果"></a>测试类检验成果</h4><pre><code>public class AbstractFactoryDemo {
-    public static void main(String[] args) {
-        AbstractFactory animalFactory = FactoryProducer.getFactory(&quot;animal&quot;);
-        Animal dog = animalFactory.getAnimal(&quot;dog&quot;);
-        dog.sounds();
-        Animal cat = animalFactory.getAnimal(&quot;cat&quot;);
-        cat.sounds();
+<h4 id="测试类检验成果"><a href="#测试类检验成果" class="headerlink" title="测试类检验成果"></a>测试类检验成果</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactoryDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AbstractFactory animalFactory = FactoryProducer.getFactory(<span class="string">"animal"</span>);</span><br><span class="line">        Animal dog = animalFactory.getAnimal(<span class="string">"dog"</span>);</span><br><span class="line">        dog.sounds();</span><br><span class="line">        Animal cat = animalFactory.getAnimal(<span class="string">"cat"</span>);</span><br><span class="line">        cat.sounds();</span><br><span class="line"></span><br><span class="line">        AbstractFactory foodFactory = FactoryProducer.getFactory(<span class="string">"food"</span>);</span><br><span class="line">        Food bone = foodFactory.getFood(<span class="string">"bone"</span>);</span><br><span class="line">        bone.eat();</span><br><span class="line">        Food fish = foodFactory.getFood(<span class="string">"fish"</span>);</span><br><span class="line">        fish.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        AbstractFactory foodFactory = FactoryProducer.getFactory(&quot;food&quot;);
-        Food bone = foodFactory.getFood(&quot;bone&quot;);
-        bone.eat();
-        Food fish = foodFactory.getFood(&quot;fish&quot;);
-        fish.eat();
-    }
-}</code></pre><h4 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h4><pre><code>狗叫汪汪
-猫叫喵喵
-狗喜欢吃骨头
-猫喜欢吃鱼</code></pre>
+<h4 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">狗叫汪汪</span><br><span class="line">猫叫喵喵</span><br><span class="line">狗喜欢吃骨头</span><br><span class="line">猫喜欢吃鱼</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -693,7 +618,7 @@ public class FoodFactory extends AbstractFactory {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-count">228</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -709,16 +634,6 @@ public class FoodFactory extends AbstractFactory {
                     
                   
                     
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
                     
                       
                     
@@ -812,8 +727,6 @@ public class FoodFactory extends AbstractFactory {
                     
                   
                     
-                    
-                      
                     
                       
                     

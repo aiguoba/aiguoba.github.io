@@ -491,10 +491,10 @@
         <p><code>AOF(append only file)</code>持久化：以独立日志的方式记录每次写命令，重启时再重新执行AOF文件中的命令达到恢复数据的目的。AOF的主要作用是解决了数据持久化的实时性，目前已经是Redis持久化的主流方式。 </p>
 <p>开启AOF功能需要设置配置：<code>appendonly yes</code>，AOF文件名通过appendfilename配置设置，默认文件名是<code>appendonly.aof</code>。保存路径同RDB持久化方式一致，通过dir配置指定。 </p>
 <p><code>appendonly</code>默认是<code>no</code>，需要改成<code>yes</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> By default Redis asynchronously dumps the dataset on disk. This mode is</span><br><span class="line"><span class="meta">#</span> good enough in many applications, but an issue with the Redis process or</span><br><span class="line"><span class="meta">#</span> a power outage may result into a few minutes of writes lost (depending on</span><br><span class="line"><span class="meta">#</span> the configured save points).</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> The Append Only File is an alternative persistence mode that provides</span><br><span class="line"><span class="meta">#</span> much better durability. For instance using the default data fsync policy</span><br><span class="line"><span class="meta">#</span> (see later in the config file) Redis can lose just one second of writes in a</span><br><span class="line"><span class="meta">#</span> dramatic event like a server power outage, or a single write if something</span><br><span class="line"><span class="meta">#</span> wrong with the Redis process itself happens, but the operating system is</span><br><span class="line"><span class="meta">#</span> still running correctly.</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> AOF and RDB persistence can be enabled at the same time without problems.</span><br><span class="line"><span class="meta">#</span> If the AOF is enabled on startup Redis will load the AOF, that is the file</span><br><span class="line"><span class="meta">#</span> with the better durability guarantees.</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> Please check http://redis.io/topics/persistence for more information.</span><br><span class="line"></span><br><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> By default Redis asynchronously dumps the dataset on disk. This mode is</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> good enough <span class="keyword">in</span> many applications, but an issue with the Redis process or</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a power outage may result into a few minutes of writes lost (depending on</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> the configured save points).</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The Append Only File is an alternative persistence mode that provides</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> much better durability. For instance using the default data fsync policy</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (see later <span class="keyword">in</span> the config file) Redis can lose just one second of writes <span class="keyword">in</span> a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> dramatic event like a server power outage, or a single write <span class="keyword">if</span> something</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> wrong with the Redis process itself happens, but the operating system is</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> still running correctly.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> AOF and RDB persistence can be enabled at the same time without problems.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> If the AOF is enabled on startup Redis will load the AOF, that is the file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> with the better durability guarantees.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Please check http://redis.io/topics/persistence <span class="keyword">for</span> more information.</span></span><br><span class="line"></span><br><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
 
 <p>文件名，默认是<code>appendonly.aof</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> The name of the append only file (default: "appendonly.aof")</span><br><span class="line">appendfilename "appendonly.aof"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> The name of the append only file (default: <span class="string">"appendonly.aof"</span>)</span></span><br><span class="line">appendfilename "appendonly.aof"</span><br></pre></td></tr></table></figure>
 
 <p>AOF的工作流程操作：命令写入(append)、文件同步(sync)、文件重写(rewrite)、重启加载(load)，如下图</p>
 <p> <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/AOF%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" alt></p>
@@ -681,7 +681,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-count">228</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -697,16 +697,6 @@
                     
                   
                     
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
                     
                       
                     
@@ -800,8 +790,6 @@
                     
                   
                     
-                    
-                      
                     
                       
                     

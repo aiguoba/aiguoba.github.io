@@ -1743,6 +1743,17 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[Java反射]]></title>
+    <url>%2F2017%2F05%2F21%2Fjava%E5%8F%8D%E5%B0%84%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[HTML 属性]]></title>
     <url>%2F2017%2F04%2F27%2Fhtml-shu-xing%2F</url>
     <content type="text"><![CDATA[属性为HTML 元素提供附加信息HTML 属性 HTML 标签可以拥有属性。属性提供了有关HTML元素的更多的信息。 属性总是以名称/值对的形式出现，比如 name = &quot;value&quot;。 属性总是在HTML 元素的开始标签中规定。 属性实例HTML 链接由 &lt;a&gt; 标签定义。链接的地址在href属性中指定。&lt;a href = &quot;http://www.baidu.com&quot;&gt; This is a link&lt;/a&gt;HTML 提示：使用小写属性属性和属性值对大小写不敏感。万维网联盟在HTML 4 推荐标准中推荐小写的属性/属性值。而在(X)HTML 要求使用小写属性。 始终为属性值加引号属性值应该始终被包括在引号内。 ￼ ￼]]></content>

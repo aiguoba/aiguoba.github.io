@@ -100,13 +100,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="doeat&#39;s blog">
-<meta property="og:url" content="http://blog.oeteo.cn/page/9/index.html">
+  <meta name="description" content="Object类如果一个类没有指定父类，默认就是继承Object类。Object类里面共有11个方法:经常用到的equals()，toString()都是直接使用或者重写的Object里面的这些方法；另外还有final native修饰的方法：反射需要用到的getClass()，线程操作需要的notify()，notifyAll()，wait(long timeout)；还有native修饰的方法：">
+<meta name="keywords" content="Java,Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object和Objects的区别">
+<meta property="og:url" content="http://blog.oeteo.cn/2017/09/14/Object和Objects的区别/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
+<meta property="og:description" content="Object类如果一个类没有指定父类，默认就是继承Object类。Object类里面共有11个方法:经常用到的equals()，toString()都是直接使用或者重写的Object里面的这些方法；另外还有final native修饰的方法：反射需要用到的getClass()，线程操作需要的notify()，notifyAll()，wait(long timeout)；还有native修饰的方法：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T08:52:37.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="doeat&#39;s blog">
+<meta name="twitter:title" content="Object和Objects的区别">
+<meta name="twitter:description" content="Object类如果一个类没有指定父类，默认就是继承Object类。Object类里面共有11个方法:经常用到的equals()，toString()都是直接使用或者重写的Object里面的这些方法；另外还有final native修饰的方法：反射需要用到的getClass()，线程操作需要的notify()，notifyAll()，wait(long timeout)；还有native修饰的方法：">
 
 
 
@@ -114,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/page/9/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2017/09/14/Object和Objects的区别/">
 
 
 
@@ -124,7 +129,7 @@
   };
 </script>
 
-  <title>doeat's blog</title>
+  <title>Object和Objects的区别 | doeat's blog</title>
   
 
 
@@ -182,8 +187,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -369,9 +373,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -386,7 +390,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/Redis学习笔记—事务/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2017/09/14/Object和Objects的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -403,10 +407,8 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/Redis学习笔记—事务/" class="post-title-link" itemprop="url">Redis学习笔记—事务</a>
+          <h2 class="post-title" itemprop="name headline">Object和Objects的区别
+
               
             
           </h2>
@@ -431,7 +433,7 @@
                 
               
 
-              <time title="创建时间：2019-03-19 18:07:20" itemprop="dateCreated datePublished" datetime="2019-03-19T18:07:20+08:00">2019-03-19</time>
+              <time title="创建时间：2017-09-14 09:50:06" itemprop="dateCreated datePublished" datetime="2017-09-14T09:50:06+08:00">2017-09-14</time>
             </span>
           
 
@@ -446,26 +448,11 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 14:37:58" itemprop="dateModified" datetime="2019-07-23T14:37:58+08:00">2019-07-23</time>
+                <time title="修改时间：2019-08-20 16:52:37" itemprop="dateModified" datetime="2019-08-20T16:52:37+08:00">2019-08-20</time>
               </span>
             
           
 
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -498,26 +485,146 @@
       
 
       
-        
-          
-            <p>
-              事务简单理解就是一组命令要么执行，要么全部不执行，否则执行一部分数据会造成数据不一致的问题 Redis提供了简单的事务功能，不支持回滚操作，将一组需要批量执行的命令放到multi和exec两个命令之间就可以实现简单地事务功能。
+        <h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p><strong>如果一个类没有指定父类，默认就是继承Object类。</strong><br>Object类里面共有11个方法:<br>经常用到的equals()，toString()都是直接使用或者重写的Object里面的这些方法；<br>另外还有final native修饰的方法：反射需要用到的getClass()，线程操作需要的notify()，notifyAll()，wait(long timeout)；<br>还有native修饰的方法：hashCode()和clone()</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>protected Object</td>
+<td>clone()</td>
+<td>创建并返回此对象的副本</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>equals(Object obj)</td>
+<td>判断一些其他对象是否等于此</td>
+</tr>
+<tr>
+<td>protected void</td>
+<td>finalize()</td>
+<td>当垃圾收集确定不再有对该对象的引用时，垃圾收集器在对象上调用该对象</td>
+</tr>
+<tr>
+<td>Class&lt;?&gt;</td>
+<td>getClass()</td>
+<td>返回此Object的运行时类</td>
+</tr>
+<tr>
+<td>int</td>
+<td>hashCode()</td>
+<td>返回对象的哈希码值</td>
+</tr>
+<tr>
+<td>void</td>
+<td>notify()</td>
+<td>唤醒正在等待对象监视器的单个线程</td>
+</tr>
+<tr>
+<td>void</td>
+<td>notifyAll()</td>
+<td>唤醒正在等待对象监视器的所有线程</td>
+</tr>
+<tr>
+<td>String</td>
+<td>toString()</td>
+<td>返回对象的字符串表示形式</td>
+</tr>
+<tr>
+<td>void</td>
+<td>wait()</td>
+<td>导致当前线程等待，直到另一个线程调用该对象的 notify()方法或 notifyAll()方法</td>
+</tr>
+<tr>
+<td>void</td>
+<td>wait(long timeout)</td>
+<td>导致当前线程等待，直到另一个线程调用 notify()方法或该对象的 notifyAll()方法，或者指定的时间已过</td>
+</tr>
+<tr>
+<td>void</td>
+<td>wait(long timeout, int nanos)</td>
+<td>导致当前线程等待，直到另一个线程调用该对象的 notify()方法或 notifyAll()方法，或者某些其他线程中断当前线程，或一定量的实时时间</td>
+</tr>
+</tbody></table>
+<p>Object类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Object</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">registerNatives</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        registerNatives();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> Class&lt;?&gt; getClass();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">native</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getClass().getName() + <span class="string">"@"</span> + Integer.toHexString(hashCode());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> InterruptedException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nanos &lt; <span class="number">0</span> || nanos &gt; <span class="number">999999</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</span><br><span class="line">                                <span class="string">"nanosecond timeout value out of range"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nanos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            timeout++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        wait(timeout);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        wait(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-multi命令代表事务开始
-exec命令代表事务结束
-discard命
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/Redis学习笔记—事务/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+<h4 id="Objects类"><a href="#Objects类" class="headerlink" title="Objects类"></a>Objects类</h4><p>Objects类是final修饰的类，不可继承，内部方法都是static方法，从jdk1.7开始才引入了Objects类</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static <t> int</t></td>
+<td>compare(T a, T b, Comparator&lt;? super T&gt; c)</td>
+<td>如果参数a,b相同则返回0，否则返回c.compare(a, b)的结果</td>
+</tr>
+<tr>
+<td>static boolean</td>
+<td>deepEquals(Object a, Object b)</td>
+<td>对比a,b参数是否深层次相等，假定a,b为数组，对比数组的每个参数</td>
+</tr>
+<tr>
+<td>static boolean</td>
+<td>equals(Object a, Object b)</td>
+<td>对比a,b参数是否相等</td>
+</tr>
+<tr>
+<td>static int</td>
+<td>hash(Object… values)</td>
+<td>为输入值序列生成哈希码</td>
+</tr>
+<tr>
+<td>static int</td>
+<td>hashCode(Object o)</td>
+<td>返回哈希码。如果o为null则返回0</td>
+</tr>
+<tr>
+<td>static boolean</td>
+<td>isNull(Object obj)</td>
+<td>如果obj参数为null返回true</td>
+</tr>
+<tr>
+<td>static boolean</td>
+<td>nonNull(Object obj)</td>
+<td>如果obj参数不为null返回true</td>
+</tr>
+<tr>
+<td>static <t> T</t></td>
+<td>requireNonNull(T obj)</td>
+<td>检查指定的对象引用不是 null，为null报空指针错误</td>
+</tr>
+<tr>
+<td>static <t> T</t></td>
+<td>requireNonNull(T obj, String message)</td>
+<td>检查指定的对象引用不是null并抛出自定义的NullPointerException（如果是）</td>
+</tr>
+<tr>
+<td>static <t> T</t></td>
+<td>requireNonNull(T obj, Supplier<string> messageSupplier)</string></td>
+<td>检查指定的对象引用不是null并抛出一个自定义的NullPointerException（如果是）</td>
+</tr>
+<tr>
+<td>static String</td>
+<td>toString(Object o)</td>
+<td>返回对象的字符串表示形式</td>
+</tr>
+<tr>
+<td>static String</td>
+<td>toString(Object o, String nullDefault)</td>
+<td>如果第一个参数不是 null ，则返回第一个参数调用 toString的结果，否则直接将第二个参数nullDefault返回</td>
+</tr>
+</tbody></table>
+<p>Objects类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.function.Supplier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Objects</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Objects</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">"No java.util.Objects instances for you!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object a, Object b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (a == b) || (a != <span class="keyword">null</span> &amp;&amp; a.equals(b));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">deepEquals</span><span class="params">(Object a, Object b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a == b)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (a == <span class="keyword">null</span> || b == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> Arrays.deepEquals0(a, b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> o != <span class="keyword">null</span> ? o.hashCode() : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object... values)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.hashCode(values);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.valueOf(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toString</span><span class="params">(Object o, String nullDefault)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (o != <span class="keyword">null</span>) ? o.toString() : nullDefault;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(T a, T b, Comparator&lt;? <span class="keyword">super</span> T&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (a == b) ? <span class="number">0</span> :  c.compare(a, b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">requireNonNull</span><span class="params">(T obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">requireNonNull</span><span class="params">(T obj, String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(message);</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isNull</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj == <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">nonNull</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj != <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">requireNonNull</span><span class="params">(T obj, Supplier&lt;String&gt; messageSupplier)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(messageSupplier.get());</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -538,390 +645,45 @@ discard命
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
         
+          
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/" class="post-title-link" itemprop="url">Redis学习笔记—Pipeline</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
+        <div class="post-tags">
           
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
+            <a href="/tags/Java基础/" rel="tag"># Java基础</a>
           
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 17:22:22" itemprop="dateCreated datePublished" datetime="2019-03-19T17:22:22+08:00">2019-03-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-            <p>
-              Redis客户端执行一条命令分为如下四个过程
-
-
-发送命令
-命令排队
-执行命令
-返回结果
-
-无论网络延如何延时，数据包总是能从客户端到达服务器，并从服务器返回数据回复客户端，这样的从1~4所需要的时间称为Round Trip Time（RTT，往返时间） Redis提供了批量操作命令（例如mget、
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-pipeline/#more" rel="contents">
-                阅读全文 &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/01/多态/" rel="next" title="多态">
+                <i class="fa fa-chevron-left"></i> 多态
               </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-benchmark详解</a>
-              
             
-          </h2>
-        
+          </div>
 
-        <div class="post-meta">
+          <span class="post-nav-divider"></span>
 
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 16:41:20" itemprop="dateCreated datePublished" datetime="2019-03-19T16:41:20+08:00">2019-03-19</time>
-            </span>
-          
-
-          
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2017/11/28/DNS解析/" rel="prev" title="DNS解析">
+                DNS解析 <i class="fa fa-chevron-right"></i>
+              </a>
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>
-              redis-benchmark可以为Redis做基准性能测试，它提供了很多选项帮助开发和运维人员测试Redis的相关性能
--c
--c（clients）选项代表客户端的并发量（默认50）
--n
--n（num）选项代表客户端请求数量（默认100000）
-例如测试100个客户端一共请求20000次
-[ro
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-benchmark-e8-af-a6-e8-a7-a3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -931,384 +693,15 @@ discard命
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-server详解</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 16:32:15" itemprop="dateCreated datePublished" datetime="2019-03-19T16:32:15+08:00">2019-03-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              redis-server除了启动Redis外，还有一个–test-memory选项。redis-server –test-memory可以用来检测当前操作系统能否稳定地分配指定容量的内存给Redis，通过这种检测可以有效避免因为内存问题造成Redis崩溃，例如下面操作检测当前操作系统能否提供1G的内
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-server-e8-af-a6-e8-a7-a3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charlie">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/doe50.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="doeat's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/" class="post-title-link" itemprop="url">Redis学习笔记—redis-cli详解</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-19 16:17:33" itemprop="dateCreated datePublished" datetime="2019-03-19T16:17:33+08:00">2019-03-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              输入 redis-cli 连接到命令行客户端（默认host=127.0.0.1，port=6379）
-[root@vmzq1l0l ~]# redis-cli127.0.0.1:6379&gt; 
--h
--h（host：主机）选项代表主机IP，不输入默认为127.0.0.1
-[root@vmzq1l
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/19/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-redis-cli-e8-af-a6-e8-a7-a3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1328,8 +721,17 @@ discard命
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1542,6 +944,23 @@ discard命
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object类"><span class="nav-number">1.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Objects类"><span class="nav-number">2.</span> <span class="nav-text">Objects类</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -1681,6 +1100,10 @@ discard命
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -1696,6 +1119,8 @@ discard命
 
   
 
+
+  
 
 
   

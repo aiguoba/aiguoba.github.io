@@ -1282,7 +1282,7 @@
   <entry>
     <title><![CDATA[df和du命令—查看磁盘和文件大小]]></title>
     <url>%2F2018%2F03%2F25%2Fdf%E5%92%8Cdu%E5%91%BD%E4%BB%A4%E2%80%94%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%2F</url>
-    <content type="text"><![CDATA[df作用：报告文件系统磁盘空间使用情况，格式如下： df [OPTION]... [FILE]...选项 作用 -a 查看包括虚拟文件系统 –total 统计总量 -h 以一种友好的格式展示大小(例如：1K，234M，2G) -H 跟-h类似，只不过换算是用1000不是1024 -i 以inode模式显示磁盘使用情况 -t 显示指定类型磁盘。例如：df -ht ext4 常用举例： 查看硬盘大小 df -h查看当前所在目录硬盘大小 df -h .du作用：估计文件空间使用率，格式如下 du [OPTION]... [FILE]... du [OPTION]... --files0-from=F选项 作用 -a 列出所有文件的写入计数，而不仅仅是目录 -s 只显示每个参数的合计,不列出下级目录的文件，与-a冲突 -d, –max-depth=N 查看N级目录层级的数据。例如:“du -ahd2 /tmp/”表示列出tmp目录和他一层子目录的所有文件大小；“du -ahd2 /tmp/“等同于”du -ah –max-depth=2 /tmp/“ -h 以一种友好的格式展示大小(例如：1K，234M，2G) -c 统计总量 常用举例： 查看文件或者文件夹大小 du -sh file]]></content>
+    <content type="text"><![CDATA[df作用：报告文件系统磁盘空间使用情况，格式如下： df [OPTION]... [FILE]...选项 作用 -a 查看包括虚拟文件系统 –total 统计总量 -h 以一种友好的格式展示大小(例如：1K，234M，2G) -H 跟-h类似，只不过换算是用1000不是1024 -i 以inode模式显示磁盘使用情况 -t 显示指定类型磁盘。例如：df -ht ext4 常用举例： 查看硬盘大小 df -h查看当前所在目录硬盘大小 df -h .du作用：估计文件空间使用率，格式如下 du [OPTION]... [FILE]... du [OPTION]... --files0-from=F选项 作用 -a 列出所有文件的写入计数，而不仅仅是目录 -s 只显示每个参数的合计,不列出下级目录的文件，与-a冲突 -d, –max-depth=N 查看N级目录层级的数据。例如:“du -ahd2 /tmp/”表示列出tmp目录和他一层子目录的所有文件大小；“du -ahd2 /tmp/“等同于”du -ah –max-depth=2 /tmp/“ -h 以一种友好的格式展示大小(例如：1K，234M，2G) -c 统计总量 常用举例： 查看文件或者文件夹大小 1du -sh file]]></content>
       <categories>
         <category>Linux命令</category>
       </categories>

@@ -248,7 +248,7 @@
   </entry>
   <entry>
     <title><![CDATA[Redis学习笔记—Java客户端]]></title>
-    <url>%2F2019%2F03%2F26%2Fredis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-java-e5-ae-a2-e6-88-b7-e7-ab-af%2F</url>
+    <url>%2F2019%2F03%2F26%2FRedis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94Java%E5%AE%A2%E6%88%B7%E7%AB%AF%2F</url>
     <content type="text"><![CDATA[现在spring-boot项目直接使用spring-data-redis和配置文件的方式非常的方便快捷，不算复杂，jedis作为之前java使用率非常高的redis java客户端，在此稍做介绍： Jedis可以通过new一个Jedis对象直接连接，不建议使用，可用于本地测试 Jedis直连代码举例： //不建议使用Jedis jedis = new Jedis(“127.0.0.1”,6379);jedis.set(key,value)jedis.close() 一般使用连接池的方式对Jedis连接进行管理，所有Jedis对象预先放在池子中（JedisPool），每次要连接Redis，只需要在池子中借，用完了再归还给池子，流程如下图，具体可以参考下面给出的文档 Jedis工具类参考这篇文章 官方文档 http://tool.oschina.net/uploads/apidocs/ 网友智慧结晶（现成的工具类） https://blog.csdn.net/liuxiao723846/article/details/50401406 spring-data-redis整合参考下面 官方文档 https://spring.io/projects/spring-data-redishttps://www.cnblogs.com/phil_jing/p/7468586.html 网友智慧结晶 https://www.cnblogs.com/phil_jing/p/7468586.html]]></content>
       <categories>
         <category>redis</category>
@@ -1105,7 +1105,7 @@
   <entry>
     <title><![CDATA[在Centos7安装Git]]></title>
     <url>%2F2018%2F05%2F16%2F%E5%9C%A8Centos7%E5%AE%89%E8%A3%85Git%2F</url>
-    <content type="text"><![CDATA[本机上可能自带git，先不管卸载之 yum remove git先安装所需要的依赖工具 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 wget https://github.com/git/git/archive/v2.22.0-rc0.tar.gz解压并进入解压目录 tar -zxf v2.22.0-rc0.tar.gz cd git-2.22.0-rc0/编译安装 make prefix=/usr/local all make prefix=/usr/local install如果是按照上面步骤编译安装在 /usr/local 目录了，教程到此结束，执行命令验证安装 git --version如果安装在其他目录需要添加环境变量，添加环境变量 vim /etc/profile添加下面这行（比如git安装在/home/git目录下） export PATH=$PATH:/home/git/bin刷新环境变量 source /etc/profile]]></content>
+    <content type="text"><![CDATA[本机上可能自带git，先不管卸载之 1yum remove git 先安装所需要的依赖工具 1yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel 下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 1wget https://github.com/git/git/archive/v2.22.0-rc0.tar.gz 解压并进入解压目录 12tar -zxf v2.22.0-rc0.tar.gzcd git-2.22.0-rc0/ 编译安装 12make prefix=/usr/local allmake prefix=/usr/local install 如果是按照上面步骤编译安装在 /usr/local 目录了，教程到此结束，执行命令验证安装 1git --version 如果安装在其他目录需要添加环境变量，添加环境变量 1vim /etc/profile 添加下面这行（比如git安装在/home/git目录下） 1export PATH=$PATH:/home/git/bin 刷新环境变量 1source /etc/profile]]></content>
       <categories>
         <category>Git</category>
       </categories>

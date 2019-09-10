@@ -100,17 +100,17 @@
 
 
 
-  <meta name="description" content="本机上可能自带git，先不管卸载之 yum remove git先安装所需要的依赖工具 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 wget https://github.com/git/git/archive/v2.22.0-rc0">
+  <meta name="description" content="本机上可能自带git，先不管卸载之 1yum remove git  先安装所需要的依赖工具 1yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel  下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 1wget https://github.com/git/git/archive/v2.2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Centos7安装Git">
 <meta property="og:url" content="http://blog.oeteo.cn/2018/05/16/在Centos7安装Git/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="本机上可能自带git，先不管卸载之 yum remove git先安装所需要的依赖工具 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 wget https://github.com/git/git/archive/v2.22.0-rc0">
+<meta property="og:description" content="本机上可能自带git，先不管卸载之 1yum remove git  先安装所需要的依赖工具 1yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel  下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 1wget https://github.com/git/git/archive/v2.2">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.168Z">
+<meta property="og:updated_time" content="2019-09-10T08:46:34.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Centos7安装Git">
-<meta name="twitter:description" content="本机上可能自带git，先不管卸载之 yum remove git先安装所需要的依赖工具 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 wget https://github.com/git/git/archive/v2.22.0-rc0">
+<meta name="twitter:description" content="本机上可能自带git，先不管卸载之 1yum remove git  先安装所需要的依赖工具 1yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel  下载自己需要的版本：访问链接。此处这里下载的版本是2.22.0 1wget https://github.com/git/git/archive/v2.2">
 
 
 
@@ -447,7 +447,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-09-10 16:46:34" itemprop="dateModified" datetime="2019-09-10T16:46:34+08:00">2019-09-10</time>
               </span>
             
           
@@ -500,17 +500,31 @@
 
       
         <p>本机上可能自带git，先不管卸载之</p>
-<pre><code>yum remove git</code></pre><p>先安装所需要的依赖工具</p>
-<pre><code>yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</code></pre><p>下载自己需要的版本：<a href="https://github.com/git/git/releases" title="访问链接" target="_blank" rel="noopener">访问链接</a>。此处这里下载的版本是2.22.0</p>
-<pre><code>wget https://github.com/git/git/archive/v2.22.0-rc0.tar.gz</code></pre><p>解压并进入解压目录</p>
-<pre><code>tar -zxf v2.22.0-rc0.tar.gz
-cd git-2.22.0-rc0/</code></pre><p>编译安装</p>
-<pre><code>make prefix=/usr/local all
-make prefix=/usr/local install</code></pre><p>如果是按照上面步骤编译安装在 /usr/local 目录了，教程到此结束，执行命令验证安装</p>
-<pre><code>git --version</code></pre><p>如果安装在其他目录需要添加环境变量，添加环境变量</p>
-<pre><code>vim /etc/profile</code></pre><p>添加下面这行（比如git安装在/home/git目录下）</p>
-<pre><code>export PATH=$PATH:/home/git/bin</code></pre><p>刷新环境变量</p>
-<pre><code>source /etc/profile</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure>
+
+<p>先安装所需要的依赖工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</span><br></pre></td></tr></table></figure>
+
+<p>下载自己需要的版本：<a href="https://github.com/git/git/releases" title="访问链接" target="_blank" rel="noopener">访问链接</a>。此处这里下载的版本是2.22.0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/git/git/archive/v2.22.0-rc0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压并进入解压目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf v2.22.0-rc0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> git-2.22.0-rc0/</span><br></pre></td></tr></table></figure>
+
+<p>编译安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make prefix=/usr/<span class="built_in">local</span> all</span><br><span class="line">make prefix=/usr/<span class="built_in">local</span> install</span><br></pre></td></tr></table></figure>
+
+<p>如果是按照上面步骤编译安装在 /usr/local 目录了，教程到此结束，执行命令验证安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p>如果安装在其他目录需要添加环境变量，添加环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>添加下面这行（比如git安装在/home/git目录下）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/git/bin</span><br></pre></td></tr></table></figure>
+
+<p>刷新环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
       
     </div>
 

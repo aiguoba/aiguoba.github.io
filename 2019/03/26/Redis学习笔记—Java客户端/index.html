@@ -100,19 +100,19 @@
 
 
 
-  <meta name="description" content="Redis制定了RESP（REdis Serialization Protocol，Redis序列化协议）实现客户端与服务端的正常交互，这种协议简单高效，既能够被机器解析，又容易被人类识别 发送命令格式RESP的规定一条命令的格式如下，CRLF代表”\r\n” *&amp;lt; 参数数量 &amp;gt; CRLF $&amp;lt; 参数 1 的字节数量 &amp;gt; CRLF &amp;lt; 参数 1&amp;gt; CRLF ..">
+  <meta name="description" content="现在spring-boot项目直接使用spring-data-redis和配置文件的方式非常的方便快捷，不算复杂，jedis作为之前java使用率非常高的redis java客户端，在此稍做介绍： Jedis可以通过new一个Jedis对象直接连接，不建议使用，可用于本地测试 Jedis直连代码举例： //不建议使用Jedis jedis = new Jedis(“127.0.0.1”,6379)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis学习笔记—客户端通讯协议RESP">
-<meta property="og:url" content="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—客户端通讯协议RESP/index.html">
+<meta property="og:title" content="Redis学习笔记—Java客户端">
+<meta property="og:url" content="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—Java客户端/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="Redis制定了RESP（REdis Serialization Protocol，Redis序列化协议）实现客户端与服务端的正常交互，这种协议简单高效，既能够被机器解析，又容易被人类识别 发送命令格式RESP的规定一条命令的格式如下，CRLF代表”\r\n” *&amp;lt; 参数数量 &amp;gt; CRLF $&amp;lt; 参数 1 的字节数量 &amp;gt; CRLF &amp;lt; 参数 1&amp;gt; CRLF ..">
+<meta property="og:description" content="现在spring-boot项目直接使用spring-data-redis和配置文件的方式非常的方便快捷，不算复杂，jedis作为之前java使用率非常高的redis java客户端，在此稍做介绍： Jedis可以通过new一个Jedis对象直接连接，不建议使用，可用于本地测试 Jedis直连代码举例： //不建议使用Jedis jedis = new Jedis(“127.0.0.1”,6379)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://blog.doeat.cn/wp-content/uploads/2019/03/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BD%BF%E7%94%A8RESP%E6%A0%87%E5%87%86%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92-1.png">
+<meta property="og:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/jedis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.png">
 <meta property="og:updated_time" content="2019-07-18T05:42:10.172Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis学习笔记—客户端通讯协议RESP">
-<meta name="twitter:description" content="Redis制定了RESP（REdis Serialization Protocol，Redis序列化协议）实现客户端与服务端的正常交互，这种协议简单高效，既能够被机器解析，又容易被人类识别 发送命令格式RESP的规定一条命令的格式如下，CRLF代表”\r\n” *&amp;lt; 参数数量 &amp;gt; CRLF $&amp;lt; 参数 1 的字节数量 &amp;gt; CRLF &amp;lt; 参数 1&amp;gt; CRLF ..">
-<meta name="twitter:image" content="https://blog.doeat.cn/wp-content/uploads/2019/03/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BD%BF%E7%94%A8RESP%E6%A0%87%E5%87%86%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92-1.png">
+<meta name="twitter:title" content="Redis学习笔记—Java客户端">
+<meta name="twitter:description" content="现在spring-boot项目直接使用spring-data-redis和配置文件的方式非常的方便快捷，不算复杂，jedis作为之前java使用率非常高的redis java客户端，在此稍做介绍： Jedis可以通过new一个Jedis对象直接连接，不建议使用，可用于本地测试 Jedis直连代码举例： //不建议使用Jedis jedis = new Jedis(“127.0.0.1”,6379)">
+<meta name="twitter:image" content="http://blog.doeat.cn/wp-content/uploads/2019/03/jedis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.png">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—客户端通讯协议RESP/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—Java客户端/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>Redis学习笔记—客户端通讯协议RESP | doeat's blog</title>
+  <title>Redis学习笔记—Java客户端 | doeat's blog</title>
   
 
 
@@ -391,7 +391,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—客户端通讯协议RESP/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2019/03/26/Redis学习笔记—Java客户端/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -408,7 +408,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Redis学习笔记—客户端通讯协议RESP
+          <h2 class="post-title" itemprop="name headline">Redis学习笔记—Java客户端
 
               
             
@@ -434,7 +434,7 @@
                 
               
 
-              <time title="创建时间：2019-03-26 10:24:20" itemprop="dateCreated datePublished" datetime="2019-03-26T10:24:20+08:00">2019-03-26</time>
+              <time title="创建时间：2019-03-26 15:39:17" itemprop="dateCreated datePublished" datetime="2019-03-26T15:39:17+08:00">2019-03-26</time>
             </span>
           
 
@@ -501,23 +501,9 @@
       
 
       
-        <p>Redis制定了RESP（REdis Serialization Protocol，Redis序列化协议）实现客户端与服务端的正常交互，这种协议简单高效，既能够被机器解析，又容易被人类识别</p>
-<h4 id="发送命令格式"><a href="#发送命令格式" class="headerlink" title="发送命令格式"></a>发送命令格式</h4><p>RESP的规定一条命令的格式如下，CRLF代表”\r\n”</p>
-<pre><code>*&lt; 参数数量 &gt; CRLF
-$&lt; 参数 1 的字节数量 &gt; CRLF
-&lt; 参数 1&gt; CRLF
-...
-$&lt; 参数 N 的字节数量 &gt; CRLF
-&lt; 参数 N&gt; CRLF</code></pre><p>以set hell world这条命令进行说明，参数数量为3个，因此第一行为：</p>
-<pre><code>*3</code></pre><p>参数字节数分别是355，因此后面几行为：</p>
-<pre><code>$3
-SET
-$5
-hello
-$5
-world</code></pre><p>这样传输的格式就是：</p>
-<pre><code>*3\r\n$3\r\nSET\r\n$5\r\nhello\r\n$5\r\nworld\r\n</code></pre><h4 id="返回结果格式"><a href="#返回结果格式" class="headerlink" title="返回结果格式"></a>返回结果格式</h4><p>Redis的返回结果类型分为以下五种: - 状态回复：在RESP中第一个字节为”+” - 错误回复：在RESP中第一个字节为”-“ - 整数回复：在RESP中第一个字节为”：” - 字符串回复：在RESP中第一个字节为”$” - 多条字符串回复：在RESP中第一个字节为”*”</p>
-<p><img src="https://blog.doeat.cn/wp-content/uploads/2019/03/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BD%BF%E7%94%A8RESP%E6%A0%87%E5%87%86%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92-1.png" alt></p>
+        <p>现在spring-boot项目直接使用spring-data-redis和配置文件的方式非常的方便快捷，不算复杂，jedis作为之前java使用率非常高的redis java客户端，在此稍做介绍： Jedis可以通过new一个Jedis对象直接连接，不建议使用，可用于本地测试 Jedis直连代码举例：</p>
+<p>//不建议使用<br>Jedis jedis = new Jedis(“127.0.0.1”,6379);<br>jedis.set(key,value)<br>jedis.close()</p>
+<p>一般使用连接池的方式对Jedis连接进行管理，所有Jedis对象预先放在池子中（JedisPool），每次要连接Redis，只需要在池子中借，用完了再归还给池子，流程如下图，具体可以参考下面给出的文档 <img src="http://blog.doeat.cn/wp-content/uploads/2019/03/jedis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.png" alt> <strong>Jedis</strong>工具类参考这篇文章 官方文档 <a href="http://tool.oschina.net/uploads/apidocs/" target="_blank" rel="noopener">http://tool.oschina.net/uploads/apidocs/</a> 网友智慧结晶（现成的工具类） <a href="https://blog.csdn.net/liuxiao723846/article/details/50401406" target="_blank" rel="noopener">https://blog.csdn.net/liuxiao723846/article/details/50401406</a> <strong>spring-data-redis</strong>整合参考下面 官方文档 <a href="https://spring.io/projects/spring-data-redishttps://www.cnblogs.com/phil_jing/p/7468586.html" target="_blank" rel="noopener">https://spring.io/projects/spring-data-redishttps://www.cnblogs.com/phil_jing/p/7468586.html</a> 网友智慧结晶 <a href="https://www.cnblogs.com/phil_jing/p/7468586.html" target="_blank" rel="noopener">https://www.cnblogs.com/phil_jing/p/7468586.html</a></p>
 
       
     </div>
@@ -548,8 +534,8 @@ world</code></pre><p>这样传输的格式就是：</p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/25/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-geo/" rel="next" title="Redis学习笔记—地理信息定位（GEO）">
-                <i class="fa fa-chevron-left"></i> Redis学习笔记—地理信息定位（GEO）
+              <a href="/2019/03/26/Redis学习笔记—客户端通讯协议RESP/" rel="next" title="Redis学习笔记—客户端通讯协议RESP">
+                <i class="fa fa-chevron-left"></i> Redis学习笔记—客户端通讯协议RESP
               </a>
             
           </div>
@@ -558,8 +544,8 @@ world</code></pre><p>这样传输的格式就是：</p>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/26/Redis学习笔记—Java客户端/" rel="prev" title="Redis学习笔记—Java客户端">
-                Redis学习笔记—Java客户端 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/26/redis-e5-ad-a6-e4-b9-a0-e7-ac-94-e8-ae-b0-e6-8c-81-e4-b9-85-e5-8c-96-e6-9c-ba-e5-88-b6-e4-b9-8brdb/" rel="prev" title="Redis学习笔记—持久化机制之RDB">
+                Redis学习笔记—持久化机制之RDB <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,17 +590,8 @@ world</code></pre><p>这样传输的格式就是：</p>
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -826,23 +803,6 @@ world</code></pre><p>这样传输的格式就是：</p>
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#发送命令格式"><span class="nav-number">1.</span> <span class="nav-text">发送命令格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回结果格式"><span class="nav-number">2.</span> <span class="nav-text">返回结果格式</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

@@ -100,17 +100,17 @@
 
 
 
-  <meta name="description" content="索引：索引是数据结构；最简单的索引相当于书的目录，通过目录找书本章节内容，顺序结构 索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引 唯一索引(Unique)：索引列的值必须唯一，但允许有空值 复合索引：即一个索引包含多个列 聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（">
+  <meta name="description" content="索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引  唯一索引(Unique)：索引列的值必须唯一，但允许有空值  复合索引：即一个索引包含多个列  聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL索引优化">
-<meta property="og:url" content="http://blog.oeteo.cn/2018/08/13/mysql-e4-bc-98-e5-8c-96-e5-ae-9e-e6-88-98/index.html">
+<meta property="og:url" content="http://blog.oeteo.cn/2018/08/13/MySQL索引优化/index.html">
 <meta property="og:site_name" content="doeat&#39;s blog">
-<meta property="og:description" content="索引：索引是数据结构；最简单的索引相当于书的目录，通过目录找书本章节内容，顺序结构 索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引 唯一索引(Unique)：索引列的值必须唯一，但允许有空值 复合索引：即一个索引包含多个列 聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（">
+<meta property="og:description" content="索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引  唯一索引(Unique)：索引列的值必须唯一，但允许有空值  复合索引：即一个索引包含多个列  聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（技术">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-18T05:42:10.170Z">
+<meta property="og:updated_time" content="2019-10-10T09:30:44.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL索引优化">
-<meta name="twitter:description" content="索引：索引是数据结构；最简单的索引相当于书的目录，通过目录找书本章节内容，顺序结构 索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引 唯一索引(Unique)：索引列的值必须唯一，但允许有空值 复合索引：即一个索引包含多个列 聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（">
+<meta name="twitter:description" content="索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引  唯一索引(Unique)：索引列的值必须唯一，但允许有空值  复合索引：即一个索引包含多个列  聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（技术">
 
 
 
@@ -118,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://blog.oeteo.cn/2018/08/13/mysql-e4-bc-98-e5-8c-96-e5-ae-9e-e6-88-98/">
+  <link rel="canonical" href="http://blog.oeteo.cn/2018/08/13/MySQL索引优化/">
 
 
 
@@ -389,7 +389,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/13/mysql-e4-bc-98-e5-8c-96-e5-ae-9e-e6-88-98/">
+    <link itemprop="mainEntityOfPage" href="http://blog.oeteo.cn/2018/08/13/MySQL索引优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charlie">
@@ -447,7 +447,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 13:42:10" itemprop="dateModified" datetime="2019-07-18T13:42:10+08:00">2019-07-18</time>
+                <time title="修改时间：2019-10-10 17:30:44" itemprop="dateModified" datetime="2019-10-10T17:30:44+08:00">2019-10-10</time>
               </span>
             
           
@@ -499,7 +499,137 @@
       
 
       
-        <p><strong>索引</strong>：索引是数据结构；最简单的索引相当于书的目录，通过目录找书本章节内容，顺序结构 索引分类 普通索引：只有一个索引只包含一个列，一个表可以有多个单列索引 唯一索引(Unique)：索引列的值必须唯一，但允许有空值 复合索引：即一个索引包含多个列 聚簇索引：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（技术上来说就是B+Tree）和数据行。 非聚簇索引：不是聚簇索引就是非聚簇索引 Show global variables like “%datadir%”; 基础语法:略 查看索引：show index from 表名; 创建索引： ①CREATE UNIQUE INDEX 索引名 ON 表名(字段名); ②ALTER TABLE 表名 add UNIQUE 索引名(字段名); 删除索引：DROP INDEX 索引名 ON 表名; <strong>执行计划</strong> 执行计划是什么：使用explain关键字可以模拟优化器执行SQL查询语句，从而知道MySQL是如何处理你的SQL语句的。分析你的查询语句或是表结构的性能瓶颈 possible_keys：可能有索引 key：SQL用到了索引，key就是有值的 <strong>key_len</strong>：表示索引使用的字节数 索引长度，可以衡量索引是否生效，比如explain select * from t1 where col1 = ‘ab’;会查出key_len为13，如果explain select * from t1 where col1 = ‘ab’ and col2 = ‘cd’;会查出key_len为26，说明用了两个索引 索引在char和varchar建立 Utf-8占三位字符 varchar(n)变长字段+不允许NULL = n<em>(utf-8=3,gbk=2,latin=1)+2 *</em>ref<strong>表示哪一列用到了索引 **优化实战</strong> <strong>1.全职匹配</strong> <strong>2.最佳左前缀法则</strong>：如果索引是多个，要遵循此原则。指的是查询从索引的最左边开始并且不跳过字段。如果聚合索引是name,age,postion三个字段的聚合索引；那如果通过age和postion查询，那索引会失效，因为name头不在了，无法走索引 <strong>3.不能再索引列上做任何操作</strong>（计算，函数，），会跳过索引 <strong>4.范围条件放最后</strong>：存储引擎不能使用索引中范围条件右边的列 比如 select * from staffs where name = “张三” and age &gt;15 and postion = “上海” 这样的话只会走name和age两个索引，因为age做了范围搜索之后就不在进入索引 <strong>5.尽量使用覆盖索引</strong>：只访问索引的查询，减少“select <em>”的</em>；比如只查询name，age，postion三个参数，那就不要用select * from~ 而是  select name,age,postion from staffs where~ <strong>6.不等于要慎用</strong>：mysql在使用不等于（！=或&lt;&gt;）的时候无法使用索引，会导致全表扫描； select * from staffs where name != “张三” 这样无法使用索引 select name,age,postion from staffs where name != “张三” 这样使用了上面的覆盖索引原则，这样可以使用索引 <strong>7.Null/Not有影响</strong> : select * from staffs where name is not null; 是否会全表扫描要根据字段来决定；如果查询的字段没有设置为 not null那就不会全表扫描 <strong>8.Like查询要当心</strong>：左模糊查询会造成全表扫描，避免使用左模糊查询；但是实际项目无法避免，所以要用到之前的覆盖索引原则 <strong>9.字符串不加单引号索引失效</strong>：如果数据类型是varchar那一定要在查询条件上加上引号；如果不用引号那就会全表扫描 <strong>10.OR改UNION效率高</strong>：能用union就不要用or，用or会导致索引失效</p>
+        <h4 id="索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构"><a href="#索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构" class="headerlink" title="索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构"></a>索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构</h4><h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
+<li><p><strong>普通索引</strong>：只有一个索引只包含一个列，一个表可以有多个单列索引</p>
+</li>
+<li><p><strong>唯一索引(Unique)</strong>：索引列的值必须唯一，但允许有空值</p>
+</li>
+<li><p><strong>复合索引</strong>：即一个索引包含多个列</p>
+</li>
+<li><p><strong>聚簇索引</strong>：并不是一种单独的索引类型，而是一种数据存储方式。具体细节取决于不同的实现，InnoDB的聚簇索引其实就是在同一个结构中保存了B-Tree索引（技术上来说就是B+Tree）和数据行。</p>
+</li>
+<li><p><strong>非聚簇索引</strong>：不是聚簇索引就是非聚簇索引</p>
+</li>
+</ul>
+<h4 id="查看索引："><a href="#查看索引：" class="headerlink" title="查看索引："></a>查看索引：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建索引："><a href="#创建索引：" class="headerlink" title="创建索引："></a>创建索引：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> 索引名 <span class="keyword">ON</span> 表名(字段名);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">add</span> <span class="keyword">UNIQUE</span> 索引名(字段名);</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除索引："><a href="#删除索引：" class="headerlink" title="删除索引："></a>删除索引：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> 索引名 <span class="keyword">ON</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行计划"><a href="#执行计划" class="headerlink" title="执行计划"></a>执行计划</h4><p>执行计划是什么：使用explain关键字可以模拟优化器执行SQL查询语句，从而知道MySQL是如何处理你的SQL语句的。分析你的查询语句或是表结构的性能瓶颈。</p>
+<p>比如查看一条SQL的执行计划，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> grade <span class="keyword">WHERE</span> course = <span class="string">"语文"</span></span><br></pre></td></tr></table></figure>
+
+<p>会展示如下信息</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>select_type</th>
+<th>table</th>
+<th>type</th>
+<th>possible_keys</th>
+<th>key</th>
+<th>key_len</th>
+<th>ref</th>
+<th>rows</th>
+<th>Extra</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>SIMPLE</td>
+<td>grade</td>
+<td>ref</td>
+<td>index_course</td>
+<td>index_course</td>
+<td>69</td>
+<td>const</td>
+<td>3</td>
+<td>Using index condition</td>
+</tr>
+</tbody></table>
+<p><strong>id</strong>：一个序号值，按顺序从大到依次执行</p>
+<p><strong>select_type</strong>：选择的类型,可选值有: SIMPLE(简单的),</p>
+<p><strong>table</strong>：查询的表</p>
+<p><strong>type</strong>：访问类型,主要包括以下几种：<br>访问速度如表格显示从上到下排列由慢到快；通过这个属性可以直接判断是否走索引</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ALL</td>
+<td>全表扫描</td>
+</tr>
+<tr>
+<td>index</td>
+<td>索引扫描</td>
+</tr>
+<tr>
+<td>range</td>
+<td>范围扫描</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>非唯一索引扫描</td>
+</tr>
+<tr>
+<td>eq_ref</td>
+<td>唯一索引扫描</td>
+</tr>
+<tr>
+<td>const</td>
+<td>常数引用</td>
+</tr>
+</tbody></table>
+<p><strong>possible_keys</strong>：可能走的索引</p>
+<p><strong>key</strong>：SQL实际用到的索引，用到什么索引，key会显示索引名</p>
+<p><strong>key_len</strong>：表示索引使用的字节数,索引长度，可以衡量索引是否生效，</p>
+<p>比如如下SQL会查出key_len为13，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> t1 <span class="keyword">where</span> col1 = <span class="string">'ab'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果如下SQL会查出key_len为26，说明用了两个索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> t1 <span class="keyword">where</span> col1 = <span class="string">'ab'</span> <span class="keyword">and</span> col2 = <span class="string">'cd'</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>ref</strong>：表示哪一列用到了索引</p>
+<p><strong>rows</strong>：扫描行数</p>
+<p><strong>Extra</strong>：额外的信息说明</p>
+<h4 id="优化实战"><a href="#优化实战" class="headerlink" title="优化实战"></a>优化实战</h4><ol>
+<li><p><strong>全职匹配</strong></p>
+</li>
+<li><p><strong>最佳左前缀法则</strong>：如果索引是多个，要遵循此原则。指的是查询从索引的最左边开始并且不跳过字段。如果聚合索引是name,age,postion三个字段的聚合索引；那如果通过age和postion查询，那索引会失效，因为name头不在了，无法走索引</p>
+</li>
+<li><p><strong>不能再索引列上做任何操作（计算，函数），会跳过索引</strong></p>
+</li>
+<li><p><strong>范围条件放最后</strong>：存储引擎不能使用索引中范围条件右边的列；<br>比如如下SQL只会走name和age两个索引，因为age做了范围搜索之后就不在进入索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> staffs <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'张三'</span> <span class="keyword">and</span> age &gt;<span class="number">15</span> <span class="keyword">and</span> postion = <span class="string">'上海'</span>，</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>尽量使用覆盖索引</strong>：只访问索引的查询，减少“select <em>”的</em>；<br>比如只查询name，age，postion三个参数，<br>那就不要用select * from~ 而是 select name,age,postion from staffs where~</p>
+</li>
+<li><p><strong>不等于要慎用</strong>：mysql在使用不等于（！=或&lt;&gt;）的时候无法使用索引，会导致全表扫描；<br>如下无法使用索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> staffs <span class="keyword">where</span> <span class="keyword">name</span> != <span class="string">'张三'</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>如下使用了上面的覆盖索引原则，这样可以使用索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">name</span>,age,postion <span class="keyword">from</span> staffs <span class="keyword">where</span> <span class="keyword">name</span> != <span class="string">'张三'</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li><p><strong>Null/Not有影响</strong> : select * from staffs where name is not null; 是否会全表扫描要根据字段来决定；如果查询的字段没有设置为 not null那就不会全表扫描</p>
+</li>
+<li><p><strong>Like查询要当心</strong>：左模糊查询会造成全表扫描，避免使用左模糊查询；但是实际项目无法避免，所以要用到之前的覆盖索引原则</p>
+</li>
+<li><p><strong>字符串不加单引号索引失效</strong>：如果数据类型是varchar那一定要在查询条件上加上引号；如果不用引号那就会全表扫描</p>
+</li>
+<li><p><strong>OR改UNION效率高</strong>：能用union就不要用or，用or会导致索引失效</p>
+</li>
+</ol>
 
       
     </div>
@@ -586,8 +716,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -799,6 +938,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构"><span class="nav-number">1.</span> <span class="nav-text">索引是数据结构；可以简单理解为书的目录，通过目录找书本章节的内容，顺序结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引分类"><span class="nav-number">2.</span> <span class="nav-text">索引分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看索引："><span class="nav-number">3.</span> <span class="nav-text">查看索引：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建索引："><span class="nav-number">4.</span> <span class="nav-text">创建索引：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除索引："><span class="nav-number">5.</span> <span class="nav-text">删除索引：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行计划"><span class="nav-number">6.</span> <span class="nav-text">执行计划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化实战"><span class="nav-number">7.</span> <span class="nav-text">优化实战</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
